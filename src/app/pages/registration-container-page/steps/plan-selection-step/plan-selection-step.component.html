@@ -1,0 +1,62 @@
+<div class="w-full max-w-md">
+    <div class="text-center mb-8">
+        <h2 class="text-2xl font-bold text-gray-800">Escolha seu plano</h2>
+        <p class="text-gray-600">Passo 2 de 2</p>
+    </div>
+    
+    <form [formGroup]="planForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <!-- Seleção de Plano -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Escolha seu plano:</label>
+            <div class="space-y-3">
+                <label class="plan-card block border-2 border-blue-500 rounded-lg p-4 cursor-pointer">
+                    <div class="flex items-center">
+                        <input type="radio" formControlName="plan" value="free" (change)="onPlanChange('free')" class="h-4 w-4 text-blue-600 focus:ring-blue-500">
+                        <span class="ml-2 font-medium">Teste Grátis</span>
+                        <span class="ml-auto bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">7 dias</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-1">Acesso completo sem custo durante o período de teste.</p>
+                </label>
+                
+                <label class="plan-card block border border-gray-300 rounded-lg p-4 cursor-pointer hover:border-blue-400">
+                    <div class="flex items-center">
+                        <input type="radio" formControlName="plan" value="premium" (change)="onPlanChange('premium')" class="h-4 w-4 text-blue-600 focus:ring-blue-500">
+                        <span class="ml-2 font-medium">Plano Premium</span>
+                        <span class="ml-auto text-sm">R$ 29,90/mês</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-1">Acesso ilimitado a todos os recursos.</p>
+                </label>
+            </div>
+        </div>
+        
+        <!-- Termos e Condições -->
+        <div class="flex items-start pt-2">
+            <div class="flex items-center h-5">
+                <input id="terms" formControlName="terms" type="checkbox" required
+                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+            </div>
+            <div class="ml-2">
+                <label for="terms" class="text-sm text-gray-700">
+                    Concordo com os <a href="#" class="text-blue-600 hover:underline">Termos de Serviço</a> e <a href="#" class="text-blue-600 hover:underline">Política de Privacidade</a>
+                </label>
+            </div>
+        </div>
+        
+        <!-- Botões de Navegação -->
+        <div class="pt-4 flex space-x-3">
+            <button type="button" (click)="goBack()"
+            class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-3 px-4 rounded-lg transition">
+            Voltar
+        </button>
+        
+        <button type="submit"
+        [class.bg-blue-600]="selectedPlan === 'free'"
+        [class.hover:bg-blue-700]="selectedPlan === 'free'"
+        [class.bg-green-600]="selectedPlan === 'premium'"
+        [class.hover:bg-green-700]="selectedPlan === 'premium'"
+        class="flex-1 text-white font-medium py-3 px-4 rounded-lg transition duration-200 transform hover:-translate-y-0.5">
+        {{ selectedPlan === 'free' ? 'Finalizar cadastro' : 'Continuar para pagamento' }}
+    </button>
+</div>
+</form>
+</div>

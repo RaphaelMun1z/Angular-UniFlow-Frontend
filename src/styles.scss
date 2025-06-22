@@ -1,1 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+@use "tailwindcss";
+@use "primeicons/primeicons.css";
+
+@layer reset, primeng;
+
+@theme {  
+    --color-academic-primary: #4f46e5;
+    --color-academic-secondary: #6366f1;
+    --color-academic-light: #a5b4fc;
+    --color-academic-dark: #4338ca;
+    --color-academic-success: #10b981;
+    --color-academic-warning: #f59e0b;
+    --color-academic-danger: #ef4444;
+    --font-sans: 'Inter', sans-serif;
+    --color-custom-gray: #e5e7eb;
+}
+
+.mat-icon.fa,
+.mat-icon.fab {
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+@layer base {
+    @supports (not (-webkit-appearance: -apple-pay-button)) or (contain-intrinsic-size: 1px) {
+        ::placeholder {
+            color: #9ca3af;
+        }
+    }
+    
+    select {
+        background-color: revert;
+    }
+
+    input {
+        background-color: #fff;
+    }
+}
+
+@layer utilities {
+    .shadow-sm{
+        --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    }
+}

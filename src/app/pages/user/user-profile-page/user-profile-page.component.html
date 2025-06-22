@@ -1,0 +1,271 @@
+<div class="bg-gray-50 font-sans">
+    <!-- Barra de navegação (igual à sua) -->
+    <nav class="bg-academic-primary text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <i class="fas fa-arrow-left text-xl"></i>
+                <span class="text-xl font-bold">Academic Manager</span>
+            </a>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <img src="https://via.placeholder.com/40" alt="Perfil" class="w-10 h-10 rounded-full cursor-pointer">
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mx-auto px-4 py-8">
+        <!-- Cabeçalho do perfil -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <div class="flex flex-col md:flex-row items-center gap-6">
+                <!-- Avatar (editável) -->
+                <div class="avatar-container relative">
+                    <div class="w-32 h-32 rounded-full bg-indigo-100 flex items-center justify-center overflow-hidden">
+                        <img src="https://via.placeholder.com/128" alt="Foto do aluno" class="w-full h-full object-cover">
+                    </div>
+                    <button class="hover-actions absolute bottom-2 right-2 bg-academic-primary text-white p-2 rounded-full">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                </div>
+                
+                <!-- Informações -->
+                <div class="flex-1">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                        <h1 class="text-3xl font-bold text-gray-800">Mariana Oliveira</h1>
+                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Ativo</span>
+                    </div>
+                    
+                    <p class="text-gray-600 mb-4">Aluna de Engenharia de Software na Universidade XYZ</p>
+                    
+                    <div class="flex flex-wrap gap-4 text-sm text-gray-500">
+                        <div class="flex items-center">
+                            <i class="fas fa-id-card mr-2 text-academic-primary"></i>
+                            <span>Matrícula: <strong>202311234</strong></span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-academic-primary"></i>
+                            <span>mariana.oliveiraemail.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar-alt mr-2 text-academic-primary"></i>
+                            <span>Ingresso: <strong>02/2022</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Abas de navegação -->
+        <div class="border-b border-gray-200 mb-8">
+            <nav class="-mb-px flex space-x-8">
+                <a href="#" class="border-academic-primary text-academic-primary whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    <i class="fas fa-user-circle mr-2"></i> Perfil
+                </a>
+                <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    <i class="fas fa-trophy mr-2"></i> Desempenho
+                </a>
+                <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    <i class="fas fa-cog mr-2"></i> Configurações
+                </a>
+            </nav>
+        </div>
+        
+        <!-- Conteúdo principal -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Coluna esquerda -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Informações acadêmicas -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6">
+                        <i class="fas fa-graduation-cap text-academic-primary mr-2"></i> Informações Acadêmicas
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-medium text-gray-800 mb-3">Disciplinas Atuais</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-academic-primary rounded-full mr-3"></span>
+                                    <span>Matemática Avançada</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-academic-success rounded-full mr-3"></span>
+                                    <span>Banco de Dados II</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-academic-warning rounded-full mr-3"></span>
+                                    <span>Engenharia de Software</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-medium text-gray-800 mb-3">Histórico</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="text-sm font-medium">CR: <span class="text-academic-primary">8.7</span></p>
+                                    <div class="w-full bg-gray-200 rounded-full h-2 mt-1">
+                                        <div class="bg-academic-primary h-2 rounded-full" style="width: 87%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium">Disciplinas concluídas: <span class="text-academic-primary">24</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Atividades recentes -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-semibold text-gray-800">
+                            <i class="fas fa-tasks text-academic-primary mr-2"></i> Atividades Recentes
+                        </h2>
+                        <a href="#" class="text-sm text-academic-primary hover:text-academic-secondary">
+                            Ver todas <i class="fas fa-chevron-right ml-1"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <!-- Atividade 1 -->
+                        <div class="border-l-4 border-academic-success pl-4 py-3 hover:bg-gray-50 rounded-r transition">
+                            <div class="flex justify-between">
+                                <div>
+                                    <h3 class="font-medium text-gray-800">Projeto de Banco de Dados</h3>
+                                    <p class="text-sm text-gray-600">Entregue em 10/06/2023</p>
+                                    <p class="text-xs text-gray-500 mt-1">Disciplina: Banco de Dados II</p>
+                                </div>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">9.5</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Atividade 2 -->
+                        <div class="border-l-4 border-academic-warning pl-4 py-3 hover:bg-gray-50 rounded-r transition">
+                            <div class="flex justify-between">
+                                <div>
+                                    <h3 class="font-medium text-gray-800">Lista de Exercícios - Álgebra</h3>
+                                    <p class="text-sm text-gray-600">Prazo: 15/06/2023</p>
+                                    <p class="text-xs text-gray-500 mt-1">Disciplina: Matemática Avançada</p>
+                                </div>
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">Pendente</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Coluna direita -->
+            <div class="space-y-6">
+                <!-- Grupos ativos -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">
+                            <i class="fas fa-users text-academic-primary mr-2"></i> Meus Grupos (3)
+                        </h2>
+                        <a href="#" class="text-sm text-academic-primary hover:text-academic-secondary">
+                            Ver todos <i class="fas fa-chevron-right ml-1"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <a href="#" class="group block">
+                            <div class="flex items-center p-3 rounded-lg hover:bg-gray-50 transition">
+                                <div class="flex-shrink-0 bg-indigo-100 text-academic-primary p-3 rounded-lg mr-4">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-gray-800 group-hover:text-academic-primary">Matemática Avançada</h3>
+                                    <p class="text-sm text-gray-500">12 membros • 5 atividades</p>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a href="#" class="group block">
+                            <div class="flex items-center p-3 rounded-lg hover:bg-gray-50 transition">
+                                <div class="flex-shrink-0 bg-blue-100 text-blue-600 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-gray-800 group-hover:text-academic-primary">Projeto Integrador</h3>
+                                    <p class="text-sm text-gray-500">8 membros • 2 atividades</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Configurações rápidas -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">
+                        <i class="fas fa-cog text-academic-primary mr-2"></i> Configurações
+                    </h2>
+                    
+                    <div class="space-y-3">
+                        <a href="#" class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition">
+                            <div class="flex items-center">
+                                <i class="fas fa-lock text-gray-500 mr-4 w-5 text-center"></i>
+                                <span>Alterar senha</span>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </a>
+                        
+                        <a href="#" class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition">
+                            <div class="flex items-center">
+                                <i class="fas fa-bell text-gray-500 mr-4 w-5 text-center"></i>
+                                <span>Notificações</span>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </a>
+                        
+                        <a href="#" class="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition">
+                            <div class="flex items-center">
+                                <i class="fas fa-moon text-gray-500 mr-4 w-5 text-center"></i>
+                                <span>Tema escuro</span>
+                            </div>
+                            <i class="fas fa-toggle-off text-gray-400"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Próximos prazos (reduzido) -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">
+                        <i class="fas fa-calendar-day text-academic-primary mr-2"></i> Hoje
+                    </h2>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <span class="w-2 h-2 bg-red-500 rounded-full block"></span>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-800">Reunião com orientador</p>
+                                <p class="text-xs text-gray-500">14:00 - Sala B203</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <span class="w-2 h-2 bg-academic-primary rounded-full block"></span>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-800">Entrega parcial - PI</p>
+                                <p class="text-xs text-gray-500">23:59 • Online</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Rodapé (igual ao seu) -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+                <p>&copy; 2023 Academic Manager. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</div>

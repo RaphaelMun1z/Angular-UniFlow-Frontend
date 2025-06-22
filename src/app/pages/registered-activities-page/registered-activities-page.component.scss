@@ -1,0 +1,24 @@
+.model-card {
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.model-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.1);
+}
+
+.badge-draft {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.badge-published {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.badge-private {
+    background-color: #e0e7ff;
+    color: #3730a3;
+}

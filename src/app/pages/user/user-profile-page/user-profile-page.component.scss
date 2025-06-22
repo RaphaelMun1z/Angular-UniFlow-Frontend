@@ -1,0 +1,16 @@
+*{
+    font-family: ui-sans-serif, system-ui, sans-serif, "Font Awesome 6 Free";
+}
+
+.progress-bar {
+    transition: width 0.5s ease-in-out;
+}
+
+.hover-actions {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.avatar-container:hover .hover-actions {
+    opacity: 1;
+}

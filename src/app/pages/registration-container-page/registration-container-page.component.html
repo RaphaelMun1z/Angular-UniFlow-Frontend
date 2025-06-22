@@ -1,0 +1,28 @@
+<div class="flex flex-col md:flex-row min-h-screen">
+    <!-- Banner Lateral -->
+    <div class="md:w-1/2 bg-gradient-to-br from-blue-600 to-indigo-800 p-8 text-white flex flex-col justify-center items-center">
+        <div class="max-w-md mx-auto text-center md:text-left">
+            <h1 class="text-3xl font-bold mb-4">Comece sua jornada acadêmica</h1>
+            <p class="mb-6">Gerencie atividades, prazos e colaborações em um só lugar.</p>
+            <ul class="space-y-3">
+                <li class="flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Período gratuito de 7 dias
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Sem compromisso, cancele quando quiser
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Área do Formulário -->
+    <div class="md:w-1/2 flex items-center justify-center">
+        <router-outlet></router-outlet>
+    </div>
+</div>

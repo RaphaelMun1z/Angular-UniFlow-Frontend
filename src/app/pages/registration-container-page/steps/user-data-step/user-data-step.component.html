@@ -1,0 +1,58 @@
+<div class="bg-gray-50 min-h-screen">
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <!-- Formulário de Cadastro (100% altura em desktop) -->
+        <div class="flex items-center justify-center w-full">
+            <div class="w-full max-w-md">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800">Crie sua conta</h2>
+                    <p class="text-gray-600">Já tem uma conta? <a href="/login" class="text-blue-600 hover:underline">Faça login</a></p>
+                </div>
+                
+                <form class="space-y-4">
+                    <!-- Dados Pessoais -->
+                    <div>
+                        <label for="fullname" class="block text-sm font-medium text-gray-700 mb-1">Nome completo</label>
+                        <input type="text" id="fullname" name="fullname" required 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-mail institucional</label>
+                        <input type="email" id="email" name="email" placeholder="seu.email@faculdade.edu.br" required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    </div>
+                    
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+                        <input type="password" id="password" name="password" required minlength="8"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                        <p class="text-xs text-gray-500 mt-1">Mínimo de 8 caracteres</p>
+                    </div>
+                    
+                    <!-- Tipo de Usuário -->
+                    <div class="pt-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Você é:</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="flex items-center border border-custom-gray rounded-lg p-4 cursor-pointer hover:border-blue-400">
+                                <input type="radio" name="user_type" value="student" class="h-4 w-4 text-blue-600 focus:ring-blue-500" checked>
+                                <span class="ml-2">Aluno</span>
+                            </label>
+                            <label class="flex items-center border border-custom-gray rounded-lg p-4 cursor-pointer hover:border-blue-400">
+                                <input type="radio" name="user_type" value="teacher" class="h-4 w-4 text-blue-600 focus:ring-blue-500">
+                                <span class="ml-2">Professor</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Botão de Submit -->
+                    <div class="pt-4">
+                        <button type="submit" id="submitBtn"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 transform hover:-translate-y-0.5">
+                        Criar conta
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>

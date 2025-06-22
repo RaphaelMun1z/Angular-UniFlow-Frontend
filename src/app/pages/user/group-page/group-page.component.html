@@ -1,0 +1,536 @@
+<div class="bg-gray-50 font-sans">
+    <!-- Barra de navegação -->
+    <nav class="bg-academic-primary text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <i class="fas fa-arrow-left text-xl"></i>
+                <span class="text-xl font-bold">Academic Manager</span>
+            </a>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <img src="https://via.placeholder.com/40" alt="Perfil" class="w-10 h-10 rounded-full cursor-pointer">
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mx-auto px-4 py-8">
+        <!-- Cabeçalho do grupo -->
+        <div class="bg-white rounded-xl shadow-md p-6 mb-8 relative">
+            <!-- Menu de ações do grupo -->
+            <div class="absolute top-6 right-6 dropdown">
+                <button class="text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-gray-100">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+                <div class="dropdown-menu hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100"><i class="fas fa-edit mr-2"></i> Editar Grupo</a>
+                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100"><i class="fas fa-users-cog mr-2"></i> Gerenciar Membros</a>
+                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100"><i class="fas fa-file-export mr-2"></i> Exportar Dados</a>
+                    <a href="#" class="block px-4 py-2 text-red-600 hover:bg-gray-100"><i class="fas fa-sign-out-alt mr-2"></i> Sair do Grupo</a>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row md:items-center">
+                <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                    <div class="w-24 h-24 rounded-full bg-indigo-100 flex items-center justify-center text-academic-primary text-4xl">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+                <div class="flex-grow">
+                    <div class="flex items-center mb-2">
+                        <h1 class="text-3xl font-bold text-gray-800 mr-3">Grupo de Matemática Avançada</h1>
+                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Ativo</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Grupo de estudos para a disciplina de Matemática Avançada com foco em cálculo diferencial e álgebra linear.</p>
+                    
+                    <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+                        <div class="flex items-center">
+                            <i class="fas fa-user-tie mr-2 text-academic-primary"></i>
+                            <span>Professor: <strong>Dr. Carlos Silva</strong></span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar-alt mr-2 text-academic-primary"></i>
+                            <span>Criado em: <strong>15/03/2023</strong></span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-users mr-2 text-academic-primary"></i>
+                            <span>12 membros</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-tasks mr-2 text-academic-primary"></i>
+                            <span>5 atividades</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Abas de navegação -->
+        <div class="border-b border-gray-200 mb-8">
+            <nav class="-mb-px flex space-x-8">
+                <a href="#" class="border-academic-primary text-academic-primary whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    <i class="fas fa-home mr-2"></i> Visão Geral
+                </a>
+                <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    <i class="fas fa-tasks mr-2"></i> Atividades
+                </a>
+                <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    <i class="fas fa-users mr-2"></i> Membros
+                </a>
+                <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    <i class="fas fa-file-alt mr-2"></i> Materiais
+                </a>
+                <a href="#" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                    <i class="fas fa-comments mr-2"></i> Discussões
+                </a>
+            </nav>
+        </div>
+        
+        <!-- Conteúdo principal -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Coluna esquerda -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Anúncio do professor -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-start mb-4">
+                        <img src="https://via.placeholder.com/48" alt="Professor" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h3 class="font-bold text-gray-800">Dr. Carlos Silva</h3>
+                            <p class="text-sm text-gray-500">Professor Orientador • 2 horas atrás</p>
+                        </div>
+                    </div>
+                    <div class="prose max-w-none text-gray-700 mb-4">
+                        <p>Olá, pessoal! Lembrando que na próxima semana teremos a entrega do trabalho de Cálculo III. Estou disponível para tirar dúvidas nesta quarta-feira, das 14h às 16h, na sala B203.</p>
+                        <p class="mt-2">Não se esqueçam de revisar os materiais que compartilhei na seção "Aulas Gravadas".</p>
+                    </div>
+                    <div class="flex items-center justify-between text-sm text-gray-500">
+                        <div class="flex items-center space-x-4">
+                            <button class="flex items-center text-gray-500 hover:text-academic-primary">
+                                <i class="far fa-thumbs-up mr-1"></i> 8
+                            </button>
+                            <button class="flex items-center text-gray-500 hover:text-academic-primary">
+                                <i class="far fa-comment mr-1"></i> 3 comentários
+                            </button>
+                        </div>
+                        <button class="text-gray-500 hover:text-academic-primary">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Atividades do grupo -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-semibold text-gray-800">
+                            <i class="fas fa-tasks text-academic-primary mr-2"></i> Atividades do Grupo
+                        </h2>
+                        <button class="px-4 py-2 bg-academic-primary text-white rounded-lg hover:bg-academic-secondary text-sm flex items-center">
+                            <i class="fas fa-plus mr-2"></i> Nova Atividade
+                        </button>
+                    </div>
+                    
+                    <!-- Lista de atividades -->
+                    <div class="space-y-4">
+                        <!-- Atividade 1 -->
+                        <div class="border-l-4 border-academic-warning pl-4 py-3 hover:bg-gray-50 rounded-r transition">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <h3 class="font-medium text-gray-800">Trabalho de Cálculo III</h3>
+                                    <p class="text-sm text-gray-600">Entrega: 15/06/2023 • 3 dias restantes</p>
+                                    <div class="mt-2 flex items-center text-sm text-gray-500">
+                                        <i class="fas fa-user-tie mr-2"></i>
+                                        <span>Postado por: Dr. Carlos Silva</span>
+                                    </div>
+                                </div>
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">Pendente</span>
+                            </div>
+                            <div class="mt-3 flex items-center justify-between">
+                                <div class="w-full mr-4">
+                                    <div class="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="progress-bar h-full bg-academic-warning" style="width: 45%"></div>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1">45% concluído (3/7 tarefas)</p>
+                                </div>
+                                <a href="#" class="text-academic-primary hover:text-academic-dark text-sm font-medium">
+                                    Ver detalhes <i class="fas fa-chevron-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Atividade 2 -->
+                        <div class="border-l-4 border-academic-success pl-4 py-3 hover:bg-gray-50 rounded-r transition">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <h3 class="font-medium text-gray-800">Lista de Exercícios - Álgebra Linear</h3>
+                                    <p class="text-sm text-gray-600">Entrega: 05/06/2023 • Entregue</p>
+                                    <div class="mt-2 flex items-center text-sm text-gray-500">
+                                        <i class="fas fa-user-tie mr-2"></i>
+                                        <span>Postado por: Dr. Carlos Silva</span>
+                                    </div>
+                                </div>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Concluído</span>
+                            </div>
+                            <div class="mt-3 flex items-center justify-between">
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-check-circle text-green-500 mr-1"></i>
+                                    <span>Nota média do grupo: 8.7</span>
+                                </div>
+                                <a href="#" class="text-academic-primary hover:text-academic-dark text-sm font-medium">
+                                    Ver detalhes <i class="fas fa-chevron-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Atividade 3 -->
+                        <div class="border-l-4 border-academic-primary pl-4 py-3 hover:bg-gray-50 rounded-r transition">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <h3 class="font-medium text-gray-800">Prova Substitutiva</h3>
+                                    <p class="text-sm text-gray-600">Entrega: 25/06/2023 • 13 dias restantes</p>
+                                    <div class="mt-2 flex items-center text-sm text-gray-500">
+                                        <i class="fas fa-user-tie mr-2"></i>
+                                        <span>Postado por: Dr. Carlos Silva</span>
+                                    </div>
+                                </div>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">Em Andamento</span>
+                            </div>
+                            <div class="mt-3 flex items-center justify-between">
+                                <div class="w-full mr-4">
+                                    <div class="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="progress-bar h-full bg-academic-primary" style="width: 78%"></div>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1">78% concluído (7/9 tarefas)</p>
+                                </div>
+                                <a href="#" class="text-academic-primary hover:text-academic-dark text-sm font-medium">
+                                    Ver detalhes <i class="fas fa-chevron-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 text-center">
+                        <a href="#" class="text-academic-primary hover:text-academic-dark font-medium text-sm">
+                            Ver todas as atividades <i class="fas fa-chevron-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Materiais recentes -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6">
+                        <i class="fas fa-file-alt text-academic-primary mr-2"></i> Materiais Recentes
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Material 1 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:border-academic-primary transition">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-indigo-100 text-academic-primary p-3 rounded-lg mr-4">
+                                    <i class="fas fa-file-pdf text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-gray-800 mb-1">Aula 5 - Integrais Múltiplas</h3>
+                                    <p class="text-sm text-gray-500 mb-2">PDF • 2.4 MB</p>
+                                    <div class="flex items-center text-xs text-gray-500">
+                                        <i class="fas fa-user-tie mr-1"></i>
+                                        <span>Dr. Carlos Silva • 3 dias atrás</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Material 2 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:border-academic-primary transition">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-blue-100 text-blue-600 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-link text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-gray-800 mb-1">Videoaula - Teorema de Stokes</h3>
+                                    <p class="text-sm text-gray-500 mb-2">Link • YouTube</p>
+                                    <div class="flex items-center text-xs text-gray-500">
+                                        <i class="fas fa-user-graduate mr-1"></i>
+                                        <span>Ana Paula (aluna) • 1 semana atrás</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Material 3 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:border-academic-primary transition">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-green-100 text-green-600 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-file-excel text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-gray-800 mb-1">Exercícios Resolvidos</h3>
+                                    <p class="text-sm text-gray-500 mb-2">Planilha • 1.1 MB</p>
+                                    <div class="flex items-center text-xs text-gray-500">
+                                        <i class="fas fa-user-tie mr-1"></i>
+                                        <span>Dr. Carlos Silva • 2 semanas atrás</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Material 4 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:border-academic-primary transition">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-purple-100 text-purple-600 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-file-archive text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-gray-800 mb-1">Banco de Questões</h3>
+                                    <p class="text-sm text-gray-500 mb-2">ZIP • 5.7 MB</p>
+                                    <div class="flex items-center text-xs text-gray-500">
+                                        <i class="fas fa-user-tie mr-1"></i>
+                                        <span>Dr. Carlos Silva • 3 semanas atrás</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 text-center">
+                        <a href="#" class="text-academic-primary hover:text-academic-dark font-medium text-sm">
+                            Ver todos os materiais <i class="fas fa-chevron-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Coluna direita -->
+            <div class="space-y-6">
+                <!-- Próximos prazos -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">
+                        <i class="fas fa-calendar-alt text-academic-primary mr-2"></i> Próximos Prazos
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <!-- Prazo 1 -->
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-red-100 text-red-600 p-2 rounded-lg mr-4">
+                                <i class="fas fa-exclamation"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-800">Trabalho de Cálculo III</h3>
+                                <p class="text-sm text-gray-600">15/06/2023 • 3 dias</p>
+                                <p class="text-xs text-gray-500 mt-1">Grupo: Matemática Avançada</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Prazo 2 -->
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-yellow-100 text-yellow-600 p-2 rounded-lg mr-4">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-800">Projeto de Álgebra</h3>
+                                <p class="text-sm text-gray-600">18/06/2023 • 6 dias</p>
+                                <p class="text-xs text-gray-500 mt-1">Grupo: Matemática Avançada</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Prazo 3 -->
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-blue-100 text-blue-600 p-2 rounded-lg mr-4">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-800">Leitura Capítulo 7</h3>
+                                <p class="text-sm text-gray-600">20/06/2023 • 8 dias</p>
+                                <p class="text-xs text-gray-500 mt-1">Grupo: Matemática Avançada</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <a href="#" class="text-academic-primary hover:text-academic-dark font-medium text-sm">
+                            Ver calendário completo <i class="fas fa-chevron-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Membros do grupo -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">
+                            <i class="fas fa-users text-academic-primary mr-2"></i> Membros (12)
+                        </h2>
+                        <button class="text-academic-primary hover:text-academic-dark">
+                            <i class="fas fa-user-plus"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Membro 1 -->
+                        <div class="member-avatar relative">
+                            <div class="flex items-center">
+                                <img src="https://via.placeholder.com/40" alt="Membro" class="w-10 h-10 rounded-full mr-3">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800">Dr. Carlos Silva</p>
+                                    <p class="text-xs text-gray-500">Professor</p>
+                                </div>
+                            </div>
+                            <div class="member-actions absolute top-0 right-0 opacity-0 transition">
+                                <button class="text-gray-500 hover:text-academic-primary p-1">
+                                    <i class="fas fa-envelope"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Membro 2 -->
+                        <div class="member-avatar relative">
+                            <div class="flex items-center">
+                                <img src="https://via.placeholder.com/40" alt="Membro" class="w-10 h-10 rounded-full mr-3">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800">Ana Paula</p>
+                                    <p class="text-xs text-gray-500">Monitora</p>
+                                </div>
+                            </div>
+                            <div class="member-actions absolute top-0 right-0 opacity-0 transition">
+                                <button class="text-gray-500 hover:text-academic-primary p-1">
+                                    <i class="fas fa-envelope"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Membro 3 -->
+                        <div class="member-avatar relative">
+                            <div class="flex items-center">
+                                <img src="https://via.placeholder.com/40" alt="Membro" class="w-10 h-10 rounded-full mr-3">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800">Roberto Costa</p>
+                                    <p class="text-xs text-gray-500">Aluno</p>
+                                </div>
+                            </div>
+                            <div class="member-actions absolute top-0 right-0 opacity-0 transition">
+                                <button class="text-gray-500 hover:text-academic-primary p-1">
+                                    <i class="fas fa-envelope"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Membro 4 -->
+                        <div class="member-avatar relative">
+                            <div class="flex items-center">
+                                <img src="https://via.placeholder.com/40" alt="Membro" class="w-10 h-10 rounded-full mr-3">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800">Mariana Oliveira</p>
+                                    <p class="text-xs text-gray-500">Aluna</p>
+                                </div>
+                            </div>
+                            <div class="member-actions absolute top-0 right-0 opacity-0 transition">
+                                <button class="text-gray-500 hover:text-academic-primary p-1">
+                                    <i class="fas fa-envelope"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <a href="#" class="text-academic-primary hover:text-academic-dark font-medium text-sm">
+                            Ver todos os membros <i class="fas fa-chevron-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Estatísticas do grupo -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">
+                        <i class="fas fa-chart-bar text-academic-primary mr-2"></i> Estatísticas
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="font-medium">Atividades concluídas</span>
+                                <span>78%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 78%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="font-medium">Média do grupo</span>
+                                <span>8.4</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full" style="width: 84%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="font-medium">Participação</span>
+                                <span>65%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-purple-500 h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 grid grid-cols-2 gap-4 text-center">
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <p class="text-2xl font-bold text-academic-primary">5</p>
+                            <p class="text-xs text-gray-600">Atividades</p>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <p class="text-2xl font-bold text-academic-primary">12</p>
+                            <p class="text-xs text-gray-600">Membros</p>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <p class="text-2xl font-bold text-academic-primary">23</p>
+                            <p class="text-xs text-gray-600">Materiais</p>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <p class="text-2xl font-bold text-academic-primary">7</p>
+                            <p class="text-xs text-gray-600">Discussões</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Convite para o grupo -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">
+                        <i class="fas fa-user-plus text-academic-primary mr-2"></i> Convide Colegas
+                    </h2>
+                    <p class="text-sm text-gray-600 mb-4">Compartilhe o código abaixo ou envie convites por e-mail:</p>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Código do Grupo</label>
+                        <div class="flex">
+                            <input type="text" readonly value="MATH2023-XPTO" class="flex-grow px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-academic-primary focus:border-academic-primary">
+                            <button class="bg-academic-primary text-white px-4 py-2 rounded-r-md hover:bg-academic-secondary transition">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Enviar convite</label>
+                        <div class="flex">
+                            <input type="email" placeholder="E-mails separados por vírgula" class="flex-grow px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-academic-primary focus:border-academic-primary">
+                            <button class="bg-academic-primary text-white px-4 py-2 rounded-r-md hover:bg-academic-secondary transition">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Rodapé -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
+                <p>&copy; 2023 Academic Manager. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</div>
