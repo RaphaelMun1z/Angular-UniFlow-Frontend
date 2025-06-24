@@ -1,0 +1,66 @@
+<div class="relative">
+    <div>
+        <button
+        type="button"
+        (click)="toggleDropdown()"
+        class="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        id="user-menu-button"
+        >
+        <span class="sr-only">Abrir menu do usuário</span>
+        <img
+        class="h-8 w-8 rounded-full"
+        [src]="avatarUrl"
+        alt="Foto do usuário"
+        >
+    </button>
+</div>
+
+<div *ngIf="isDropdownOpen" 
+class="origin-top-right absolute right-0 z-100 mt-2 w-56 rounded-xl shadow-xl py-2 bg-white ring-1 ring-gray-100/10 backdrop-blur-sm border border-gray-100/20"
+style="box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05)"
+role="menu"
+aria-orientation="vertical"
+aria-labelledby="user-menu-button">
+
+<!-- Header do usuário -->
+<div class="px-4 py-3 border-b border-gray-100/20 flex items-center gap-3">
+    <img class="h-9 w-9 rounded-full object-cover" 
+    [src]="avatarUrl || 'https://via.placeholder.com/36'" 
+    alt="User photo">
+    <div>
+        <p class="text-sm font-medium text-gray-900 truncate">{{ userName || 'Usuário' }}</p>
+        <p class="text-xs text-gray-500 truncate">{{ userEmail || 'usuario@email.com' }}</p>
+    </div>
+</div>
+
+<!-- Itens do menu -->
+<div class="py-1">
+    <a *ngFor="let item of menuItems"
+    [routerLink]="item.link"
+    class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50/80 transition-all duration-200 group"
+    role="menuitem"
+    (click)="closeDropdown()">
+    <div class="p-1.5 mr-3 rounded-lg group-hover:bg-accent-50/50 transition-all duration-200">
+        <i [class]="item.icon" class="text-gray-500 group-hover:text-accent-600"></i>
+    </div>
+    <span class="group-hover:translate-x-1 transition-transform duration-200">{{ item.label }}</span>
+    <i class="fas fa-chevron-right ml-auto text-xs text-gray-400 group-hover:text-accent-600"></i>
+</a>
+</div>
+
+<!-- Divisor -->
+<div class="border-t border-gray-100/20 my-1"></div>
+
+<!-- Logout -->
+<div class="py-1">
+    <a href="#"
+    class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-red-50/80 transition-all duration-200 group"
+    role="menuitem"
+    (click)="handleLogout(); $event.preventDefault()">
+    <div class="p-1.5 mr-3 rounded-lg group-hover:bg-red-50 transition-all duration-200">
+        <i class="fas fa-sign-out-alt text-gray-500 group-hover:text-red-600"></i>
+    </div>
+    <span class="group-hover:translate-x-1 transition-transform duration-200">Sair</span>
+</a>
+</div>
+</div>

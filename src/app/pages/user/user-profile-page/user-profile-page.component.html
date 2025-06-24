@@ -1,18 +1,6 @@
 <div class="bg-gray-50 font-sans">
     <!-- Barra de navegação (igual à sua) -->
-    <nav class="bg-academic-primary text-white shadow-lg">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-2">
-                <i class="fas fa-arrow-left text-xl"></i>
-                <span class="text-xl font-bold">Academic Manager</span>
-            </a>
-            <div class="flex items-center space-x-4">
-                <div class="relative">
-                    <img src="https://via.placeholder.com/40" alt="Perfil" class="w-10 h-10 rounded-full cursor-pointer">
-                </div>
-            </div>
-        </div>
-    </nav>
+    <app-navbar-alt-tree [bgStyle]="1"></app-navbar-alt-tree>
     
     <div class="container mx-auto px-4 py-8">
         <!-- Cabeçalho do perfil -->
@@ -21,7 +9,7 @@
                 <!-- Avatar (editável) -->
                 <div class="avatar-container relative">
                     <div class="w-32 h-32 rounded-full bg-indigo-100 flex items-center justify-center overflow-hidden">
-                        <img src="https://via.placeholder.com/128" alt="Foto do aluno" class="w-full h-full object-cover">
+                        <img src="profile-icon.png" alt="Foto do aluno" class="w-full h-full object-cover">
                     </div>
                     <button class="hover-actions absolute bottom-2 right-2 bg-academic-primary text-white p-2 rounded-full">
                         <i class="fas fa-camera"></i>

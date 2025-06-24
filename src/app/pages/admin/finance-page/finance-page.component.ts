@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { NavbarAltTreeComponent } from "../../../shared/components/navbar-alt-tree/navbar-alt-tree.component";
 
 @Component({
   selector: 'app-finance-page',
-  imports: [],
+  imports: [NavbarAltTreeComponent],
   templateUrl: './finance-page.component.html',
   styleUrl: './finance-page.component.scss'
 })
