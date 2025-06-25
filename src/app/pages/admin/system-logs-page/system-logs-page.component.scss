@@ -1,0 +1,21 @@
+.log-row:hover {
+    background-color: #f9fafb;
+}
+.log-critical {
+    border-left: 4px solid #ef4444;
+}
+.log-warning {
+    border-left: 4px solid #f59e0b;
+}
+.log-info {
+    border-left: 4px solid #3b82f6;
+}
+.dropdown-menu {
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}

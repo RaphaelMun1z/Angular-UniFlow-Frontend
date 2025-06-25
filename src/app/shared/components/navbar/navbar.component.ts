@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { AvatarDropdownComponent } from "./avatar-dropdown/avatar-dropdown.component";
+import { AvatarDropdownComponent } from "../avatar-dropdown/avatar-dropdown.component";
 
 @Component({
     selector: 'app-navbar',

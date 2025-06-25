@@ -1,0 +1,10 @@
+ .toggle-checkbox:checked + .toggle-label {
+    background-color: #4f46e5;
+}
+.toggle-checkbox:checked + .toggle-label:before {
+    transform: translateX(1.5rem);
+}
+.message-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}

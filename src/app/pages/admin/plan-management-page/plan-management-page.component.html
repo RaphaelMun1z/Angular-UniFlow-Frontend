@@ -1,0 +1,179 @@
+<div class="bg-gray-50 font-sans">
+    <app-navbar-alt-tree [bgStyle]="0"></app-navbar-alt-tree>
+    
+    <!-- Conteúdo principal -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Cabeçalho -->
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">
+                <i class="fas fa-credit-card mr-2 text-indigo-600"></i> Gestão de Planos
+            </h1>
+            <button class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition flex items-center">
+                <i class="fas fa-plus mr-2"></i> Novo Plano
+            </button>
+        </div>
+        
+        <!-- Filtros -->
+        <div class="bg-white p-4 rounded-lg shadow-sm mb-6">
+            <div class="flex flex-wrap gap-4">
+                <div class="relative flex-grow">
+                    <select class="block appearance-none w-full bg-gray-100 border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-indigo-500">
+                        <option>Filtrar por status</option>
+                        <option>Ativo</option>
+                        <option>Inativo</option>
+                        <option>Teste gratuito</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                <input type="text" placeholder="Buscar plano..." class="flex-grow px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                <button class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-md hover:bg-indigo-200 transition flex items-center">
+                    <i class="fas fa-filter mr-2"></i> Aplicar
+                </button>
+            </div>
+        </div>
+        
+        <!-- Tabela de planos -->
+        <div class="bg-white shadow rounded-lg overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plano</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Preço</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuários</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- Plano 1 -->
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Premium</div>
+                                        <div class="text-sm text-gray-500">Acesso completo</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">R$ 99,90/mês</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Ilimitado</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Ativo</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-3"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        <!-- Plano 2 -->
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Estudante</div>
+                                        <div class="text-sm text-gray-500">50% de desconto</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">R$ 49,90/mês</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">1 usuário</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Ativo</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-3"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        <!-- Plano 3 -->
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-600">
+                                        <i class="fas fa-hourglass-half"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">Teste Gratuito</div>
+                                        <div class="text-sm text-gray-500">14 dias</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Grátis</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">3 usuários</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Expirado</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-3"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Estatísticas -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <!-- Card 1 -->
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-indigo-100 text-indigo-600 mr-4">
+                        <i class="fas fa-wallet text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Faturamento mensal</p>
+                        <p class="text-2xl font-bold text-gray-800">R$ 5.432,90</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-green-100 text-green-600 mr-4">
+                        <i class="fas fa-users text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Planos ativos</p>
+                        <p class="text-2xl font-bold text-gray-800">142</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-blue-100 text-blue-600 mr-4">
+                        <i class="fas fa-hourglass-end text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-500">Testes expirando</p>
+                        <p class="text-2xl font-bold text-gray-800">12</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <app-footer></app-footer>
+</div>

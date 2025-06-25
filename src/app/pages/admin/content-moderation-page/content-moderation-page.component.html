@@ -1,0 +1,271 @@
+<div class="bg-gray-50 font-sans">
+    <app-navbar-alt-tree [bgStyle]="1"></app-navbar-alt-tree>
+    
+    <div class="container mx-auto px-4 py-8">
+        <!-- Cabeçalho -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                    <i class="fas fa-flag text-academic-primary mr-2"></i> Moderação de Conteúdo
+                </h1>
+                <p class="text-gray-600">Analise e gerencie materiais enviados pelos usuários</p>
+            </div>
+            <div class="flex space-x-3 mt-4 md:mt-0">
+                <div class="relative">
+                    <input type="text" placeholder="Buscar conteúdo..." class="border border-gray-300 rounded-lg px-4 py-2 pl-10 focus:ring-academic-primary focus:border-academic-primary w-full md:w-64">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                </div>
+                <div class="dropdown relative">
+                    <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 flex items-center">
+                        <i class="fas fa-filter mr-2"></i> Filtrar
+                        <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                    </button>
+                    <div class="dropdown-menu absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Todos</a>
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Pendentes</a>
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Aprovados</a>
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Rejeitados</a>
+                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Denunciados</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Estatísticas Rápidas -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white rounded-xl shadow-md p-4 flex items-center">
+                <div class="bg-blue-100 text-blue-600 p-3 rounded-lg mr-4">
+                    <i class="fas fa-clock text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500">Pendentes</p>
+                    <p class="text-2xl font-bold">24</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-4 flex items-center">
+                <div class="bg-green-100 text-green-600 p-3 rounded-lg mr-4">
+                    <i class="fas fa-check-circle text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500">Aprovados</p>
+                    <p class="text-2xl font-bold">156</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-4 flex items-center">
+                <div class="bg-red-100 text-red-600 p-3 rounded-lg mr-4">
+                    <i class="fas fa-times-circle text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500">Rejeitados</p>
+                    <p class="text-2xl font-bold">18</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-4 flex items-center">
+                <div class="bg-yellow-100 text-yellow-600 p-3 rounded-lg mr-4">
+                    <i class="fas fa-exclamation-triangle text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500">Denúncias</p>
+                    <p class="text-2xl font-bold">7</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Lista de Conteúdos -->
+        <div class="space-y-4">
+            <!-- Conteúdo 1 (Pendente) -->
+            <div class="content-card bg-white rounded-xl shadow-md p-6 transition duration-300">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <div class="mb-4 md:mb-0">
+                        <div class="flex items-center mb-2">
+                            <h2 class="text-xl font-semibold text-gray-800 mr-3">Trabalho de Cálculo III</h2>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">Pendente</span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-user mr-2 text-academic-primary"></i>
+                                <span>Enviado por: <strong>Mariana Oliveira</strong></span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-calendar-alt mr-2 text-academic-primary"></i>
+                                <span>15/06/2023 14:32</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-users mr-2 text-academic-primary"></i>
+                                <span>Grupo: <strong>Matemática Avançada</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 flex items-center">
+                            <i class="fas fa-check mr-2"></i> Aprovar
+                        </button>
+                        <button class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center">
+                            <i class="fas fa-times mr-2"></i> Rejeitar
+                        </button>
+                        <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <h3 class="text-sm font-medium text-gray-700 mb-2">Descrição:</h3>
+                    <p class="text-gray-600">Trabalho sobre integrais múltiplas com resolução passo a passo. Contém 15 páginas e foi desenvolvido em LaTeX.</p>
+                    <div class="mt-3">
+                        <span class="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded mr-2">
+                            <i class="fas fa-file-pdf mr-1 text-red-500"></i> PDF (2.4MB)
+                        </span>
+                        <span class="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">
+                            <i class="fas fa-tag mr-1 text-academic-primary"></i> Cálculo
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Conteúdo 2 (Denunciado) -->
+            <div class="content-card bg-white rounded-xl shadow-md p-6 transition duration-300">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <div class="mb-4 md:mb-0">
+                        <div class="flex items-center mb-2">
+                            <h2 class="text-xl font-semibold text-gray-800 mr-3">Resumo de Álgebra Linear</h2>
+                            <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">Denunciado</span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-user mr-2 text-academic-primary"></i>
+                                <span>Enviado por: <strong>Roberto Costa</strong></span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-calendar-alt mr-2 text-academic-primary"></i>
+                                <span>14/06/2023 09:15</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-exclamation-triangle mr-2 text-academic-primary"></i>
+                                <span>3 denúncias</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 flex items-center">
+                            <i class="fas fa-check mr-2"></i> Aprovar
+                        </button>
+                        <button class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center">
+                            <i class="fas fa-times mr-2"></i> Rejeitar
+                        </button>
+                        <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <h3 class="text-sm font-medium text-gray-700 mb-2">Motivo da Denúncia:</h3>
+                    <p class="text-gray-600 bg-red-50 p-3 rounded-lg">Conteúdo plagiado do site "Matemática Fácil" sem atribuição. Links comparativos: <a href="#" class="text-academic-primary hover:underline">matematicafacil.com/algebra-linear</a></p>
+                    <div class="mt-3">
+                        <span class="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded mr-2">
+                            <i class="fas fa-file-word mr-1 text-blue-500"></i> DOCX (1.1MB)
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Conteúdo 3 (Aprovado) -->
+            <div class="content-card bg-white rounded-xl shadow-md p-6 transition duration-300">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <div class="mb-4 md:mb-0">
+                        <div class="flex items-center mb-2">
+                            <h2 class="text-xl font-semibold text-gray-800 mr-3">Slides - Engenharia de Software</h2>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Aprovado</span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-user-tie mr-2 text-academic-primary"></i>
+                                <span>Enviado por: <strong>Dr. Carlos Silva</strong> (Professor)</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-calendar-alt mr-2 text-academic-primary"></i>
+                                <span>10/06/2023 16:45</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-thumbs-up mr-2 text-academic-primary"></i>
+                                <span>23 downloads</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 flex items-center">
+                            <i class="fas fa-undo mr-2"></i> Reverter
+                        </button>
+                        <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <h3 class="text-sm font-medium text-gray-700 mb-2">Detalhes:</h3>
+                    <p class="text-gray-600">Slides da aula sobre Padrões de Projeto GOF (Gang of Four). Inclui exemplos em Java e Python.</p>
+                    <div class="mt-3">
+                        <span class="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded mr-2">
+                            <i class="fas fa-file-powerpoint mr-1 text-orange-500"></i> PPTX (4.7MB)
+                        </span>
+                        <span class="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded mr-2">
+                            <i class="fas fa-tag mr-1 text-academic-primary"></i> Eng. Software
+                        </span>
+                        <span class="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">
+                            <i class="fas fa-star mr-1 text-yellow-500"></i> Material Oficial
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Paginação -->
+        <div class="mt-8 flex justify-between items-center">
+            <div class="text-sm text-gray-500">Mostrando <span class="font-medium">1-3</span> de <span class="font-medium">24</span> conteúdos</div>
+            <div class="flex space-x-2">
+                <button class="px-3 py-1 bg-gray-100 text-gray-700 rounded-lg"><i class="fas fa-chevron-left"></i></button>
+                <button class="px-3 py-1 bg-academic-primary text-white rounded-lg">1</button>
+                <button class="px-3 py-1 bg-gray-100 text-gray-700 rounded-lg">2</button>
+                <button class="px-3 py-1 bg-gray-100 text-gray-700 rounded-lg"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de Rejeição (Oculto) -->
+    <div id="rejectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-md">
+            <div class="border-b border-gray-200 px-6 py-4 flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-gray-800">Justificativa de Rejeição</h3>
+                <button onclick="document.getElementById('rejectModal').classList.add('hidden')" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <form>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Motivo</label>
+                        <select class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                            <option>Conteúdo plagiado</option>
+                            <option>Informações incorretas</option>
+                            <option>Formato não permitido</option>
+                            <option>Outro</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Detalhes (opcional)</label>
+                        <textarea class="w-full border border-gray-300 rounded-lg px-3 py-2 h-24" placeholder="Forneça detalhes para ajudar o usuário..."></textarea>
+                    </div>
+                    <div class="flex justify-end space-x-3">
+                        <button type="button" onclick="document.getElementById('rejectModal').classList.add('hidden')" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
+                            Confirmar Rejeição
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <app-footer></app-footer>
+</div>

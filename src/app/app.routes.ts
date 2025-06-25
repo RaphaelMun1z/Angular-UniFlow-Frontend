@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 // Public
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { TermsOfUsePageComponent } from './pages/terms-of-use-page/terms-of-use-page.component';
 
 // Activity
 import { ActivityPageComponent } from './pages/activity/activity-page/activity-page.component';
@@ -30,12 +31,22 @@ import { ConfirmedPaymentPageComponent } from './pages/payment/confirmed-payment
 import { UserPlanPageComponent } from './pages/user/user-plan-page/user-plan-page.component';
 import { UserDashboardPageComponent } from './pages/user/user-dashboard-page/user-dashboard-page.component';
 import { UserProfilePageComponent } from './pages/user/user-profile-page/user-profile-page.component';
-
+import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
+import { MessageBroadcastPageComponent } from './pages/admin/message-broadcast-page/message-broadcast-page.component';
+import { PlanManagementPageComponent } from './pages/admin/plan-management-page/plan-management-page.component';
+import { SystemLogsPageComponent } from './pages/admin/system-logs-page/system-logs-page.component';
+import { ContentModerationPageComponent } from './pages/admin/content-moderation-page/content-moderation-page.component';
+import { UserManagementPageComponent } from './pages/admin/user-management-page/user-management-page.component';
+import { NestedDropdownComponent } from './shared/components/nested-dropdown/nested-dropdown.component';
 
 export const routes: Routes = [
     {
         path: '',
         component: HomePageComponent
+    },
+    {
+        path: 'test',
+        component: NestedDropdownComponent
     },
     {
         path: 'register',
@@ -49,6 +60,14 @@ export const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'about-us',
+        component: AboutUsPageComponent
+    },
+    {
+        path: 'terms-of-use',
+        component: TermsOfUsePageComponent
     },
     {
         path: 'payment',
@@ -71,8 +90,28 @@ export const routes: Routes = [
                 component: DashboardPageComponent
             },
             {
+                path: 'plan-management',
+                component: PlanManagementPageComponent
+            },
+            {
                 path: 'finance',
                 component: FinancePageComponent
+            },
+            {
+                path: 'message-broadcast',
+                component: MessageBroadcastPageComponent
+            },
+            {
+                path: 'logs',
+                component: SystemLogsPageComponent
+            },
+            {
+                path: 'content-moderation',
+                component: ContentModerationPageComponent
+            },
+            {
+                path: 'user-management',
+                component: UserManagementPageComponent
             },
         ]
     },

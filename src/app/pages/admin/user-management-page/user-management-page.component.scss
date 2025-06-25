@@ -1,0 +1,10 @@
+.dropdown-menu {
+    transition: all 0.3s ease;
+}
+.hover-actions {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+tr:hover .hover-actions {
+    opacity: 1;
+}

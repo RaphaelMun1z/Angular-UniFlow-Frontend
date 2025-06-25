@@ -42,50 +42,26 @@
         <div class="relative">
             <button
             type="button"
-            (click)="toggleHamburgerMenu()"
+            (click)="dropdown.toggle($event)"
             class="flex text-sm rounded-full focus:outline-none"
             [ngClass]="{
                 'text-gray-600 hover:text-gray-900 hover:bg-gray-100': bgStyle == 0,
                 'text-white hover:text-white/90 hover:bg-white/10': bgStyle == 1 || bgStyle == 2
             }"
-            id="hamburger-menu-button"
-            >
+            id="hamburger-menu-button">
             <span class="sr-only">Abrir menu principal</span>
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
         </button>
-        
-        <!-- Dropdown do Hamburger Menu -->
-        <div *ngIf="isHamburgerMenuOpen" 
-        class="origin-top-right absolute right-0 z-50 mt-2 w-56 rounded-xl shadow-xl py-2 bg-white ring-1 ring-gray-100/10 backdrop-blur-sm border border-gray-100/20"
-        style="box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05)"
-        role="menu"
-        aria-orientation="vertical"
-        aria-labelledby="hamburger-menu-button">
-        
-        <!-- Itens do menu -->
-        <div class="py-1">
-            <a *ngFor="let item of hamburgerMenuItems"
-            [routerLink]="item.link"
-            class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50/80 transition-all duration-200 group"
-            role="menuitem"
-            (click)="closeHamburgerMenu()">
-            <div class="p-1.5 mr-3 rounded-lg group-hover:bg-accent-50/50 transition-all duration-200">
-                <i [class]="item.icon" class="text-gray-500 group-hover:text-accent-600"></i>
-            </div>
-            <span class="group-hover:translate-x-1 transition-transform duration-200">{{ item.label }}</span>
-            <i class="fas fa-chevron-right ml-auto text-xs text-gray-400 group-hover:text-accent-600"></i>
-        </a>
     </div>
-</div>
-</div>
-
-<!-- Avatar -->
-<div class="relative">
-    <app-avatar-dropdown></app-avatar-dropdown>
-</div>
+    
+    <!-- Avatar -->
+    <div class="relative">
+        <app-avatar-dropdown></app-avatar-dropdown>
+    </div>
 </div>
 </div>
 </div>
 </nav>
+<p-tieredmenu #dropdown [model]="items" [popup]="true" styleClass="bg-white shadow-xl rounded-lg text-sm w-64"/>
