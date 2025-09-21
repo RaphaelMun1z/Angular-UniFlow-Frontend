@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit{
     isMobileMenuOpen = false;
     currentFragment: string | null = null;
     isLoggedIn: boolean = true; // Simula o estado de login, pode ser dinâmico
+    isNotificationMenuOpen: boolean = false;
     
     navItems = [
         { label: 'Recursos', link: '/', fragment: 'features', isActive: false },
@@ -72,5 +73,9 @@ export class NavbarComponent implements OnInit{
         if (target.innerWidth >= 640) { // sm breakpoint do Tailwind
             this.closeMobileMenu();
         }
+    }
+
+    toggleNotificationMenu(){
+        this.isNotificationMenuOpen = !this.isNotificationMenuOpen;
     }
 }
