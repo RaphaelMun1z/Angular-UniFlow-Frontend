@@ -1,0 +1,137 @@
+<header class="bg-white/80 backdrop-blur-lg sticky top-0 z-10 border-b border-gray-200">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            
+            <div class="flex items-center space-x-4">
+                <div class="flex-shrink-0 flex items-center">
+                    <img 
+                    [routerLink]="'/'"
+                    class="logo h-8 w-auto cursor-pointer" 
+                    [src]="bgStyle == 0 ? 'UniFlowLogo.png' : 'UniFlowLogoAlt.png'" 
+                    alt="UniFlow Logo">
+                </div>
+                <nav class="hidden md:flex items-center text-sm font-medium text-gray-500">
+                    <span>Início</span>
+                </nav>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                
+                <div class="relative">
+                    <button (click)="isNotificationsOpen = !isNotificationsOpen" type="button" class="relative text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" /></svg>
+                        <span *ngIf="unreadNotificationsCount > 0" class="absolute top-1.5 right-1.5 h-2 w-2 bg-red-500 rounded-full"></span>
+                    </button>
+                    
+                    <div *ngIf="isNotificationsOpen" class="absolute right-0 mt-2 w-[calc(100vw-2rem)] max-w-lg sm:w-[480px] bg-white rounded-lg shadow-2xl border border-gray-200 origin-top-right z-20">
+                        <div class="flex flex-col h-full">
+                            <div class="flex justify-between items-center px-4 py-3 border-b border-gray-200">
+                                <h3 class="text-lg font-semibold text-gray-800">Notificações</h3>
+                                <button class="text-sm font-medium text-indigo-600 hover:underline">Marcar todas como lidas</button>
+                            </div>
+                            
+                            <ul class="flex-1 divide-y divide-gray-200 max-h-96 overflow-y-auto">
+                                <li *ngIf="notifications.length === 0" class="p-8 text-center">
+                                    <svg class="mx-auto h-12 w-12 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" /></svg>
+                                    <h3 class="mt-2 text-sm font-semibold text-gray-900">Sem notificações</h3>
+                                    <p class="mt-1 text-sm text-gray-500">Você está em dia!</p>
+                                </li>
+                                
+                                <li *ngFor="let notification of notifications" [ngClass]="{'bg-indigo-50/50': !notification.lida}" class="hover:bg-gray-100/50 transition-colors">
+                                    <a [routerLink]="notification.link" class="p-4 flex items-start space-x-4">
+                                        <div *ngIf="!notification.lida" class="flex-shrink-0 mt-1.5">
+                                            <span class="h-2.5 w-2.5 bg-blue-500 rounded-full block"></span>
+                                        </div>
+                                        <div class="flex-shrink-0">
+                                            <div class="h-10 w-10 rounded-full flex items-center justify-center" [ngClass]="notification.iconBgClass">
+                                                <svg class="h-6 w-6" [ngClass]="notification.iconClass" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" [innerHTML]="notification.iconPath | safeHtml"></svg>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-gray-900" [innerHTML]="notification.mensagem"></p>
+                                            <p class="text-sm text-gray-500">{{ notification.contexto }}</p>
+                                            <p class="text-xs text-gray-400 mt-1">{{ notification.timestamp }}</p>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                            <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
+                                <a [routerLink]="'/me/notificacoes'" class="w-full flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                                    Ver todas as notificações
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div (click)="isProfileMenuOpen = !isProfileMenuOpen" class="flex items-center space-x-2 cursor-pointer p-1 rounded-lg hover:bg-gray-100 transition-colors">
+                        <img class="h-8 w-8 rounded-full object-cover ring-2 ring-offset-2 ring-indigo-300" src="https://i.pravatar.cc/150?u=professor" alt="Avatar do usuário">
+                        <span class="text-sm font-medium text-gray-700 hidden sm:block">Professor</span>
+                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    </div>
+                    
+                    <div *ngIf="isProfileMenuOpen" class="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-2xl border border-gray-200 origin-top-right z-20">
+                        <div class="flex flex-col">
+                            <div class="flex items-center space-x-3 p-4 border-b border-gray-200">
+                                <img class="h-10 w-10 rounded-full object-cover" src="https://i.pravatar.cc/150?u=professor" alt="Avatar do usuário">
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-semibold text-gray-900 truncate">Professor Teste</p>
+                                    <p class="text-sm text-gray-500 truncate">professor.testeemail.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="p-2 border-b border-gray-200">
+                                <div class="grid grid-cols-2 gap-2">
+                                    <a href="#" class="relative flex flex-col items-center justify-center p-2 rounded-lg hover:bg-gray-100 transition-colors text-center">
+                                        <div class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+                                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                                        </div>
+                                        <span class="mt-1 text-xs font-medium text-gray-700">Criar Turma</span>
+                                        <button class="absolute top-1 right-1 text-gray-300 hover:text-indigo-500"><svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C14.86 11.45 16 13.207 16 15h-1c0-1.5-1.1-2.769-2.062-3.25A1.503 1.503 0 0 0 12 11.5v-4.793c-.104-.074-.228-.173-.354-.298C11.342 6.174 11 5.68 11 5V.5a.5.5 0 0 1-.5-.5h-1a.5.5 0 0 1-.5.5v2.707c-.246.215-.5.49-.688.753l-.018.025v3.176l-.078.048c-.203.127-.476.314-.751.555C4.14 11.45 3 13.207 3 15H2c0-1.793 1.14-3.55 2.812-4.25A1.503 1.503 0 0 0 6 9.5v-3.176l-.018-.025A2.52 2.52 0 0 1 5.313 5.3l-.002-.003V.5a.5.5 0 0 1-.5-.5h-1a.5.5 0 0 1-.5.5V5c0 .68.342 1.174.646 1.479.126.125.25.224.354.298v3.97l-1.573 2.622a.5.5 0 1 1-.866-.5L4 12.03V.5a.5.5 0 0 1 .146-.354z"/></svg></button>
+                                    </a>
+                                    <a href="#" class="relative flex flex-col items-center justify-center p-2 rounded-lg hover:bg-gray-100 transition-colors text-center">
+                                        <div class="h-10 w-10 rounded-full bg-sky-100 flex items-center justify-center text-sky-600">
+                                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-3.976 5.39c-.393.53-.823.99-1.295 1.422l-2.121 2.121A15.002 15.002 0 002.25 18z" /></svg>
+                                        </div>
+                                        <span class="mt-1 text-xs font-medium text-gray-700">Ver Analytics</span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <nav class="py-1">
+                                <a [routerLink]="'/me'" class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors">
+                                    <div class="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center mr-3">
+                                        <svg class="h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                                    </div>
+                                    <span>Meu Perfil</span>
+                                </a>
+                                <a [routerLink]="'/me/assinaturas'" class="flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-colors">
+                                    <div class="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center mr-3">
+                                        <svg class="h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15A2.25 2.25 0 002.25 6.75v10.5A2.25 2.25 0 004.5 19.5z" /></svg>
+                                    </div>
+                                    <span>Gerenciar Assinatura</span>
+                                </a>
+                            </nav>
+                            
+                            <div class="px-4 py-2 border-t border-b border-gray-200">
+                                <div class="flex justify-between items-center">
+                                    <p class="text-sm text-gray-500">Plano Atual</p>
+                                    <span class="text-xs font-semibold text-green-800 bg-green-100 px-2.5 py-0.5 rounded-full">Professor PRO</span>
+                                </div>
+                            </div>
+                            
+                            <div class="p-2">
+                                <button (click)="logout()" class="w-full text-left flex items-center p-2 text-sm text-red-600 hover:bg-red-50 hover:text-red-800 rounded-md transition-colors">
+                                    <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" /></svg>
+                                    <span>Sair</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

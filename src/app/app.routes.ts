@@ -29,7 +29,7 @@ import { ConfirmedPaymentPageComponent } from './pages/payment/confirmed-payment
 
 // User
 import { UserPlanPageComponent } from './pages/user/user-plan-page/user-plan-page.component';
-import { UserDashboardPageComponent } from './pages/user/user-dashboard-page/user-dashboard-page.component';
+import { EstudanteDashboardPageComponent } from './pages/user/estudante-dashboard-page/estudante-dashboard-page.component';
 import { UserProfilePageComponent } from './pages/user/user-profile-page/user-profile-page.component';
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
 import { MessageBroadcastPageComponent } from './pages/admin/message-broadcast-page/message-broadcast-page.component';
@@ -38,6 +38,9 @@ import { SystemLogsPageComponent } from './pages/admin/system-logs-page/system-l
 import { ContentModerationPageComponent } from './pages/admin/content-moderation-page/content-moderation-page.component';
 import { UserManagementPageComponent } from './pages/admin/user-management-page/user-management-page.component';
 import { NestedDropdownComponent } from './shared/components/nested-dropdown/nested-dropdown.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { ProfessorDashboardPageComponent } from './pages/user/professor-dashboard-page/professor-dashboard-page.component';
 
 export const routes: Routes = [
     {
@@ -60,6 +63,14 @@ export const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'forgot-password',
+        component: ForgotPasswordComponent
+    },
+    {
+        path: 'reset-password',
+        component: ResetPasswordComponent
     },
     {
         path: 'about-us',
@@ -154,7 +165,16 @@ export const routes: Routes = [
             },
             {
                 path: 'dashboard',
-                component: UserDashboardPageComponent
+                children: [
+                     {
+                        path: 'estudante',
+                        component: EstudanteDashboardPageComponent
+                    },
+                    {
+                        path: 'professor',
+                        component: ProfessorDashboardPageComponent
+                    },
+                ]
             }
         ]
     },
