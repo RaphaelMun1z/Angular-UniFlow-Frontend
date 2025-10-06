@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FooterComponent } from "../../../shared/components/footer/footer.component";
 import { CommonModule } from '@angular/common';
 import { SafeHtmlPipe } from '../../../shared/components/navbar-versions-components/navbar-alt-with-auth/safe-html.pipe';
 
@@ -16,7 +15,7 @@ export interface AtividadeViewModel {
 
 @Component({
     selector: 'app-activity-wall-page',
-    imports: [FooterComponent, CommonModule, SafeHtmlPipe],
+    imports: [CommonModule, SafeHtmlPipe],
     templateUrl: './activity-wall-page.component.html',
     styleUrl: './activity-wall-page.component.scss'
 })

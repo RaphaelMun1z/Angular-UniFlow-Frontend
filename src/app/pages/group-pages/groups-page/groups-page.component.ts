@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FooterComponent } from "../../../shared/components/footer/footer.component";
 import { RouterLink } from '@angular/router';
 
 export interface GrupoViewModel {
@@ -15,7 +14,7 @@ export interface GrupoViewModel {
 
 @Component({
     selector: 'app-groups-page',
-    imports: [CommonModule, FooterComponent, RouterLink],
+    imports: [CommonModule, RouterLink],
     templateUrl: './groups-page.component.html',
     styleUrl: './groups-page.component.scss'
 })

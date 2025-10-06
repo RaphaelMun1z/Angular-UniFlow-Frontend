@@ -1,0 +1,23 @@
+<div class="bg-white p-8 rounded-xl border border-gray-200 text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col h-full">
+    <div [class]="iconClasses" class="h-16 w-16 flex items-center justify-center rounded-full mx-auto mb-5">
+        <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="icon" />
+        </svg>
+    </div>
+    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ title }}</h3>
+    
+    @if (description) {
+        <p class="text-gray-600">{{ description }}</p>
+    }
+    
+    @if (listItems && listItems.length > 0) {
+        <ul class="text-gray-600 space-y-2 text-left">
+            @for (item of listItems; track item) {
+                <li class="flex items-start">
+                    <span class="text-indigo-500 mr-2">&bull;</span>
+                    {{ item }}
+                </li>
+            }
+        </ul>
+    }
+</div>

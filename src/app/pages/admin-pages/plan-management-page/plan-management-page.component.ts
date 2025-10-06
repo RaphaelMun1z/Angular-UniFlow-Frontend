@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from "../../../shared/components/footer/footer.component";
 
 export interface PlanoViewModel {
     id: string;
@@ -27,7 +26,7 @@ export interface NovoPlanoForm {
 
 @Component({
     selector: 'app-plan-management-page',
-    imports: [CommonModule, FooterComponent],
+    imports: [CommonModule],
     templateUrl: './plan-management-page.component.html',
     styleUrl: './plan-management-page.component.scss'
 })

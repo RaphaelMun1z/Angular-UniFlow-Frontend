@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from "../../../shared/components/footer/footer.component";
 import { FormsModule } from '@angular/forms';
 
 export interface UsuarioViewModel {
@@ -32,7 +31,7 @@ const TODOS_OS_USUARIOS: UsuarioViewModel[] = [
 
 @Component({
     selector: 'app-user-management-page',
-    imports: [CommonModule, FooterComponent, FormsModule],
+    imports: [CommonModule, FormsModule],
     templateUrl: './user-management-page.component.html',
     styleUrl: './user-management-page.component.scss'
 })
