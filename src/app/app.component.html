@@ -1,1 +1,10 @@
+<ng-container *ngIf="authService.isAuthenticated$ | async; else noAuthNavbar">
+    <app-navbar-alt-with-auth></app-navbar-alt-with-auth>
+</ng-container>
+
+<ng-template #noAuthNavbar>
+    <app-navbar-alt-no-auth></app-navbar-alt-no-auth>
+</ng-template>
+
 <router-outlet />
+<app-footer></app-footer>

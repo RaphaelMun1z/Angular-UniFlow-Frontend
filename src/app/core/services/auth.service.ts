@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class AuthService {
+    private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+    public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
     
     constructor() { }
     
@@ -27,6 +30,16 @@ export class AuthService {
         } catch (error) {
             return false;
         }
+    }
+    
+    login(): void {
+        console.log('Usuário logado!');
+        this.isAuthenticatedSubject.next(true);
+    }
+    
+    logout(): void {
+        console.log('Usuário deslogado!');
+        this.isAuthenticatedSubject.next(false); 
     }
 }
 

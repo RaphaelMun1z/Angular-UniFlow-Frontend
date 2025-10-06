@@ -1,0 +1,257 @@
+<div class="font-sans antialiased text-gray-800 bg-gray-50">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="lg:grid lg:grid-cols-3 lg:gap-8">
+            <!-- Processo de pagamento -->
+            <div class="lg:col-span-2">
+                
+                <!-- Coluna Principal: Processo de pagamento -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                        
+                        <!-- Seletor de Método de Pagamento -->
+                        <div class="p-4 bg-gray-50 border-b border-gray-200">
+                            <div class="flex bg-gray-200 rounded-lg p-1">
+                                <button (click)="metodoPagamento = 'pix'" 
+                                [ngClass]="{'bg-white shadow-sm text-indigo-700': metodoPagamento === 'pix', 'text-gray-500 hover:bg-gray-100/50': metodoPagamento !== 'pix'}"
+                                class="w-1/2 py-2 text-sm font-semibold rounded-md transition-colors flex items-center justify-center gap-2">
+                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 21.6c-5.302 0-9.6-4.298-9.6-9.6S6.698 2.4 12 2.4s9.6 4.298 9.6 9.6-4.298 9.6-9.6 9.6zm-2.88-14.4h2.88v2.88h-2.88v-2.88zm-2.88 2.88h2.88v2.88h-2.88v-2.88zm8.64 0h2.88v2.88h-2.88v-2.88zm-5.76 2.88h2.88v2.88h-2.88v-2.88zm-2.88 2.88h2.88v2.88h-2.88v-2.88zm8.64 0h2.88v2.88h-2.88v-2.88z"/></svg>
+                                <span>Pix</span>
+                            </button>
+                            <button (click)="metodoPagamento = 'cartao'"
+                            [ngClass]="{'bg-white shadow-sm text-indigo-700': metodoPagamento === 'cartao', 'text-gray-500 hover:bg-gray-100/50': metodoPagamento !== 'cartao'}"
+                            class="w-1/2 py-2 text-sm font-semibold rounded-md transition-colors flex items-center justify-center gap-2">
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15A2.25 2.25 0 002.25 6.75v10.5A2.25 2.25 0 004.5 19.5z" /></svg>
+                            <span>Cartão de Crédito</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Seção PIX (Seu código original) -->
+                <div *ngIf="metodoPagamento === 'pix'">
+                    <div class="px-6 py-5 border-b border-gray-200">
+                        <h2 class="text-lg font-medium text-gray-900 flex items-center">
+                            <i class="fas fa-qrcode text-indigo-600 mr-2"></i> Pagamento via PIX
+                        </h2>
+                    </div>
+                    <div class="px-6 py-8">
+                        <div class="text-center mb-8">
+                            <div class="mx-auto w-64 h-64 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=example-pix-code" alt="QR Code Pix" class="mx-auto rounded-lg">
+                            </div>
+                            <p class="text-gray-600 mb-2">Escaneie o QR Code acima usando o app do seu banco</p>
+                            <p class="text-sm text-gray-500">Ou utilize os dados abaixo para pagamento manual</p>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Chave PIX (CNPJ)</label>
+                            <div class="flex rounded-md shadow-sm">
+                                <div class="relative flex items-stretch flex-grow focus-within:z-10">
+                                    <input type="text" readonly value="12.345.678/0001-99" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-none rounded-l-md pl-3 py-3 border-gray-300 font-mono bg-gray-50">
+                                </div>
+                                <button class="copy-btn -ml-px relative inline-flex items-center space-x-2 px-4 py-3 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                                    <i class="far fa-copy"></i>
+                                    <span>Copiar</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-info-circle text-yellow-400"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-yellow-700">
+                                        <strong>Importante:</strong> Sua assinatura será ativada automaticamente após a confirmação do pagamento.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Seção Cartão de Crédito (Novo Bloco) -->
+                <div *ngIf="metodoPagamento === 'cartao'">
+                    <div class="px-6 py-5 border-b border-gray-200">
+                        <h2 class="text-lg font-medium text-gray-900 flex items-center">
+                            <svg class="h-6 w-6 mr-2 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15A2.25 2.25 0 002.25 6.75v10.5A2.25 2.25 0 004.5 19.5z" /></svg>
+                            Pagamento com Cartão de Crédito
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-6">
+                            <div>
+                                <label for="card-number" class="block text-sm font-medium text-gray-700">Número do Cartão</label>
+                                <div class="mt-1">
+                                    <input type="text" id="card-number" placeholder="0000 0000 0000 0000" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="card-name" class="block text-sm font-medium text-gray-700">Nome no Cartão</label>
+                                <div class="mt-1">
+                                    <input type="text" id="card-name" placeholder="Como aparece no cartão" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="card-expiry" class="block text-sm font-medium text-gray-700">Validade (MM/AA)</label>
+                                    <input type="text" id="card-expiry" placeholder="MM/AA" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                </div>
+                                <div>
+                                    <label for="card-cvc" class="block text-sm font-medium text-gray-700">CVC</label>
+                                    <input type="text" id="card-cvc" placeholder="123" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="lg:col-span-3 space-y-8">
+            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            </div>
+            
+            <div *ngIf="metodoPagamento === 'pix'">
+                <!-- Instruções -->
+                <div class="mt-6 bg-white rounded-lg pix-card overflow-hidden">
+                    <div class="px-6 py-5 border-b border-gray-200">
+                        <h2 class="text-lg font-medium text-gray-900">
+                            <i class="fas fa-info-circle text-academic-primary mr-2"></i> Como pagar com PIX
+                        </h2>
+                    </div>
+                    <div class="px-6 py-6">
+                        <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                            <li class="pb-2">Abra o aplicativo do seu banco ou instituição financeira</li>
+                            <li class="pb-2">Acesse a área <strong>PIX</strong> ou <strong>Pagamentos</strong></li>
+                            <li class="pb-2">Selecione a opção <strong>Pagar com PIX</strong></li>
+                            <li class="pb-2">Escaneie o QR Code ou cole a chave PIX copiada</li>
+                            <li class="pb-2">Confira o valor e confirme o pagamento</li>
+                            <li>Aguarde a confirmação (normalmente em poucos segundos)</li>
+                        </ol>
+                        
+                        <div class="mt-6 pt-6 border-t border-gray-200">
+                            <h3 class="text-sm font-medium text-gray-900 mb-2">Problemas com o pagamento?</h3>
+                            <p class="text-sm text-gray-600 mb-3">Se o pagamento não for confirmado automaticamente, entre em contato com nosso suporte:</p>
+                            <div class="flex items-center text-sm text-academic-primary">
+                                <i class="fas fa-envelope mr-2"></i>
+                                <span>suporteacademicmanager.com</span>
+                            </div>
+                            <div class="flex items-center text-sm text-academic-primary mt-1">
+                                <i class="fas fa-phone-alt mr-2"></i>
+                                <span>(11) 1234-5678</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div *ngIf="metodoPagamento === 'cartao'">
+                <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-5 border-b border-gray-200 flex items-center">
+                        <svg class="h-6 w-6 mr-3 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286zm0 13.036h.008v.008H12v-.008z" /></svg>
+                        <h2 class="text-lg font-medium text-gray-900">Pagamento Seguro</h2>
+                    </div>
+                    <div class="px-6 py-6 space-y-4">
+                        <p class="text-gray-700">Seus dados de pagamento são processados com segurança pelo nosso gateway parceiro. Nós não armazenamos as informações do seu cartão.</p>
+                        <div class="flex items-center space-x-2">
+                            <p class="text-sm font-medium text-gray-900">Bandeiras aceitas:</p>
+                            <div class="flex space-x-2">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" class="h-6" alt="Mastercard">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" class="h-5" alt="Visa">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f5/Elo_logo.svg" class="h-5" alt="Elo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <!-- Resumo do pedido -->
+    <div class="mt-8 lg:mt-0">
+        <div class="bg-white rounded-lg pix-card overflow-hidden sticky top-4">
+            <div class="px-6 py-5 border-b border-gray-200">
+                <h2 class="text-lg font-medium text-gray-900">
+                    <i class="fas fa-file-invoice-dollar text-academic-primary mr-2"></i> Resumo do Pedido
+                </h2>
+            </div>
+            
+            <div class="px-6 py-6">
+                <!-- Plano -->
+                <div class="mb-6 p-4 bg-opacity-20 bg-academic-light/[.20] rounded-lg">
+                    <h3 class="font-medium text-academic-dark">Plano Premium</h3>
+                    <p class="text-sm text-gray-600 mt-1">Assinatura mensal - Gestão completa de atividades acadêmicas</p>
+                </div>
+                
+                <!-- Detalhes -->
+                <div class="space-y-3 mb-6">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Valor do plano</span>
+                        <span class="font-medium">R$ 199,90</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Desconto promocional</span>
+                        <span class="text-green-600">-R$ 39,90</span>
+                    </div>
+                    <div class="pt-3 mt-3 border-t border-gray-200 flex justify-between">
+                        <span class="font-medium">Total a pagar</span>
+                        <span class="font-bold text-academic-primary text-lg">R$ 160,00</span>
+                    </div>
+                </div>
+                
+                <!-- Benefícios -->
+                <div class="mb-6">
+                    <h3 class="text-sm font-medium text-gray-900 mb-2">Benefícios incluídos:</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-0.5 mr-2 flex-shrink-0"></i>
+                            <span>Disciplinas e atividades ilimitadas</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-0.5 mr-2 flex-shrink-0"></i>
+                            <span>Grupos de estudo colaborativos</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-0.5 mr-2 flex-shrink-0"></i>
+                            <span>Relatórios de desempenho avançados</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-0.5 mr-2 flex-shrink-0"></i>
+                            <span>5GB de armazenamento para materiais</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Status -->
+                <div class="bg-blue-50 p-4 rounded-lg mb-6">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-blue-400"></i>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-blue-800">Pagamento via PIX</h3>
+                            <p class="text-xs text-blue-700 mt-1">Transação instantânea e segura. Aguardando confirmação...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Botão -->
+                <button class="w-full bg-gray-300 text-gray-600 py-3 px-4 rounded-md font-medium cursor-not-allowed" disabled>
+                    <i class="fas fa-spinner fa-spin mr-2"></i> Aguardando confirmação
+                </button>
+                
+                <!-- Garantia -->
+                <div class="mt-4 flex items-start">
+                    <div class="flex-shrink-0 text-academic-primary">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-xs text-gray-600">Pagamento 100% seguro. Garantia de 7 dias ou seu dinheiro de volta.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+</div>

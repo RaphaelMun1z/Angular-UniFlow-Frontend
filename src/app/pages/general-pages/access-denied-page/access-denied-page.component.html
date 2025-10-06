@@ -1,0 +1,26 @@
+<div class="bg-white min-h-screen flex flex-col">
+    <main class="flex-grow flex items-center justify-center">
+        <div class="text-center px-4 py-16">
+            <div class="flex justify-center items-center mb-4">
+                <div class="flex-shrink-0 h-16 w-16 rounded-full bg-red-100 flex items-center justify-center">
+                    <svg class="h-8 w-8 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286zm0 13.036h.008v.008H12v-.008z" /></svg>
+                </div>
+            </div>
+            <h1 class="mt-4 text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">
+                Acesso Negado
+            </h1>
+            <p class="mt-2 text-base text-gray-500 max-w-md mx-auto">
+                Parece que você não tem as permissões necessárias para visualizar esta página.
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a [routerLink]="'/app/dashboard'" 
+                class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm">
+                <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5" /></svg>
+                Voltar para o Dashboard</a>
+                <a href="#" class="text-sm font-semibold text-gray-700 hover:text-indigo-600">
+                    Fale com o Suporte <span aria-hidden="true">&rarr;</span>
+                </a>
+            </div>
+        </div>
+    </main>
+</div>
