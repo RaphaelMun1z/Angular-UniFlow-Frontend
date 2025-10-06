@@ -30,6 +30,7 @@ import { PlansPageComponent } from './pages/no-auth/landing-pages/plans-page/pla
 import { TermsOfUsePageComponent } from './pages/no-auth/landing-pages/terms-of-use-page/terms-of-use-page.component';
 import { CheckoutPaymentPageComponent } from './pages/no-auth/payment-pages/checkout-payment-page/checkout-payment-page.component';
 import { ConfirmedPaymentPageComponent } from './pages/no-auth/payment-pages/confirmed-payment-page/confirmed-payment-page.component';
+import { CreateClassPageComponent } from './pages/auth-subscriber/group-pages/create-class-page/create-class-page.component';
 
 
 export const routes: Routes = [
@@ -74,6 +75,20 @@ export const routes: Routes = [
         path: 'app',
         canActivate: [AuthGuard],
         children: [
+            {
+                path: 'professor',
+                children: [
+                    {
+                        path: 'grupos',
+                        children: [
+                            {
+                                path: 'cadastrar',
+                                component: CreateClassPageComponent
+                            },
+                        ]
+                    },
+                ]
+            },
             {
                 path: 'dashboard',
                 component: DashboardPageComponent
