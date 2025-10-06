@@ -1,0 +1,127 @@
+<app-navbar-alt-two></app-navbar-alt-two>
+
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    
+    <header class="mb-8">
+        <p class="text-sm font-semibold text-indigo-600">Turma: Banco de Dados II</p>
+        <h1 class="text-3xl font-bold text-gray-900 mt-1">Projeto de Banco de Dados</h1>
+    </header>
+    
+    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <div class="p-6">
+            <h2 class="text-xl font-bold text-gray-900">Entregas dos Alunos</h2>
+            
+            <div class="mt-4 border-b border-gray-200">
+                <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                    
+                    <button (click)="filtrarEntregas('todos')" 
+                    [ngClass]="{
+                        'border-indigo-600 text-indigo-600': activeTab === 'todos',
+                        'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'todos'
+                    }"
+                    class="whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm transition-colors">
+                    Todos
+                    <span [ngClass]="{
+                        'bg-indigo-100 text-indigo-600': activeTab === 'todos',
+                        'bg-gray-200 text-gray-600': activeTab !== 'todos'
+                    }" 
+                    class="ml-2 py-0.5 px-2 rounded-full text-xs font-medium">{{ todasEntregas.length }}</span>
+                </button>
+                
+                <button (click)="filtrarEntregas('entregue')"
+                [ngClass]="{
+                    'border-indigo-600 text-indigo-600': activeTab === 'entregue',
+                    'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'entregue'
+                }"
+                class="whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm transition-colors">
+                Entregues
+                <span [ngClass]="{
+                    'bg-indigo-100 text-indigo-600': activeTab === 'entregue',
+                    'bg-gray-200 text-gray-600': activeTab !== 'entregue'
+                }" 
+                class="ml-2 py-0.5 px-2 rounded-full text-xs font-medium">{{ entreguesCount }}</span>
+            </button>
+            
+            <button (click)="filtrarEntregas('pendente')"
+            [ngClass]="{
+                'border-indigo-600 text-indigo-600': activeTab === 'pendente',
+                'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'pendente'
+            }"
+            class="whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm transition-colors">
+            Pendentes
+            <span [ngClass]="{
+                'bg-indigo-100 text-indigo-600': activeTab === 'pendente',
+                'bg-gray-200 text-gray-600': activeTab !== 'pendente'
+            }" 
+            class="ml-2 py-0.5 px-2 rounded-full text-xs font-medium">{{ pendentesCount }}</span>
+        </button>
+        
+        <button (click)="filtrarEntregas('avaliado')"
+        [ngClass]="{
+            'border-indigo-600 text-indigo-600': activeTab === 'avaliado',
+            'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300': activeTab !== 'avaliado'
+        }"
+        class="whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm transition-colors">
+        Avaliados
+        <span [ngClass]="{
+            'bg-indigo-100 text-indigo-600': activeTab === 'avaliado',
+            'bg-gray-200 text-gray-600': activeTab !== 'avaliado'
+        }" 
+        class="ml-2 py-0.5 px-2 rounded-full text-xs font-medium">{{ avaliadosCount }}</span>
+    </button>
+</nav>
+</div>
+</div>
+
+<div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+            <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Aluno</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Data de Envio</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Nota</th>
+                <th scope="col" class="relative px-6 py-3"><span class="sr-only">Ações</span></th>
+            </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+            
+            <tr *ngFor="let entrega of entregasFiltradas" class="hover:bg-gray-50">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ entrega.alunoNome }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full" [ngClass]="entrega.statusClass">{{ entrega.status }}</span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ entrega.dataEnvio || '-' }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800">{{ entrega.nota || '-' }}</td>
+                
+                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <div [ngSwitch]="entrega.status">
+                        
+                        <button *ngSwitchCase="'ENTREGUE'" 
+                        class="px-3 py-1.5 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Avaliar</button>
+                        
+                        <a *ngSwitchCase="'AVALIADO'" 
+                        href="#" 
+                        class="px-3 py-1.5 text-sm font-semibold text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors">
+                        Ver Detalhes</a>
+                        
+                        <span *ngSwitchDefault class="text-gray-400">-</span>
+                        
+                    </div>
+                </td>
+            </tr>
+            
+            <tr *ngIf="entregasFiltradas.length === 0">
+                <td colspan="5" class="px-6 py-12 text-center text-sm text-gray-500">
+                    Nenhuma entrega encontrada para este filtro.
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+</div>
+
+</div>
+
+<app-footer></app-footer>

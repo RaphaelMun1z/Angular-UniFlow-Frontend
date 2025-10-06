@@ -5,7 +5,6 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { TermsOfUsePageComponent } from './pages/terms-of-use-page/terms-of-use-page.component';
 
 // Activity
-import { ActivityPageComponent } from './pages/activity/activity-page/activity-page.component';
 import { RegisteredActivitiesPageComponent } from './pages/activity/registered-activities-page/registered-activities-page.component';
 import { ActivityRegistrationPageComponent } from './pages/activity/activity-registration-page/activity-registration-page.component';
 import { ActivityWallPageComponent } from './pages/activity/activity-wall-page/activity-wall-page.component';
@@ -41,6 +40,9 @@ import { NestedDropdownComponent } from './shared/components/nested-dropdown/nes
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { ProfessorDashboardPageComponent } from './pages/user/professor-dashboard-page/professor-dashboard-page.component';
+import { GroupsComponent } from './pages/groups/groups.component';
+import { ProfessorActivityPageComponent } from './pages/activity/professor-activity-page/professor-activity-page.component';
+import { EstudanteActivityPageComponent } from './pages/activity/estudante-activity-page/estudante-activity-page.component';
 
 export const routes: Routes = [
     {
@@ -158,15 +160,19 @@ export const routes: Routes = [
                         component: ActivityWallPageComponent
                     },
                     {
-                        path: ':id',
-                        component: ActivityPageComponent
+                        path: 'estudante/:id',
+                        component: EstudanteActivityPageComponent
+                    },
+                    {
+                        path: 'professor/:id',
+                        component: ProfessorActivityPageComponent
                     },
                 ]
             },
             {
                 path: 'dashboard',
                 children: [
-                     {
+                    {
                         path: 'estudante',
                         component: EstudanteDashboardPageComponent
                     },
@@ -179,7 +185,16 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'groups/:id',
-        component: GroupPageComponent
+        path: 'groups',
+        children: [
+            {
+                path: '',
+                component: GroupsComponent
+            },
+            {
+                path: ':id',
+                component: GroupPageComponent
+            }
+        ]
     }
 ];
