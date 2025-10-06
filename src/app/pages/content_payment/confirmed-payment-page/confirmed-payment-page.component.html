@@ -1,0 +1,118 @@
+<div class="font-sans antialiased text-gray-800 bg-gray-50">
+    <!-- Barra de navegação -->
+    <app-navbar-alt-no-auth></app-navbar-alt-no-auth>
+    
+    <!-- Conteúdo Principal -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="max-w-3xl mx-auto">
+            <div class="bg-white rounded-lg confirmation-card overflow-hidden text-center py-12 px-6 sm:px-12">
+                <!-- Ícone de confirmação -->
+                <div class="checkmark-circle mx-auto flex items-center justify-center w-24 h-24 rounded-full bg-green-100 mb-6">
+                    <i class="fas fa-check-circle text-5xl text-green-500"></i>
+                </div>
+                
+                <!-- Título -->
+                <h1 class="text-3xl font-extrabold text-gray-900 mb-3">Pagamento Confirmado!</h1>
+                
+                <!-- Subtítulo -->
+                <p class="text-xl text-gray-600 mb-8">
+                    Sua assinatura do <span class="font-medium text-academic-dark">Academic Manager Premium</span> foi ativada com sucesso.
+                </p>
+                
+                <!-- Detalhes do pagamento -->
+                <div class="max-w-md mx-auto bg-gray-50 rounded-lg p-6 mb-8 text-left">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-sm text-gray-500">Data do pagamento</p>
+                            <p class="font-medium">data</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Método</p>
+                            <p class="font-medium flex items-center">
+                                <i class="fab fa-pix text-xl text-academic-primary mr-2"></i> PIX
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Valor</p>
+                            <p class="font-medium">R$ 160,00</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Código da transação</p>
+                            <p class="font-mono text-sm">PIX</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mensagem de boas-vindas -->
+                <div class="bg-academic-light/[.20] bg-opacity-20 rounded-lg p-6 mb-8">
+                    <h3 class="text-lg font-medium text-academic-dark mb-3">
+                        <i class="fas fa-rocket mr-2"></i> Bem-vindo ao Academic Manager Premium!
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        Sua conta já está pronta com todos os recursos premium liberados. Aqui está o que você pode fazer agora:
+                    </p>
+                    <ul class="text-left space-y-2 text-gray-700 max-w-md mx-auto">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i>
+                            <span>Configurar suas disciplinas e atividades</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i>
+                            <span>Criar ou participar de grupos de estudo</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i>
+                            <span>Explorar relatórios de desempenho</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i>
+                            <span>Fazer upload de materiais (até 5GB)</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Ações -->
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="/dashboard" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-academic-primary hover:bg-academic-dark transition">
+                        <i class="fas fa-tachometer-alt mr-2"></i> Ir para o Dashboard
+                    </a>
+                    <a href="/guide" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-academic-primary bg-academic-light/[.20] bg-opacity-20 hover:bg-opacity-30 transition">
+                        <i class="fas fa-book mr-2"></i> Guia de Primeiros Passos
+                    </a>
+                </div>
+                
+                <!-- Recibo -->
+                <div class="mt-10 pt-6 border-t border-gray-200">
+                    <p class="text-sm text-gray-500 mb-4">
+                        Um recibo foi enviado para <span class="font-medium text-gray-700">seuemail.com</span>
+                    </p>
+                    <button class="text-sm font-medium text-academic-primary hover:text-academic-dark transition">
+                        <i class="fas fa-download mr-1"></i> Baixar recibo em PDF
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Suporte -->
+            <div class="mt-8 bg-white rounded-lg confirmation-card overflow-hidden p-6">
+                <div class="text-center">
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">
+                        <i class="fas fa-question-circle text-academic-primary mr-2"></i> Precisa de ajuda?
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        Nossa equipe está disponível para te ajudar a aproveitar ao máximo o Academic Manager.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-3">
+                        <a href="/help" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-academic-primary bg-gray-50 hover:bg-gray-100 transition">
+                            <i class="fas fa-book-open mr-2"></i> Central de Ajuda
+                        </a>
+                        <a href="/contact" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-academic-primary hover:bg-academic-dark transition">
+                            <i class="fas fa-envelope mr-2"></i> Contatar Suporte
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <app-footer></app-footer>
+</div>
