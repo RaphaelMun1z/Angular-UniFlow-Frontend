@@ -1,85 +1,14 @@
 <div class="bg-gray-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-        <div class="text-center">
-            <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight">
-                Escolha o Plano Perfeito para Você
-            </h1>
-            <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
-                Comece gratuitamente e evolua conforme suas necessidades. Cancele a qualquer momento.
-            </p>
+        <app-section-header title="Escolha o Plano Perfeito para Você" description="Comece gratuitamente e evolua conforme suas necessidades. Cancele a qualquer momento."></app-section-header>
+        
+        <div class="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <app-plan-card 
+            *ngFor="let plano of planos" 
+            [plano]="plano" 
+            [billingCycle]="billingCycle"></app-plan-card>
         </div>
         
-        <div class="mt-12 flex justify-center items-center space-x-4">
-            <span class="text-sm font-semibold text-gray-500">Mensal</span>
-            <button (click)="billingCycle = (billingCycle === 'mensal' ? 'anual' : 'mensal')" 
-            class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            [ngClass]="billingCycle === 'anual' ? 'bg-indigo-600' : 'bg-gray-200'">
-            <span class="pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"
-            [ngClass]="billingCycle === 'anual' ? 'translate-x-5' : 'translate-x-0'"></span>
-        </button>
-        <span class="text-sm font-semibold text-gray-500">Anual</span>
-        <span class="ml-2 text-xs font-semibold text-indigo-600 bg-indigo-100 px-2 py-1 rounded-full">-20% OFF</span>
+        <app-faq></app-faq>
     </div>
-    
-    <div class="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div *ngFor="let plano of planos" 
-        class="bg-white rounded-xl border transition-all duration-300"
-        [ngClass]="plano.isPopular ? 'border-indigo-600 ring-2 ring-indigo-600' : 'border-gray-200'">
-        
-        <div *ngIf="plano.isPopular" class="bg-indigo-600 text-white text-center text-sm font-semibold py-1.5 rounded-t-xl">
-            Mais Popular
-        </div>
-        
-        <div class="p-8">
-            <h3 class="text-2xl font-bold text-gray-900">{{ plano.nome }}</h3>
-            <p class="mt-2 text-gray-500">{{ plano.descricao }}</p>
-            
-            <div class="mt-6">
-                <ng-container *ngIf="plano.precoMensal > 0; else contactPrice">
-                    <p class="text-5xl font-bold text-gray-900">
-                        {{ (billingCycle === 'mensal' ? plano.precoMensal : plano.precoAnual / 12) | currency:'BRL' }}
-                    </p>
-                    <p class="text-sm font-medium text-gray-500">
-                        /mês <span *ngIf="billingCycle === 'anual'">(cobrado anualmente)</span>
-                    </p>
-                </ng-container>
-                <ng-template #contactPrice>
-                    <p class="text-3xl font-bold text-gray-900">Sob Consulta</p>
-                    <p class="text-sm font-medium text-gray-500">Para equipes grandes</p>
-                </ng-template>
-            </div>
-            
-            <a href="#" class="mt-8 block w-full py-2.5 px-4 text-center text-sm font-semibold rounded-lg transition-colors"
-            [ngClass]="plano.isPopular ? 'bg-indigo-600 text-white hover:bg-indigo-700' : 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100'">
-            Começar com {{ plano.nome }}
-        </a>
-        
-        <ul class="mt-8 space-y-4 text-sm text-gray-600">
-            <li *ngFor="let feature of plano.features" class="flex items-center">
-                <svg *ngIf="feature.incluso" class="flex-shrink-0 h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>
-                <svg *ngIf="!feature.incluso" class="flex-shrink-0 h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" /></svg>
-                <span class="ml-3">{{ feature.texto }}</span>
-            </li>
-        </ul>
-    </div>
-</div>
-</div>
-
-<div class="mt-20 max-w-4xl mx-auto">
-    <h2 class="text-3xl font-bold text-center text-gray-900">Perguntas Frequentes</h2>
-    <dl class="mt-8 space-y-6 divide-y divide-gray-200">
-        <div class="pt-6">
-            <dt class="text-lg">
-                <button class="flex w-full items-start justify-between text-left text-gray-900">
-                    <span class="font-medium">Posso cancelar a qualquer momento?</span>
-                    <span class="ml-6 flex h-7 items-center"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg></span>
-                </button>
-            </dt>
-            <dd class="mt-2 pr-12">
-                <p class="text-base text-gray-600">Sim, você pode cancelar sua assinatura a qualquer momento através do seu painel de perfil. Você continuará com acesso aos recursos do seu plano até o final do ciclo de cobrança atual.</p>
-            </dd>
-        </div>
-    </dl>
-</div>
-</div>
 </div>

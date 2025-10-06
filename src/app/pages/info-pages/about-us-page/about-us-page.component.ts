@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SectionHeaderComponent } from './components/section-header/section-header.component';
+import { SectionHeaderComponent } from '../components/section-header/section-header.component';
 import { CalltoActionCareersComponent } from "./components/callto-action-careers/callto-action-careers.component";
 import { OurNumbersComponent } from './components/our-numbers/our-numbers.component';
 import { TeamPresentationComponent } from './components/team-presentation/team-presentation.component';

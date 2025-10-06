@@ -1,24 +1,17 @@
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-
-export interface PlanoViewModel {
-    nome: string;
-    descricao: string;
-    precoMensal: number;
-    precoAnual: number;
-    isPopular: boolean;
-    features: { texto: string, incluso: boolean }[];
-}
+import { SectionHeaderComponent } from '../components/section-header/section-header.component';
+import { PlanCardComponent, PlanoViewModel } from './components/plan-card/plan-card.component';
+import { FaqComponent } from './components/faq/faq.component';
 
 @Component({
     selector: 'app-plans-page',
-    imports: [CommonModule, CurrencyPipe],
+    imports: [CommonModule, SectionHeaderComponent, PlanCardComponent, FaqComponent],
     templateUrl: './plans-page.component.html',
     styleUrl: './plans-page.component.scss'
 })
 
 export class PlansPageComponent implements OnInit {
-    
     public billingCycle: 'mensal' | 'anual' = 'mensal';
     public planos: PlanoViewModel[] = [];
     
