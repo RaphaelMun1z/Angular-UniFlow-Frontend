@@ -1,0 +1,9 @@
+<div *ngIf="currentUser" class="flex items-center space-x-2 cursor-pointer p-1 rounded-lg hover:bg-gray-100 transition-colors">
+    <img class="h-8 w-8 rounded-full object-cover ring-2 ring-offset-2 ring-indigo-300" 
+    [src]="currentUser.avatarUrl" 
+    [alt]="currentUser.nome">
+    <span class="text-sm font-medium text-gray-700 hidden sm:block">{{ currentUser.nome }}</span>
+    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+    </svg>
+</div>

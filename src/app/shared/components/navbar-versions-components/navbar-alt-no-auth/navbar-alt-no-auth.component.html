@@ -3,67 +3,69 @@
         <div class="flex items-center justify-between h-16">
             
             <div class="flex items-center">
-                <div class="flex-shrink-0">
-                    <img [routerLink]="'/'"
-                    class="h-8 w-auto cursor-pointer" 
-                    src="UniFlowLogo.png" 
-                    alt="UniFlow Logo">
-                </div>
-                
-                <div class="hidden md:ml-10 md:flex md:space-x-8">
-                    <a [routerLink]="'/'" routerLinkActive="text-indigo-600 border-indigo-600" [routerLinkActiveOptions]="{exact: true}"
-                    class="text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">
-                    Início
-                </a>
-                <a [routerLink]="'/planos'" routerLinkActive="text-indigo-600 border-indigo-600"
-                class="text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">
-                Planos
-            </a>
-            <a [routerLink]="'/sobre-nos'" routerLinkActive="text-indigo-600 border-indigo-600"
-            class="text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">
-            Sobre Nós
-        </a>
-    </div>
-</div>
-
-<div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-    <a [routerLink]="'/login'" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
-        Entrar
-    </a>
-    <a [routerLink]="'/signup'" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
-        Cadastre-se Grátis
-    </a>
-</div>
-
-<div class="-mr-2 flex items-center md:hidden">
-    <button (click)="isMobileMenuOpen = !isMobileMenuOpen" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
-        <span class="sr-only">Abrir menu</span>
-        <svg *ngIf="!isMobileMenuOpen" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>
-        <svg *ngIf="isMobileMenuOpen" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-    </button>
-</div>
-
-</div>
-</div>
-
-<div *ngIf="isMobileMenuOpen" class="md:hidden" id="mobile-menu">
-    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <a [routerLink]="'/'" routerLinkActive="bg-gray-100 text-gray-900" [routerLinkActiveOptions]="{exact: true}"
-        class="text-gray-500 hover:bg-gray-50 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">Início</a>
-        <a [routerLink]="'/planos'" routerLinkActive="bg-gray-100 text-gray-900"
-        class="text-gray-500 hover:bg-gray-50 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">Planos</a>
-        <a [routerLink]="'/sobre-nos'" routerLinkActive="bg-gray-100 text-gray-900"
-        class="text-gray-500 hover:bg-gray-50 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">Sobre Nós</a>
-    </div>
-    <div class="pt-4 pb-3 border-t border-gray-200">
-        <div class="px-2 space-y-1">
-            <a [routerLink]="'/signup'" class="block w-full px-4 py-2 text-center text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md">Cadastre-se Grátis</a>
-            <a [routerLink]="'/login'" class="block w-full px-4 py-2 text-center text-base font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-md">Entrar</a>
+                <app-logo-link></app-logo-link>
+                <nav class="hidden md:ml-10 md:flex md:space-x-8">
+                    <ng-container *ngFor="let item of navItems">
+                        <a *ngIf="!item.children" [routerLink]="item.path" routerLinkActive="text-indigo-600 border-indigo-600" [routerLinkActiveOptions]="{exact: true}"
+                        class="text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">
+                        {{ item.label }}</a>
+                        
+                        <div *ngIf="item.children" class="relative group flex items-center">
+                            <button class="text-gray-500 group-hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">
+                                <span>{{ item.label }}</span>
+                                <svg class="ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                            </button>
+                            
+                            <div class="absolute top-full -left-4 pt-4 w-screen max-w-xs transform px-2 sm:px-0 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition ease-out duration-200 z-10 hidden group-hover:block">
+                                <div class="rounded-lg shadow-lg border border-gray-200 overflow-hidden">
+                                    <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                                        <a *ngFor="let child of item.children" [routerLink]="child.path" class="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 transition ease-in-out duration-150">
+                                            <div class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-100 text-indigo-600 sm:h-12 sm:w-12">
+                                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" [innerHTML]="child.icon | safeHtml"></svg>
+                                            </div>
+                                            <div class="ml-4">
+                                                <p class="text-base font-medium text-gray-900">{{ child.label }}</p>
+                                                <p class="mt-1 text-sm text-gray-500">{{ child.description }}</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </nav>
+            </div>
+            
+            <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+                <a [routerLink]="'/login'" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">Entrar</a>
+                <a [routerLink]="'/signup'" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">Cadastre-se Grátis</a>
+            </div>
+            
+            <div class="-mr-2 flex items-center md:hidden">
+                <button (click)="isMobileMenuOpen = !isMobileMenuOpen" type="button" class="bg-white rounded-md p-2 text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
+                    <svg *ngIf="!isMobileMenuOpen" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+                    <svg *ngIf="isMobileMenuOpen" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
         </div>
     </div>
-</div>
+    
+    <div *ngIf="isMobileMenuOpen" class="md:hidden">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <ng-container *ngFor="let item of navItems">
+                <a *ngIf="!item.children" [routerLink]="item.path" routerLinkActive="bg-gray-100 text-gray-900" [routerLinkActiveOptions]="{exact: true}"
+                class="text-gray-500 hover:bg-gray-50 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">{{ item.label }}</a>
+                <ng-container *ngIf="item.children">
+                    <a *ngFor="let child of item.children" [routerLink]="child.path" routerLinkActive="bg-gray-100 text-gray-900"
+                    class="text-gray-500 hover:bg-gray-50 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium">{{ child.label }}</a>
+                </ng-container>
+            </ng-container>
+        </div>
+        <div class="pt-4 pb-3 border-t border-gray-200">
+            <div class="px-2 space-y-2">
+                <a [routerLink]="'/signup'" class="block w-full px-4 py-2 text-center text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md">Cadastre-se Grátis</a>
+                <a [routerLink]="'/login'" class="block w-full px-4 py-2 text-center text-base font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-md">Entrar</a>
+            </div>
+        </div>
+    </div>
 </nav>
