@@ -1,289 +1,79 @@
-<div class="font-sans antialiased text-gray-800 bg-gray-50">
-    <app-navbar-alt-with-auth></app-navbar-alt-with-auth>
-    
-    <!-- Conteúdo Principal -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Cabeçalho do Mural -->
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8">
+<app-navbar-alt-with-auth></app-navbar-alt-with-auth>
+
+<main class="bg-gray-100 font-sans antialiased">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
             <div>
-                <h1 class="text-2xl font-bold text-gray-900">Mural de Atividades</h1>
-                <p class="mt-1 text-gray-600">Acompanhe todas as suas tarefas e eventos acadêmicos em um só lugar</p>
+                <h1 class="text-3xl font-bold text-gray-900">Mural de Atividades</h1>
+                <p class="mt-1 text-gray-600">Acompanhe suas tarefas e prazos em um só lugar.</p>
             </div>
             <div class="mt-4 md:mt-0">
-                <button class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-academic-primary hover:bg-academic-dark focus:outline-none">
-                    <i class="fas fa-plus mr-2"></i> Nova Atividade
+                <button class="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+                    <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                    Nova Atividade
                 </button>
             </div>
-        </div>
+        </header>
         
-        <!-- Filtros e Ordenação -->
-        <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div class="flex flex-wrap gap-2">
-                    <button class="filter-active px-3 py-1 rounded-full text-xs font-medium transition">
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm">
+            
+            <div class="p-4 border-b border-gray-200">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div class="flex items-center space-x-2 overflow-x-auto pb-2 sm:pb-0">
+                        <button (click)="filtrarAtividades('todas')" [ngClass]="{'bg-indigo-100 text-indigo-700': activeTab === 'todas', 'bg-gray-100 hover:bg-gray-200 text-gray-600': activeTab !== 'todas'}"
+                        class="px-3 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap transition-colors">
                         Todas
                     </button>
-                    <button class="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 hover:bg-gray-200 transition">
-                        Pendentes
-                    </button>
-                    <button class="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 hover:bg-gray-200 transition">
-                        Concluídas
-                    </button>
-                    <button class="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 hover:bg-gray-200 transition">
-                        Atrasadas
-                    </button>
-                    <button class="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 hover:bg-gray-200 transition">
-                        Esta semana
-                    </button>
-                </div>
-                <div class="flex items-center">
-                    <label for="sort" class="mr-2 text-sm text-gray-600">Ordenar por:</label>
-                    <select id="sort" class="block w-full pl-3 pr-10 py-1 text-base border-gray-300 focus:outline-none focus:ring-academic-primary focus:border-academic-primary sm:text-sm rounded-md">
-                        <option>Prazo mais próximo</option>
-                        <option>Prazo mais distante</option>
-                        <option>Prioridade</option>
-                        <option>Disciplina</option>
-                        <option>Recente</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Linha do Tempo de Atividades -->
-        <div class="bg-white rounded-lg shadow-sm overflow-hidden">
-            <!-- Cabeçalho da Timeline -->
-            <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-                <h2 class="text-lg font-medium text-gray-900">
-                    <i class="fas fa-calendar-alt text-academic-primary mr-2"></i> Linha do Tempo
-                </h2>
-                <div class="flex items-center">
-                    <span class="text-sm text-gray-500 mr-2">Visualização:</span>
-                    <button class="p-1 rounded text-gray-500 hover:text-academic-primary">
-                        <i class="fas fa-list"></i>
-                    </button>
-                    <button class="p-1 rounded text-gray-500 hover:text-academic-primary ml-1">
-                        <i class="fas fa-calendar"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Lista de Atividades -->
-            <div class="divide-y divide-gray-200">
-                <!-- Dia/Agrupamento -->
-                <div class="px-6 py-4 bg-gray-50">
-                    <h3 class="text-sm font-medium text-gray-900">
-                        <i class="far fa-calendar mr-2"></i> Hoje, 15 de Novembro
-                    </h3>
-                </div>
-                
-                <!-- Atividade 1 -->
-                <div class="relative timeline-item px-6 py-4 hover:bg-gray-50">
-                    <div class="flex">
-                        <div class="flex-shrink-0 mr-4 relative">
-                            <div class="h-10 w-10 rounded-full bg-red-100 flex items-center justify-center">
-                                <i class="fas fa-book text-red-500"></i>
-                            </div>
-                            <span class="absolute -bottom-5 -right-2 bg-white px-1 text-xs text-gray-500">10:00</span>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="activity-card bg-white p-4 rounded-lg border border-gray-200">
-                                <div class="flex justify-between">
-                                    <h4 class="text-base font-medium text-gray-900 truncate">Entrega do Projeto de Pesquisa</h4>
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">
-                                        Alta Prioridade
-                                    </span>
-                                </div>
-                                <p class="mt-1 text-sm text-gray-600 truncate">Disciplina: Metodologia Científica - Prof. Carlos</p>
-                                <div class="mt-2 flex items-center justify-between">
-                                    <div class="flex items-center text-sm text-gray-500">
-                                        <i class="far fa-clock mr-1"></i>
-                                        <span>Prazo final: hoje às 23:59</span>
-                                    </div>
-                                    <div class="flex space-x-2">
-                                        <button class="text-sm text-academic-primary hover:text-academic-dark">
-                                            <i class="far fa-edit"></i>
-                                        </button>
-                                        <button class="text-sm text-green-600 hover:text-green-800">
-                                            <i class="far fa-check-circle"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Atividade 2 -->
-                <div class="relative timeline-item px-6 py-4 hover:bg-gray-50">
-                    <div class="flex">
-                        <div class="flex-shrink-0 mr-4 relative">
-                            <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                                <i class="fas fa-users text-blue-500"></i>
-                            </div>
-                            <span class="absolute -bottom-5 -right-2 bg-white px-1 text-xs text-gray-500">14:30</span>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="activity-card bg-white p-4 rounded-lg border border-gray-200">
-                                <div class="flex justify-between">
-                                    <h4 class="text-base font-medium text-gray-900 truncate">Reunião do Grupo de Estudos</h4>
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
-                                        Média Prioridade
-                                    </span>
-                                </div>
-                                <p class="mt-1 text-sm text-gray-600 truncate">Grupo: Pesquisa em Inteligência Artificial</p>
-                                <div class="mt-2 flex items-center justify-between">
-                                    <div class="flex items-center text-sm text-gray-500">
-                                        <i class="fas fa-map-marker-alt mr-1"></i>
-                                        <span>Sala 305 - Bloco B</span>
-                                    </div>
-                                    <div class="flex space-x-2">
-                                        <button class="text-sm text-academic-primary hover:text-academic-dark">
-                                            <i class="far fa-edit"></i>
-                                        </button>
-                                        <button class="text-sm text-green-600 hover:text-green-800">
-                                            <i class="far fa-check-circle"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Dia/Agrupamento -->
-                <div class="px-6 py-4 bg-gray-50">
-                    <h3 class="text-sm font-medium text-gray-900">
-                        <i class="far fa-calendar mr-2"></i> Amanhã, 16 de Novembro
-                    </h3>
-                </div>
-                
-                <!-- Atividade 3 -->
-                <div class="relative timeline-item px-6 py-4 hover:bg-gray-50">
-                    <div class="flex">
-                        <div class="flex-shrink-0 mr-4 relative">
-                            <div class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center">
-                                <i class="fas fa-flask text-purple-500"></i>
-                            </div>
-                            <span class="absolute -bottom-5 -right-2 bg-white px-1 text-xs text-gray-500">08:00</span>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="activity-card bg-white p-4 rounded-lg border border-gray-200">
-                                <div class="flex justify-between">
-                                    <h4 class="text-base font-medium text-gray-900 truncate">Prova de Química Orgânica</h4>
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">
-                                        Alta Prioridade
-                                    </span>
-                                </div>
-                                <p class="mt-1 text-sm text-gray-600 truncate">Disciplina: Química - Prof. Ana</p>
-                                <div class="mt-2 flex items-center justify-between">
-                                    <div class="flex items-center text-sm text-gray-500">
-                                        <i class="far fa-clock mr-1"></i>
-                                        <span>Duração: 2 horas</span>
-                                    </div>
-                                    <div class="flex space-x-2">
-                                        <button class="text-sm text-academic-primary hover:text-academic-dark">
-                                            <i class="far fa-edit"></i>
-                                        </button>
-                                        <button class="text-sm text-green-600 hover:text-green-800">
-                                            <i class="far fa-check-circle"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Dia/Agrupamento -->
-                <div class="px-6 py-4 bg-gray-50">
-                    <h3 class="text-sm font-medium text-gray-900">
-                        <i class="far fa-calendar mr-2"></i> Próximos Dias
-                    </h3>
-                </div>
-                
-                <!-- Atividade 4 -->
-                <div class="relative timeline-item px-6 py-4 hover:bg-gray-50">
-                    <div class="flex">
-                        <div class="flex-shrink-0 mr-4 relative">
-                            <div class="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center">
-                                <i class="fas fa-book-open text-green-500"></i>
-                            </div>
-                            <span class="absolute -bottom-5 -right-2 bg-white px-1 text-xs text-gray-500">18/11</span>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="activity-card bg-white p-4 rounded-lg border border-gray-200">
-                                <div class="flex justify-between">
-                                    <h4 class="text-base font-medium text-gray-900 truncate">Leitura do Capítulo 5</h4>
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
-                                        Baixa Prioridade
-                                    </span>
-                                </div>
-                                <p class="mt-1 text-sm text-gray-600 truncate">Disciplina: Literatura Brasileira - Prof. Maria</p>
-                                <div class="mt-2 flex items-center justify-between">
-                                    <div class="flex items-center text-sm text-gray-500">
-                                        <i class="far fa-clock mr-1"></i>
-                                        <span>Prazo: 18/11 às 23:59</span>
-                                    </div>
-                                    <div class="flex space-x-2">
-                                        <button class="text-sm text-academic-primary hover:text-academic-dark">
-                                            <i class="far fa-edit"></i>
-                                        </button>
-                                        <button class="text-sm text-green-600 hover:text-green-800">
-                                            <i class="far fa-check-circle"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Atividade 5 -->
-                <div class="relative timeline-item px-6 py-4 hover:bg-gray-50">
-                    <div class="flex">
-                        <div class="flex-shrink-0 mr-4 relative">
-                            <div class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
-                                <i class="fas fa-laptop-code text-indigo-500"></i>
-                            </div>
-                            <span class="absolute -bottom-5 -right-2 bg-white px-1 text-xs text-gray-500">20/11</span>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="activity-card bg-white p-4 rounded-lg border border-gray-200">
-                                <div class="flex justify-between">
-                                    <h4 class="text-base font-medium text-gray-900 truncate">Entrega do Trabalho de Programação</h4>
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
-                                        Média Prioridade
-                                    </span>
-                                </div>
-                                <p class="mt-1 text-sm text-gray-600 truncate">Disciplina: Algoritmos - Prof. Roberto</p>
-                                <div class="mt-2 flex items-center justify-between">
-                                    <div class="flex items-center text-sm text-gray-500">
-                                        <i class="far fa-clock mr-1"></i>
-                                        <span>Prazo: 20/11 às 23:59</span>
-                                    </div>
-                                    <div class="flex space-x-2">
-                                        <button class="text-sm text-academic-primary hover:text-academic-dark">
-                                            <i class="far fa-edit"></i>
-                                        </button>
-                                        <button class="text-sm text-green-600 hover:text-green-800">
-                                            <i class="far fa-check-circle"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Rodapé da Timeline -->
-            <div class="px-6 py-4 border-t border-gray-200 bg-gray-50 text-center">
-                <button class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
-                    <i class="fas fa-history mr-2"></i> Carregar atividades anteriores
+                    <button (click)="filtrarAtividades('pendentes')" [ngClass]="{'bg-indigo-100 text-indigo-700': activeTab === 'pendentes', 'bg-gray-100 hover:bg-gray-200 text-gray-600': activeTab !== 'pendentes'}"
+                    class="px-3 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap transition-colors">
+                    Pendentes
                 </button>
+                <button (click)="filtrarAtividades('concluidas')" [ngClass]="{'bg-indigo-100 text-indigo-700': activeTab === 'concluidas', 'bg-gray-100 hover:bg-gray-200 text-gray-600': activeTab !== 'concluidas'}"
+                class="px-3 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap transition-colors">
+                Concluídas
+            </button>
+            <button (click)="filtrarAtividades('atrasadas')" [ngClass]="{'bg-indigo-100 text-indigo-700': activeTab === 'atrasadas', 'bg-gray-100 hover:bg-gray-200 text-gray-600': activeTab !== 'atrasadas'}"
+            class="px-3 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap transition-colors">
+            Atrasadas
+        </button>
+    </div>
+</div>
+</div>
+
+<div class="p-6">
+    <ng-container *ngIf="atividadesFiltradas.length > 0; else emptyState">
+        <div class="relative space-y-8">
+            <div class="absolute left-5 top-2 h-full w-0.5 bg-gray-200"></div>
+            
+            <div *ngFor="let atividade of atividadesFiltradas" class="relative flex items-start space-x-6">
+                <div class="flex-shrink-0 h-10 w-10 rounded-full flex items-center justify-center ring-4 ring-white z-10" [ngClass]="atividade.iconClass">
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" [innerHTML]="atividade.icon | safeHtml"></svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <p class="text-sm text-gray-500">{{ atividade.data | date:'dd/MM/yyyy HH:mm' }}</p>
+                    <div class="bg-white p-4 rounded-lg border border-gray-200 mt-1 hover:border-indigo-500 cursor-pointer transition-colors">
+                        <div class="flex justify-between items-start">
+                            <h4 class="font-semibold text-gray-900">{{ atividade.titulo }}</h4>
+                            <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full" [ngClass]="atividade.statusClass">{{ atividade.status }}</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">{{ atividade.contexto }}</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </main>
+    </ng-container>
     
-    <app-footer></app-footer>
+    <ng-template #emptyState>
+        <div class="text-center py-12">
+            <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+            <h3 class="mt-2 text-xl font-semibold text-gray-900">Nenhuma atividade encontrada</h3>
+            <p class="mt-1 text-sm text-gray-500">Não há atividades que correspondam a este filtro.</p>
+        </div>
+    </ng-template>
 </div>
+</div>
+</div>
+</main>
+
+<app-footer></app-footer>

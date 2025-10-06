@@ -12,10 +12,11 @@ import { FaqSectionComponent } from '../../../shared/components/home-components/
 import { FinalCTASectionComponent } from '../../../shared/components/home-components/final-ctasection/final-ctasection.component';
 import { FooterComponent } from '../../../shared/components/footer/footer.component';
 import { NavbarAltNoAuthComponent } from '../../../shared/components/navbar-versions-components/navbar-alt-no-auth/navbar-alt-no-auth.component';
+import { NavbarAltWithAuthComponent } from '../../../shared/components/navbar-versions-components/navbar-alt-with-auth/navbar-alt-with-auth.component';
 
 @Component({
     selector: 'app-home-page',
-    imports: [NavbarAltNoAuthComponent, HeroSectionComponent, PartnersSectionComponent, KeyFeaturesSectionComponent, DemoSectionComponent, PlansSectionComponent, TestimonialsSectionComponent, FaqSectionComponent, FinalCTASectionComponent, FooterComponent],
+    imports: [NavbarAltNoAuthComponent, NavbarAltWithAuthComponent, HeroSectionComponent, PartnersSectionComponent, KeyFeaturesSectionComponent, DemoSectionComponent, PlansSectionComponent, TestimonialsSectionComponent, FaqSectionComponent, FinalCTASectionComponent, FooterComponent],
     templateUrl: './home-page.component.html',
     styleUrl: './home-page.component.scss'
 })

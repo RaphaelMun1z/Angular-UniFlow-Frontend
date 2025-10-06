@@ -1,20 +1,48 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { RouterLink, RouterModule } from '@angular/router';
 import { SafeHtmlPipe } from "./safe-html.pipe";
+
+export interface CurrentUser {
+    nome: string;
+    email: string;
+    avatarUrl: string;
+    role: 'ESTUDANTE' | 'PROFESSOR' | 'ADMIN';
+}
 
 @Component({
     selector: 'app-navbar-alt-with-auth',
-    imports: [RouterLink, CommonModule, SafeHtmlPipe],
+    imports: [RouterLink, CommonModule, SafeHtmlPipe, RouterModule],
     templateUrl: './navbar-alt-with-auth.component.html',
     styleUrl: './navbar-alt-with-auth.component.scss'
 })
 
-export class NavbarAltWithAuthComponent {
+export class NavbarAltWithAuthComponent implements OnInit {
     @Input() bgStyle: number = 0;
     
+    // Controle dos menus
     isNotificationsOpen = false;
     isProfileMenuOpen = false;
+    
+    // Dados do usuário logado (viriam do seu AuthService)
+    currentUser: CurrentUser | null = null;
+    
+    get unreadNotificationsCount(): number {
+        return this.notifications.filter(n => !n.lida).length;
+    }
+    
+    constructor() {}
+    
+    ngOnInit(): void {
+        // Simulação de busca do usuário logado.
+        // No app real, você obteria isso do seu AuthService.
+        this.currentUser = {
+            nome: 'Professor Teste',
+            email: 'professor.teste@email.com',
+            avatarUrl: 'https://i.pravatar.cc/150?u=professor',
+            role: 'PROFESSOR' // <-- MUDE AQUI PARA 'ESTUDANTE' ou 'ADMIN' para testar as outras visões
+        };
+    }
     
     notifications = [
         { 
@@ -48,12 +76,6 @@ export class NavbarAltWithAuthComponent {
             iconClass: 'text-blue-600'
         }
     ];
-    
-    get unreadNotificationsCount(): number {
-        return this.notifications.filter(n => !n.lida).length;
-    }
-    
-    constructor() {}
     
     logout(): void {
         console.log('Executando logout...');
