@@ -31,6 +31,8 @@ import { TermsOfUsePageComponent } from './pages/no-auth/landing-pages/terms-of-
 import { CheckoutPaymentPageComponent } from './pages/no-auth/payment-pages/checkout-payment-page/checkout-payment-page.component';
 import { ConfirmedPaymentPageComponent } from './pages/no-auth/payment-pages/confirmed-payment-page/confirmed-payment-page.component';
 import { CreateClassPageComponent } from './pages/auth-subscriber/group-pages/create-class-page/create-class-page.component';
+import { CreateStudyGroupPageComponent } from './pages/auth-subscriber/group-pages/create-study-group-page/create-study-group-page.component';
+import { ListGroupsManagementComponent } from './pages/auth-admin/admin-pages/list-groups-management/list-groups-management.component';
 
 
 export const routes: Routes = [
@@ -84,6 +86,20 @@ export const routes: Routes = [
                             {
                                 path: 'cadastrar',
                                 component: CreateClassPageComponent
+                            },
+                        ]
+                    },
+                ]
+            },
+            {
+                path: 'estudante',
+                children: [
+                    {
+                        path: 'grupos',
+                        children: [
+                            {
+                                path: 'cadastrar',
+                                component: CreateStudyGroupPageComponent
                             },
                         ]
                     },
@@ -158,6 +174,10 @@ export const routes: Routes = [
             {
                 path: 'notificacoes',
                 component: MessageBroadcastPageComponent
+            },
+            { 
+                path: 'listar-grupos', 
+                component: ListGroupsManagementComponent
             },
             { 
                 path: 'acesso-negado', 
