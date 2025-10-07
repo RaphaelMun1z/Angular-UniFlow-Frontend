@@ -1,0 +1,103 @@
+<div class="min-h-screen bg-slate-50 font-sans antialiased">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <!-- Cabeçalho da Página -->
+        <header class="mb-8 text-center">
+            <div class="inline-flex flex-col items-center justify-center gap-2 mx-auto">
+                <div class="flex-shrink-0 rounded-xl bg-indigo-600/10 p-3 text-indigo-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H5v-2H3v-2H1v-4a6 6 0 017.743-5.743z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7 15l-4-4m0 0l4-4m-4 4h18" />
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-bold tracking-tight text-slate-900">Entrar em um Grupo</h1>
+                <p class="mt-1 text-md text-slate-500 max-w-2xl">
+                    Use o código de convite fornecido pelo professor ou colega para acessar um grupo.
+                </p>
+            </div>
+        </header>
+        
+        <!-- Seção de Busca -->
+        <section class="max-w-2xl mx-auto mb-8">
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="flex flex-col sm:flex-row items-end gap-4">
+                    <div class="flex-grow w-full">
+                        <label for="invite-code" class="block text-sm font-medium text-slate-600 mb-1.5">Código de Convite</label>
+                        <input #inviteCodeInput (keyup.enter)="findGroup(inviteCodeInput.value)" type="text" id="invite-code" placeholder="Insira o código aqui..." class="block w-full rounded-lg border-slate-300 py-2.5 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    </div>
+                    <button (click)="findGroup(inviteCodeInput.value)" type="button" class="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-lg border border-transparent bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                        <span>Verificar</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção de Resultado -->
+        <main class="max-w-2xl mx-auto">
+            @if (loading()) {
+                <div class="flex justify-center items-center p-10">
+                    <svg class="animate-spin h-8 w-8 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </div>
+            } @else {
+                @if (searched() && foundGroup()) {
+                    <div class="rounded-2xl border border-slate-200 bg-white shadow-sm animate-fade-in">
+                        <div class="p-6">
+                            <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0 rounded-lg bg-indigo-100 p-3 text-indigo-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.125-1.274-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.125-1.274.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full"
+                                    [ngClass]="{
+                                        'bg-blue-100 text-blue-800': foundGroup()?.type === 'Turma',
+                                        'bg-purple-100 text-purple-800': foundGroup()?.type === 'Grupo de Estudo'
+                                    }">
+                                    {{ foundGroup()?.type }}
+                                </span>
+                                <h2 class="text-xl font-bold text-slate-800 mt-2">{{ foundGroup()?.name }}</h2>
+                                <p class="text-sm text-slate-500 mt-1">Criado por: {{ foundGroup()?.creator }}</p>
+                            </div>
+                        </div>
+                        <dl class="mt-6 grid grid-cols-2 gap-x-4 gap-y-4 text-center">
+                            <div class="rounded-lg bg-slate-50 p-3">
+                                <dt class="text-sm font-medium text-slate-500">Membros</dt>
+                                <dd class="mt-1 text-lg font-semibold text-slate-900">{{ foundGroup()?.members }}</dd>
+                            </div>
+                            <div class="rounded-lg bg-slate-50 p-3">
+                                <dt class="text-sm font-medium text-slate-500">Status</dt>
+                                <dd class="mt-1 text-lg font-semibold text-slate-900 text-green-600">{{ foundGroup()?.status }}</dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="p-4 bg-slate-50/70 border-t border-slate-200">
+                        <button type="button" class="w-full rounded-lg border border-transparent bg-indigo-600 px-4 py-3 text-base font-semibold text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all">
+                            Entrar no Grupo
+                        </button>
+                    </div>
+                </div>
+            } @else if (searched() && !foundGroup()) {
+                <div class="text-center p-10 bg-white rounded-2xl border border-slate-200 shadow-sm animate-fade-in">
+                    <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-red-100 text-red-600 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.002 10.002a11.002 11.002 0 11-22.004 0 11.002 11.002 0 0122.004 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M14.998 14.998L9 9m5.998 0L9 14.998" /></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-800">Código Inválido</h3>
+                    <p class="text-slate-500 mt-1">O código inserido não corresponde a nenhum grupo. Verifique o código e tente novamente.</p>
+                </div>
+            } @else {
+                <div class="text-center p-10 bg-white rounded-2xl border border-dashed border-slate-300">
+                    <svg class="mx-auto h-12 w-12 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5l.415-.207a.75.75 0 011.085.67V10.5m0 0h6m-6 0a.75.75 0 001.085.67l.415-.207M3 16.5V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v9a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 16.5z" /></svg>
+                    <h3 class="mt-2 text-sm font-semibold text-slate-800">Aguardando código</h3>
+                    <p class="mt-1 text-sm text-slate-500">Insira um código para encontrar e entrar em um grupo.</p>
+                </div>
+            }
+        }
+    </main>
+    
+</div>
+</div>

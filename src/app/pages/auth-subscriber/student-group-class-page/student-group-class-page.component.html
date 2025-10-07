@@ -1,0 +1,178 @@
+<div class="min-h-screen bg-slate-100 font-sans antialiased">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Cabeçalho do Grupo -->
+        <header class="mb-8 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="h-48 bg-slate-200">
+                <img [src]="group.bannerUrl" class="w-full h-full object-cover" alt="Banner do Grupo">
+            </div>
+            <div class="p-6">
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                    <div>
+                        <h1 class="text-3xl font-bold text-slate-900">{{ group.title }}</h1>
+                        <div class="flex items-center gap-2 mt-2">
+                            <img [src]="group.professor.avatarUrl" class="h-6 w-6 rounded-full" [alt]="group.professor.name">
+                            <span class="text-sm text-slate-600">Lecionado por <span class="font-medium">{{ group.professor.name }}</span></span>
+                        </div>
+                    </div>
+                    <button class="mt-4 sm:mt-0 px-4 py-2 border border-red-300 text-sm font-semibold text-red-700 rounded-lg hover:bg-red-50 transition-colors flex items-center gap-2">
+                        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>
+                        <span>Sair do Grupo</span>
+                    </button>
+                </div>
+                <div class="mt-4 flex items-center gap-6 text-slate-500">
+                    <div class="flex items-center">
+                        <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.962A3 3 0 013 10.5V12a3 3 0 013 3v.5a3 3 0 013 3m-3.75-9.08a3.001 3.001 0 00-2.923-2.185 3.001 3.001 0 00-2.923 2.185M12 6.75a3 3 0 116 0 3 3 0 01-6 0zM12 18.75a3 3 0 116 0 3 3 0 01-6 0z" /></svg>
+                        <span class="font-medium">{{ group.memberCount }} Membros</span>
+                    </div>
+                    @if(group.pendingActivities > 0) {
+                        <div class="flex items-center font-semibold text-rose-600">
+                            <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <span>{{ group.pendingActivities }} Atividades Pendentes</span>
+                        </div>
+                    }
+                </div>
+            </div>
+            <!-- Abas de Navegação -->
+            <div class="px-6 border-t border-slate-200">
+                <nav class="-mb-px flex space-x-8 overflow-x-auto">
+                    <button (click)="setActiveTab('visaoGeral')" [ngClass]="activeTab === 'visaoGeral' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'" class="flex items-center gap-2 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                        <i class="fas fa-home"></i> Visão Geral
+                    </button>
+                    <button (click)="setActiveTab('atividades')" [ngClass]="activeTab === 'atividades' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'" class="flex items-center gap-2 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                        <i class="fas fa-tasks"></i> Atividades
+                    </button>
+                    <button (click)="setActiveTab('membros')" [ngClass]="activeTab === 'membros' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'" class="flex items-center gap-2 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                        <i class="fas fa-users"></i> Membros
+                    </button>
+                    <button (click)="setActiveTab('materiais')" [ngClass]="activeTab === 'materiais' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'" class="flex items-center gap-2 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                        <i class="fas fa-file-alt"></i> Materiais
+                    </button>
+                    <button (click)="setActiveTab('discussoes')" [ngClass]="activeTab === 'discussoes' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'" class="flex items-center gap-2 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
+                        <i class="fas fa-comments"></i> Discussões
+                    </button>
+                </nav>
+            </div>
+        </header>
+        
+        <!-- Conteúdo Principal -->
+        <main>
+            @if(activeTab === 'visaoGeral') {
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Coluna Principal (Mural) -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <!-- Feed de Postagens -->
+                        @for(post of posts; track post.id) {
+                            <div class="bg-white rounded-xl border border-slate-200 shadow-sm">
+                                <div class="p-5">
+                                    <div class="flex items-start justify-between">
+                                        <div class="flex items-start gap-4">
+                                            <img class="h-10 w-10 rounded-full" [src]="post.author.avatarUrl" [alt]="post.author.name">
+                                            <div>
+                                                <p class="font-semibold text-slate-800">{{ post.author.name }}</p>
+                                                <p class="text-xs text-slate-500">{{ post.timestamp | date:'dd/MM/yyyy HH:mm' }}</p>
+                                            </div>
+                                        </div>
+                                        <button class="p-2 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg></button>
+                                    </div>
+                                    <p class="mt-4 text-slate-700 whitespace-pre-wrap">{{ post.content }}</p>
+                                </div>
+                                
+                                <!-- Ações e Comentários -->
+                                <div class="px-5 pb-5">
+                                    <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center text-sm font-medium text-slate-500">
+                                        <button class="flex items-center gap-2 hover:text-indigo-600 transition-colors" [class.text-indigo-600]="post.likedByUser">
+                                            <svg class="h-5 w-5" [class.fill-indigo-600]="post.likedByUser" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0118 4.5v1.546A4.498 4.498 0 0018.322 7.7c.303.759.93 1.331 1.653 1.715a9.041 9.041 0 012.861 2.4c.498.634 1.225 1.08 2.031 1.08h.384a.75.75 0 01.75.75v.253a.75.75 0 01-.75.75h-.384a1.875 1.875 0 01-1.495-.715a9.053 9.053 0 00-2.861-2.4c-.723-.384-1.35-.956-1.653-1.715a4.498 4.498 0 00-.322-1.672V6.75A2.25 2.25 0 0015 4.5v-1.5a2.25 2.25 0 00-2.25-2.25H9A2.25 2.25 0 006.75 4.5v1.546A4.498 4.498 0 006.428 7.7c-.303.759-.93 1.331-1.653 1.715a9.041 9.041 0 00-2.861 2.4c-.498.634-1.225 1.08-2.031 1.08H1.5a.75.75 0 00-.75.75v.253a.75.75 0 00.75.75h.384a1.875 1.875 0 001.495-.715a9.053 9.053 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 01.322-1.672V6.75a2.25 2.25 0 012.25-2.25h1.5A2.25 2.25 0 0115 6.75v1.546A4.498 4.498 0 0114.678 9.8c-.303.759-.93 1.331-1.653 1.715a9.041 9.041 0 01-2.861 2.4c-.498.634-1.225 1.08-2.031 1.08h-.384a.75.75 0 01-.75-.75V10.5a.75.75 0 01.75-.75h.384z" /></svg>
+                                            <span>{{ post.likesCount }}</span>
+                                        </button>
+                                        <button class="flex items-center gap-2 hover:text-indigo-600 transition-colors">
+                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c.243.534.64 1.036 1.134 1.482.493.446 1.065.823 1.696 1.128a1.69 1.69 0 001.032.324 1.683 1.683 0 001.033-.324c.63-.305 1.202-.682 1.696-1.128.493-.446.89-.948 1.134-1.482.243-.534.365-1.09.365-1.653 0-.562-.122-1.119-.365-1.653a4.704 4.704 0 00-1.134-1.482c-.493-.446-1.065-.823-1.696-1.128a1.69 1.69 0 00-1.032-.324 1.683 1.683 0 00-1.033.324c-.63.305-1.202.682-1.696 1.128a4.704 4.704 0 00-1.134 1.482c-.243.534-.365 1.09-.365 1.653 0 .562.122 1.119.365 1.653zM12 12.76c.243.534.64 1.036 1.134 1.482.493.446 1.065.823 1.696 1.128a1.69 1.69 0 001.032.324 1.683 1.683 0 001.033-.324c.63-.305 1.202-.682 1.696-1.128.493-.446.89-.948 1.134-1.482.243-.534.365-1.09.365-1.653 0-.562-.122-1.119-.365-1.653a4.704 4.704 0 00-1.134-1.482c-.493-.446-1.065-.823-1.696-1.128a1.69 1.69 0 00-1.032-.324 1.683 1.683 0 00-1.033.324c-.63.305-1.202.682-1.696 1.128a4.704 4.704 0 00-1.134 1.482c-.243.534-.365 1.09-.365 1.653 0 .562.122 1.119.365 1.653z" /></svg>
+                                            <span>{{ post.commentsCount }} Comentários</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mt-4 space-y-4">
+                                    @for(comment of post.comments; track comment.id){
+                                        <div class="flex items-start gap-3">
+                                            <img [src]="comment.author.avatarUrl" class="h-8 w-8 rounded-full" [alt]="comment.author.name">
+                                            <div class="bg-slate-100 px-3 py-2 rounded-lg w-full">
+                                                <p class="font-semibold text-sm text-slate-800">{{ comment.author.name }}</p>
+                                                <p class="text-sm text-slate-600">{{ comment.content }}</p>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="mt-4 flex items-start gap-3">
+                                    <img [src]="currentUser.avatarUrl" class="h-8 w-8 rounded-full" [alt]="currentUser.name">
+                                    <div class="flex-grow">
+                                        <input type="text" placeholder="Escreva um comentário..." class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <!-- Coluna Lateral -->
+                    <div class="lg:col-span-1 space-y-6">
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <h3 class="font-bold text-slate-800 mb-4">Sobre a Turma</h3>
+                            <div class="flex items-center gap-3">
+                                <img [src]="group.professor.avatarUrl" class="h-10 w-10 rounded-full" [alt]="group.professor.name">
+                                <div>
+                                    <p class="font-semibold text-slate-800">{{ group.professor.name }}</p>
+                                    <p class="text-xs text-slate-500">Professor Responsável</p>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-slate-100">
+                                <a href="#" class="w-full text-center block px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-sm">Ver todos os {{group.memberCount}} membros</a>
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <h3 class="font-bold text-slate-800 mb-4">Atividades Pendentes</h3>
+                            @if(activities.length > 0) {
+                                <ul class="space-y-4 text-sm">
+                                    @for(activity of activities; track activity.id) {
+                                        <li class="flex items-start gap-3">
+                                            <div class="flex-shrink-0 bg-rose-100 text-rose-600 h-8 w-8 flex items-center justify-center rounded-lg mt-1"><i class="fas fa-exclamation"></i></div>
+                                            <div>
+                                                <p class="font-medium text-slate-700">{{ activity.title }}</p>
+                                                <p class="text-slate-500 text-xs">Entrega: {{ activity.dueDate | date:'dd/MM/yyyy' }}</p>
+                                                <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold text-xs">Ver Detalhes &rarr;</a>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                            } @else {
+                                <p class="text-sm text-slate-500">Nenhuma atividade pendente no momento. Bom trabalho!</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+            @if(activeTab === 'atividades') {
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <h2 class="text-xl font-bold text-slate-800 mb-4">Atividades da Turma</h2>
+                    <p class="text-slate-600">Esta seção listará todas as atividades, provas e trabalhos.</p>
+                </div>
+            }
+            @if(activeTab === 'membros') {
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <h2 class="text-xl font-bold text-slate-800 mb-4">Membros da Turma</h2>
+                    <p class="text-slate-600">Aqui será exibida a lista completa de participantes.</p>
+                </div>
+            }
+            @if(activeTab === 'materiais') {
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <h2 class="text-xl font-bold text-slate-800 mb-4">Materiais de Apoio</h2>
+                    <p class="text-slate-600">Acesse aqui os arquivos e links compartilhados pelo professor.</p>
+                </div>
+            }
+            @if(activeTab === 'discussoes') {
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <h2 class="text-xl font-bold text-slate-800 mb-4">Fórum de Discussões</h2>
+                    <p class="text-slate-600">Participe dos debates e tire suas dúvidas com a turma.</p>
+                </div>
+            }
+        </main>
+        
+    </div>
+</div>
