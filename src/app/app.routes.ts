@@ -39,7 +39,6 @@ import { AdminGroupsReportsAndStatisticsPageComponent } from './pages/auth-admin
 import { AdminGroupsGlobalSettingsPageComponent } from './pages/auth-admin/admin-groups-global-settings-page/admin-groups-global-settings-page.component';
 import { AdminGroupsAuditPageComponent } from './pages/auth-admin/admin-groups-audit-page/admin-groups-audit-page.component';
 import { AdminGroupsSearchPageComponent } from './pages/auth-admin/admin-groups-search-page/admin-groups-search-page.component';
-import { StudentGroupNavigationPageComponent } from './pages/auth-subscriber/student-group-navigation-page/student-group-navigation-page.component';
 import { StudentGroupsAccessByInviteCodePageComponent } from './pages/auth-subscriber/student-groups-access-by-invite-code-page/student-groups-access-by-invite-code-page.component';
 import { StudentGroupsPendingInvitationsPageComponent } from './pages/auth-subscriber/student-groups-pending-invitations-page/student-groups-pending-invitations-page.component';
 import { TeacherGroupNavigationPageComponent } from './pages/auth-subscriber/teacher-group-navigation-page/teacher-group-navigation-page.component';
@@ -47,6 +46,8 @@ import { TeacherGroupsManageJoinRequestsPageComponent } from './pages/auth-subsc
 import { TeacherGroupsManagementPageComponent } from './pages/auth-subscriber/teacher-groups-management-page/teacher-groups-management-page.component';
 import { TeacherGroupClassPageComponent } from './pages/auth-subscriber/teacher-group-class-page/teacher-group-class-page.component';
 import { StudentGroupClassPageComponent } from './pages/auth-subscriber/student-group-class-page/student-group-class-page.component';
+import { UserRedirectionPanelPageComponent } from './shared/components/general/user-redirection-panel-page/user-redirection-panel-page.component';
+import { NavigationPageComponent } from './shared/components/general/navigation-page/navigation-page.component';
 
 
 export const routes: Routes = [
@@ -91,6 +92,11 @@ export const routes: Routes = [
         path: 'app',
         canActivate: [AuthGuard],
         children: [
+            { 
+                path: '', 
+                redirectTo: 'dashboard', 
+                pathMatch: 'full'
+            },
             {
                 path: 'professor',
                 children: [
@@ -147,6 +153,15 @@ export const routes: Routes = [
             {
                 path: 'estudante',
                 children: [
+                    { 
+                        path: '', 
+                        redirectTo: 'painel', 
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'painel',
+                        component: UserRedirectionPanelPageComponent
+                    },
                     {
                         path: 'grupos',
                         children: [
@@ -157,7 +172,7 @@ export const routes: Routes = [
                             },
                             {
                                 path: 'navegacao',
-                                component: StudentGroupNavigationPageComponent
+                                component: NavigationPageComponent
                             },
                             {
                                 path: 'listar',

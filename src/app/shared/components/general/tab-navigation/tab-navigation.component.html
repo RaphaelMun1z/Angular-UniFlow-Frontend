@@ -1,0 +1,10 @@
+<app-tab-navigation-options 
+[tabs]="tabs" 
+[activeTabIndex]="activeTabIndex"
+(activeTabIndexChange)="selectTab($event)"
+></app-tab-navigation-options>
+
+<app-tab-navigation-cards 
+[tabs]="tabs" 
+[activeTabIndex]="activeTabIndex"
+></app-tab-navigation-cards>

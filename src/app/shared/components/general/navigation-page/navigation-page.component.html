@@ -1,0 +1,17 @@
+<div class="min-h-screen bg-slate-50 font-sans antialiased">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <app-section-header-alt
+        [title]="title"
+        [subtitle]="subtitle"
+        ></app-section-header-alt>
+        
+        <main>
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                @for (item of userNavLinks(); track item.title) {
+                    <app-link-card [item]="item"></app-link-card>
+                }
+            </div>
+        </main>
+    </div>
+</div>
