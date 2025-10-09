@@ -1,12 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy, signal, computed } from '@angular/core';
+import { Component, OnInit, signal, computed, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GenericAsideComponent } from "../../../shared/components/general/generic-aside/generic-aside.component";
 import { GenericTabNavigationComponent } from "../../../shared/components/general/generic-tab-navigation/generic-tab-navigation.component";
 import { GenericPageHeaderComponent } from "../../../shared/components/general/generic-page-header/generic-page-header.component";
 import { GenericTaskCardComponent } from "../../../shared/components/general/generic-task-card/generic-task-card.component";
 import { GenericFloatingPlusButtonComponent } from "../../../shared/components/general/generic-floating-plus-button/generic-floating-plus-button.component";
+import { PagerComponent } from "../../../shared/components/general/pager/pager.component";
 
-// --- INTERFACES E TIPOS ---
+// --- INTERFACES ---
 type ActivityStatus = 'current' | 'pending' | 'completed' | 'failed';
 
 interface ActivityOwner {
@@ -26,10 +27,7 @@ interface Activity {
     icon: string;
     iconIsUrl: boolean;
     company: string;
-    statusTag: {
-        text: string;
-        color: string;
-    };
+    statusTag: { text: string; color: string };
     title: string;
     tags: string[];
     owner: ActivityOwner;
@@ -39,61 +37,76 @@ interface Activity {
     recentUpdates: ActivityUpdate[];
 }
 
-interface FilterTab {
-    id: ActivityStatus | 'all';
-    label: string;
-    count: number;
-}
-
-interface MainTab {
-    id: string;
-    label: string;
-}
-
-interface SidebarLink {
-    id: string;
-    label: string;
-    icon: string; // SVG path data
-}
-
 @Component({
     selector: 'app-generic-tasks-page',
-    imports: [CommonModule, GenericAsideComponent, GenericTabNavigationComponent, GenericPageHeaderComponent, GenericTaskCardComponent, GenericFloatingPlusButtonComponent],
+    imports: [
+        CommonModule,
+        GenericAsideComponent,
+        GenericTabNavigationComponent,
+        GenericPageHeaderComponent,
+        GenericTaskCardComponent,
+        GenericFloatingPlusButtonComponent,
+        PagerComponent
+    ],
     templateUrl: './generic-tasks-page.component.html',
     styleUrl: './generic-tasks-page.component.scss'
 })
-
 export class GenericTasksPageComponent implements OnInit {
-    private allActivities = signal<Activity[]>([]);
+    // Sinais
+    activities = signal<Activity[]>([]);
+    allActivities = signal<Activity[]>([]);
     activeFilter = signal<ActivityStatus | 'all'>('all');
+    currentPage: WritableSignal<number> = signal(1);
+    itemsPerPage: WritableSignal<number> = signal(8);
+    isMobileSidebarOpen = signal(false);
     
+    // --- Computeds ---
     filteredActivities = computed<Activity[]>(() => {
-        const activities = this.allActivities();
+        let activities = this.allActivities();
         const filter = this.activeFilter();
-        
-        let activitiesToShow = activities;
-        if (filter !== 'all') {
-            activitiesToShow = activities.filter(activity => activity.status === filter);
-        }
+        if (filter !== 'all') activities = activities.filter(a => a.status === filter);
         
         const statusOrder: Record<ActivityStatus, number> = {
-            'current': 1,
-            'pending': 2,
-            'completed': 3,
-            'failed': 4
+            'current': 1, 'pending': 2, 'completed': 3, 'failed': 4
         };
         
-        return [...activitiesToShow].sort((a, b) => {
+        return [...activities].sort((a, b) => {
+            if (a.highlighted && !b.highlighted) return -1;
+            if (!a.highlighted && b.highlighted) return 1;
             return statusOrder[a.status] - statusOrder[b.status];
         });
     });
     
+    paginatedActivities = computed(() => {
+        const start = (this.currentPage() - 1) * this.itemsPerPage();
+        const end = start + this.itemsPerPage();
+        return this.filteredActivities().slice(start, end);
+    });
+    
+    totalPages = computed(() => Math.ceil(this.filteredActivities().length / this.itemsPerPage()));
+    
+    // --- Lifecycle ---
     ngOnInit(): void {
         this.loadMockData();
     }
     
-    setFilter(filter: ActivityStatus | 'all'): void {
-        this.activeFilter.set(filter);
+    // --- Métodos ---
+    toggleMobileSidebar(): void {
+        this.isMobileSidebarOpen.update(value => !value);
+    }
+    
+    nextPage(): void {
+        if (this.currentPage() < this.totalPages()) this.currentPage.update(p => p + 1);
+    }
+    
+    previousPage(): void {
+        if (this.currentPage() > 1) this.currentPage.update(p => p - 1);
+    }
+    
+    goToPage(page: number): void {
+        if (page < 1) page = 1;
+        if (page > this.totalPages()) page = this.totalPages();
+        this.currentPage.set(page);
     }
     
     private loadMockData(): void {
@@ -284,4 +297,5 @@ export class GenericTasksPageComponent implements OnInit {
             },
         ]);
     }
+    
 }

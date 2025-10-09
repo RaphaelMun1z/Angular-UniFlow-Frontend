@@ -1,0 +1,80 @@
+<div class="flex flex-col items-center mt-6 space-y-2">
+    <!-- Botões de navegação e páginas -->
+    <div class="flex items-center space-x-1 flex-wrap justify-center">
+        <button
+        (click)="goToFirstPage()"
+        [disabled]="currentPage() === 1"
+        class="px-2 py-1 rounded bg-gray-200 text-gray-700 disabled:opacity-50"
+        >
+        &laquo;
+    </button>
+    
+    <button
+    (click)="previousPage()"
+    [disabled]="currentPage() === 1"
+    class="px-2 py-1 rounded bg-gray-200 text-gray-700 disabled:opacity-50"
+    >
+    &lsaquo;
+</button>
+
+<ng-container *ngFor="let page of visiblePages()">
+    <button
+    *ngIf="page !== -1"
+    (click)="goToPage(page)"
+    [ngClass]="
+    currentPage() === page
+    ? 'bg-indigo-600 text-white'
+    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+    "
+    class="px-3 py-1 rounded"
+    >
+    {{ page }}
+</button>
+<span *ngIf="page === -1" class="px-2">..</span>
+</ng-container>
+
+<button
+(click)="nextPage()"
+[disabled]="currentPage() === totalPages()"
+class="px-2 py-1 rounded bg-gray-200 text-gray-700 disabled:opacity-50"
+>
+&rsaquo;
+</button>
+
+<button
+(click)="goToLastPage()"
+[disabled]="currentPage() === totalPages()"
+class="px-2 py-1 rounded bg-gray-200 text-gray-700 disabled:opacity-50"
+>
+&raquo;
+</button>
+
+<!-- Jump to page -->
+<input
+type="number"
+min="1"
+[max]="totalPages()"
+[(ngModel)]="jumpPage"
+class="ml-2 w-16 px-2 py-1 border rounded text-center"
+/>
+<button
+(click)="goToPage(jumpPage)"
+class="ml-1 px-3 py-1 bg-indigo-600 text-white rounded"
+>
+Go
+</button>
+</div>
+
+<!-- Itens por página -->
+<div class="flex items-center space-x-2 text-gray-700 mt-2">
+    <span>Showing</span>
+    <select
+    [ngModel]="itemsPerPage()"
+    (ngModelChange)="itemsPerPage.set($event); goToFirstPage()"
+    class="px-2 py-1 border rounded"
+    >
+    <option *ngFor="let opt of pageSizeOptions" [value]="opt">{{ opt }}</option>
+</select>
+<span>items out of {{ totalItems }}</span>
+</div>
+</div>

@@ -1,16 +1,30 @@
-<div class="flex bg-slate-50 font-sans">
-    <app-generic-aside></app-generic-aside>
+<div class="relative min-h-screen flex bg-slate-50 font-sans">
+    <app-generic-aside (closeMobileMenu)="isMobileSidebarOpen.set(false)"></app-generic-aside>
+    
+    <div *ngIf="isMobileSidebarOpen()" 
+    (click)="isMobileSidebarOpen.set(false)" 
+    class="fixed inset-0 bg-black bg-opacity-25 z-20 lg:hidden"></div>
     
     <div class="flex-1 flex flex-col overflow-hidden">
-        <app-generic-page-header></app-generic-page-header>        
-        <app-generic-tab-navigation class="p-8 pt-6 pb-0 relative"></app-generic-tab-navigation>
+        <app-generic-page-header (toggleSidebar)="toggleMobileSidebar()"></app-generic-page-header>
+        
+        <app-generic-tab-navigation class="px-8 bg-white"></app-generic-tab-navigation>
         
         <main class="flex-1 overflow-y-auto p-8 pt-6 relative">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 <app-generic-task-card *ngFor="let activity of filteredActivities()" [activity]="activity"></app-generic-task-card>
             </div>
             
-            <app-generic-floating-plus-button></app-generic-floating-plus-button>
-        </main>
-    </div>
+            <app-pager
+            [totalItems]="filteredActivities().length"
+            [itemsPerPage]="itemsPerPage"
+            [currentPage]="currentPage"
+            (currentPageChange)="currentPage.set($event)">
+        </app-pager>
+        
+        
+        
+        <app-generic-floating-plus-button></app-generic-floating-plus-button>
+    </main>
+</div>
 </div>
