@@ -104,7 +104,21 @@ export const routes: Routes = [
             },
             {
                 path: 'grupos',
-                component: GenericGroupsPageComponent
+                children: [
+                    { 
+                        path: '', 
+                        redirectTo: '', 
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: '',
+                        component: GenericGroupsPageComponent
+                    },
+                    {
+                        path: 'navegacao',
+                        component: TeacherGroupNavigationPageComponent
+                    },
+                ]
             },
             {
                 path: 'atividades',

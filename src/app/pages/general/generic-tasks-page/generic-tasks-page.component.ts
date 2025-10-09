@@ -1,11 +1,11 @@
 import { Component, OnInit, signal, computed, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GenericAsideComponent } from "../../../shared/components/general/generic-aside/generic-aside.component";
-import { GenericTabNavigationComponent } from "../../../shared/components/general/generic-tab-navigation/generic-tab-navigation.component";
-import { GenericPageHeaderComponent } from "../../../shared/components/general/generic-page-header/generic-page-header.component";
 import { GenericTaskCardComponent } from "../../../shared/components/general/generic-task-card/generic-task-card.component";
-import { GenericFloatingPlusButtonComponent } from "../../../shared/components/general/generic-floating-plus-button/generic-floating-plus-button.component";
+import { GenericViewPageComponent } from "../generic-view-page/generic-view-page.component";
+import { GenericPageHeaderComponent } from "../../../shared/components/general/generic-page-header/generic-page-header.component";
+import { GenericTabNavigationComponent } from "../../../shared/components/general/generic-tab-navigation/generic-tab-navigation.component";
 import { PagerComponent } from "../../../shared/components/general/pager/pager.component";
+import { GenericFloatingPlusButtonComponent } from "../../../shared/components/general/generic-floating-plus-button/generic-floating-plus-button.component";
 
 // --- INTERFACES ---
 type ActivityStatus = 'current' | 'pending' | 'completed' | 'failed';
@@ -37,30 +37,36 @@ interface Activity {
     recentUpdates: ActivityUpdate[];
 }
 
+interface SidebarLink {
+    id: string;
+    label: string;
+    link: string;
+    icon: string; // SVG path data
+}
+
 @Component({
     selector: 'app-generic-tasks-page',
     imports: [
         CommonModule,
-        GenericAsideComponent,
-        GenericTabNavigationComponent,
-        GenericPageHeaderComponent,
         GenericTaskCardComponent,
-        GenericFloatingPlusButtonComponent,
-        PagerComponent
+        GenericViewPageComponent,
+        GenericPageHeaderComponent,
+        GenericTabNavigationComponent,
+        PagerComponent,
+        GenericFloatingPlusButtonComponent
     ],
     templateUrl: './generic-tasks-page.component.html',
     styleUrl: './generic-tasks-page.component.scss'
 })
 export class GenericTasksPageComponent implements OnInit {
-    // Sinais
     activities = signal<Activity[]>([]);
     allActivities = signal<Activity[]>([]);
     activeFilter = signal<ActivityStatus | 'all'>('all');
+    
     currentPage: WritableSignal<number> = signal(1);
     itemsPerPage: WritableSignal<number> = signal(8);
-    isMobileSidebarOpen = signal(false);
+    totalItems: number = 0;
     
-    // --- Computeds ---
     filteredActivities = computed<Activity[]>(() => {
         let activities = this.allActivities();
         const filter = this.activeFilter();
@@ -88,11 +94,6 @@ export class GenericTasksPageComponent implements OnInit {
     // --- Lifecycle ---
     ngOnInit(): void {
         this.loadMockData();
-    }
-    
-    // --- Métodos ---
-    toggleMobileSidebar(): void {
-        this.isMobileSidebarOpen.update(value => !value);
     }
     
     nextPage(): void {
@@ -297,5 +298,4 @@ export class GenericTasksPageComponent implements OnInit {
             },
         ]);
     }
-    
 }

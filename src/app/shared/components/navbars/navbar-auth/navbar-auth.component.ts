@@ -6,6 +6,8 @@ import { NotificationsPopupComponent } from "./components/notifications-popup/no
 import { UserAvatarComponent } from "./components/user-avatar/user-avatar.component";
 import { NavigationComponent } from "./components/navigation/navigation.component";
 import { LogoLinkComponent } from "../../general/logo-link/logo-link.component";
+import { NotificationButtonComponent } from "../../general/notification-button/notification-button.component";
+import { ProfileButtonComponent } from "../../general/profile-button/profile-button.component";
 
 export interface CurrentUser {
     nome: string;
@@ -16,16 +18,13 @@ export interface CurrentUser {
 
 @Component({
     selector: 'app-navbar-auth',
-    imports: [CommonModule, RouterModule, ProfilePopupComponent, NotificationsPopupComponent, UserAvatarComponent, NavigationComponent, LogoLinkComponent, NavigationComponent],
+    imports: [CommonModule, RouterModule, NavigationComponent, LogoLinkComponent, NavigationComponent, NotificationButtonComponent, ProfileButtonComponent],
     templateUrl: './navbar-auth.component.html',
     styleUrl: './navbar-auth.component.scss'
 })
 
 export class NavbarAuthComponent implements OnInit {
     @Input() bgStyle: number = 0;
-    
-    isNotificationsOpen = false;
-    isProfileMenuOpen = false;
     
     currentUser: CurrentUser | null = null;
     unreadNotificationsCount: any;

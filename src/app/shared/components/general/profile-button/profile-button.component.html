@@ -1,0 +1,8 @@
+<div class="relative">
+    <app-user-avatar 
+    [currentUser]="currentUser" 
+    (click)="isProfileMenuOpen = !isProfileMenuOpen"></app-user-avatar>      
+    <div *ngIf="isProfileMenuOpen" class="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-2xl border border-gray-200 origin-top-right z-20">
+        <app-profile-popup></app-profile-popup>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<app-generic-view-page [title]="'Grupos'">
+    <app-generic-page-header [title]="'Grupos'"></app-generic-page-header>
+    
+    <app-generic-tab-navigation class="px-8 bg-white"></app-generic-tab-navigation>
+    
+    <main class="flex-1 overflow-y-auto p-8 pt-6 relative max-h-[80vh]">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <app-generic-group-card *ngFor="let group of groups" [group]="group"></app-generic-group-card>
+        </div>
+        
+        <app-pager
+        [totalItems]="totalItems"
+        [itemsPerPage]="itemsPerPage"
+        [currentPage]="currentPage"
+        (currentPageChange)="currentPage.set($event)"></app-pager>
+        
+        <app-generic-floating-plus-button></app-generic-floating-plus-button>
+    </main>
+</app-generic-view-page>

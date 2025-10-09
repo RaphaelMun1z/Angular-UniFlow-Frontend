@@ -1,9 +1,10 @@
-@if (userLevel === 'admin') {
-    <app-user-redirection-panel-page
-    [title]="'Painel Administrativo'"
-    [subtitle]="'Gerencie usuários, grupos e configurações do sistema'"
-    [tabs]="adminTabs">
-</app-user-redirection-panel-page>
+<app-generic-view-page [title]="'Painel'">
+    @if (userLevel === 'admin') {
+        <app-user-redirection-panel-page
+        [title]="'Painel Administrativo'"
+        [subtitle]="'Gerencie usuários, grupos e configurações do sistema'"
+        [tabs]="adminTabs">
+    </app-user-redirection-panel-page>
 }
 
 @if (userLevel === 'professor') {
@@ -21,3 +22,4 @@
     [tabs]="estudanteTabs">
 </app-user-redirection-panel-page>
 }
+</app-generic-view-page>

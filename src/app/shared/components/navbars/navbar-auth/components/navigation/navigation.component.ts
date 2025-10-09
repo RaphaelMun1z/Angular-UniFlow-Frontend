@@ -39,8 +39,9 @@ export class NavigationComponent {
         this.currentUser = { role: 'PROFESSOR' }; // Exemplo: mude para 'ADMIN' ou 'ESTUDANTE' para testar
         
         this.navItems = [
-            { label: 'Painel', path: '/app/professor/painel' },
+            { label: 'Painel', path: '/app/painel' },
             { label: 'Meus Grupos', path: '/app/grupos' },
+            { label: 'Minhas Atividades', path: '/app/atividades' },
             {
                 label: 'Recursos',
                 children: [
