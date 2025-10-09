@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 import { adminGuard } from './core/guards/admin.guard';
 
-import { DashboardPageComponent } from './pages/auth-admin/dashboard-page/dashboard-page.component';
+import { DashboardPageComponent } from './pages/general/dashboard-page/dashboard-page.component';
 import { FinancePageComponent } from './pages/auth-admin/finance-page/finance-page.component';
 import { MessageBroadcastPageComponent } from './pages/auth-admin/message-broadcast-page/message-broadcast-page.component';
 import { PlanManagementPageComponent } from './pages/auth-admin/plan-management-page/plan-management-page.component';
@@ -48,6 +48,11 @@ import { TeacherGroupClassPageComponent } from './pages/auth-subscriber/teacher-
 import { StudentGroupClassPageComponent } from './pages/auth-subscriber/student-group-class-page/student-group-class-page.component';
 import { UserRedirectionPanelPageComponent } from './shared/components/general/user-redirection-panel-page/user-redirection-panel-page.component';
 import { NavigationPageComponent } from './shared/components/general/navigation-page/navigation-page.component';
+import { StudentNavigationComponent } from './pages/auth-subscriber/student-navigation/student-navigation.component';
+import { TeacherNavigationComponent } from './pages/auth-subscriber/teacher-navigation/teacher-navigation.component';
+import { GenericNavigationPageComponent } from './pages/general/generic-navigation-page/generic-navigation-page.component';
+import { GenericGroupsPageComponent } from './pages/general/generic-groups-page/generic-groups-page.component';
+import { GenericTasksPageComponent } from './pages/general/generic-tasks-page/generic-tasks-page.component';
 
 
 export const routes: Routes = [
@@ -94,12 +99,25 @@ export const routes: Routes = [
         children: [
             { 
                 path: '', 
-                redirectTo: 'dashboard', 
+                redirectTo: 'painel', 
                 pathMatch: 'full'
+            },
+            {
+                path: 'grupos',
+                component: GenericGroupsPageComponent
+            },
+            {
+                path: 'atividades',
+                component: GenericTasksPageComponent
             },
             {
                 path: 'professor',
                 children: [
+                    { 
+                        path: '', 
+                        redirectTo: 'grupos', 
+                        pathMatch: 'full'
+                    },
                     {
                         path: 'grupos',
                         children: [
@@ -155,12 +173,8 @@ export const routes: Routes = [
                 children: [
                     { 
                         path: '', 
-                        redirectTo: 'painel', 
+                        redirectTo: 'grupos', 
                         pathMatch: 'full'
-                    },
-                    {
-                        path: 'painel',
-                        component: UserRedirectionPanelPageComponent
                     },
                     {
                         path: 'grupos',
@@ -199,8 +213,8 @@ export const routes: Routes = [
                 ]
             },
             {
-                path: 'dashboard',
-                component: DashboardPageComponent
+                path: 'painel',
+                component: GenericNavigationPageComponent
             },
             {
                 path: 'grupos',

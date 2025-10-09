@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { SafeHtmlPipe } from "../../../../navbar-versions-components/navbar-alt-with-auth/safe-html.pipe";
+import { SafeHtmlPipe } from "../../../safe-html.pipe";
 import { CommonModule } from "@angular/common";
 import { RouterLink } from "@angular/router";
 

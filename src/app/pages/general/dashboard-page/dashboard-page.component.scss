@@ -1,0 +1,16 @@
+  .sim-button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent;
+}
+.sim-button-active {
+    background-color: #4f46e5; /* indigo-600 */
+    color: white;
+}
+.sim-button-inactive {
+    background-color: #f1f5f9; /* slate-100 */
+    color: #475569; /* slate-600 */
+}

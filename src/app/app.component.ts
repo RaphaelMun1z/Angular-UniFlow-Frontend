@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './core/services/auth.service';
-
-import { NavbarAltNoAuthComponent } from "./shared/components/navbar-versions-components/navbar-alt-no-auth/navbar-alt-no-auth.component";
-import { NavbarAltWithAuthComponent } from "./shared/components/navbar-versions-components/navbar-alt-with-auth/navbar-alt-with-auth.component";
 import { FooterComponent } from "./shared/components/footer/footer.component";
+import { NavbarComponent } from "./shared/components/navbars/navbar/navbar.component";
+import { NavbarAuthComponent } from "./shared/components/navbars/navbar-auth/navbar-auth.component";
 
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet, CommonModule, NavbarAltNoAuthComponent, NavbarAltWithAuthComponent, FooterComponent],
+    imports: [RouterOutlet, CommonModule, FooterComponent, NavbarComponent, NavbarAuthComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })

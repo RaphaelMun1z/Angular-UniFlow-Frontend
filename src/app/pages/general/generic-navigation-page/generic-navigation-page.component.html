@@ -1,0 +1,23 @@
+@if (userLevel === 'admin') {
+    <app-user-redirection-panel-page
+    [title]="'Painel Administrativo'"
+    [subtitle]="'Gerencie usuários, grupos e configurações do sistema'"
+    [tabs]="adminTabs">
+</app-user-redirection-panel-page>
+}
+
+@if (userLevel === 'professor') {
+    <app-user-redirection-panel-page
+    [title]="'Painel do Professor'"
+    [subtitle]="'Gerencie suas turmas, notas e conteúdos'"
+    [tabs]="professorTabs">
+</app-user-redirection-panel-page>
+}
+
+@if (userLevel === 'estudante') {
+    <app-user-redirection-panel-page
+    [title]="'Meu Painel'"
+    [subtitle]="'Acesse suas disciplinas, notas e muito mais'"
+    [tabs]="estudanteTabs">
+</app-user-redirection-panel-page>
+}

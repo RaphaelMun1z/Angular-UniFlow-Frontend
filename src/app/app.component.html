@@ -1,9 +1,9 @@
 <ng-container *ngIf="authService.isAuthenticated$ | async; else noAuthNavbar">
-    <app-navbar-alt-with-auth></app-navbar-alt-with-auth>
+    <app-navbar-auth></app-navbar-auth>
 </ng-container>
 
 <ng-template #noAuthNavbar>
-    <app-navbar-alt-no-auth></app-navbar-alt-no-auth>
+    <app-navbar></app-navbar>
 </ng-template>
 
 <router-outlet />

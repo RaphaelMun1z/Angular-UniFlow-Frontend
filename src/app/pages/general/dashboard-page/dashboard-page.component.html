@@ -1,0 +1,150 @@
+<!-- Layout principal com 3 colunas -->
+<div class="flex h-screen bg-slate-50 font-sans text-gray-800">
+    
+    <!-- 1. ASIDE ESQUERDO (Navegação) -->
+    <aside class="w-64 flex-shrink-0 bg-white border-r border-slate-200 flex flex-col">
+        <div class="h-20 flex items-center justify-center px-4">
+            <h2 class="text-2xl font-bold text-indigo-600">Coursue</h2>
+        </div>
+        <nav class="flex-1 px-4 py-4 space-y-2">
+            <p class="px-4 py-2 text-xs font-semibold text-gray-400 uppercase">Overview</p>
+            <a *ngFor="let link of navigationLinks()" 
+            href="#" 
+            class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200"
+            [ngClass]="link.label === 'Dashboard' ? 'bg-indigo-50 text-indigo-600' : 'text-gray-500 hover:bg-slate-100'">
+            <svg [innerHTML]="link.icon | safeHtml" class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"></svg>
+            <span>{{ link.label }}</span>
+        </a>
+    </nav>
+    <div class="p-4 border-t border-slate-200">
+        <a href="#" class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-500 hover:bg-slate-100">
+            <svg class="h-5 w-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+            <span>Logout</span>
+        </a>
+    </div>
+</aside>
+
+<!-- 2. CONTEÚDO CENTRAL -->
+<div class="flex-1 flex flex-col overflow-hidden">
+    <header class="bg-white h-20 flex items-center justify-between px-8 border-b border-slate-200">
+        <div class="relative w-full max-w-md">
+            <input type="search" placeholder="Search your course..." class="w-full pl-10 pr-4 py-2 rounded-lg bg-slate-100 border-transparent focus:bg-white focus:border-indigo-500 focus:ring-indigo-500">
+            <svg class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </div>
+        <div class="flex items-center space-x-2">
+            <span class="text-sm font-medium text-gray-600 hidden sm:block">Simular Perfil:</span>
+            <button (click)="setUserRole('estudante')" [class]="getButtonClass('estudante')">Aluno</button>
+            <button (click)="setUserRole('professor')" [class]="getButtonClass('professor')">Prof</button>
+            <button (click)="setUserRole('admin')" [class]="getButtonClass('admin')">Admin</button>
+        </div>
+    </header>
+    
+    <main class="flex-1 overflow-y-auto p-8">
+        
+        <!-- VISÃO DO ESTUDANTE -->
+        <ng-container *ngIf="currentUser().role === 'estudante'">
+            <div class="bg-indigo-600 rounded-xl p-8 mb-8 text-white relative overflow-hidden">
+                <h1 class="text-3xl font-bold mb-2">Aprimore suas Habilidades com Cursos Online</h1>
+                <p class="text-indigo-200 mb-6">Comece sua jornada de aprendizado hoje.</p>
+                <button class="bg-white text-indigo-600 font-semibold px-6 py-2 rounded-lg hover:bg-indigo-100">Inscreva-se Agora</button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div *ngFor="let course of courseProgress()" class="bg-white p-5 rounded-xl border border-slate-200 flex items-center space-x-4">
+                    <div class="p-3 rounded-lg" [ngClass]="course.color">
+                        <svg [innerHTML]="course.icon | safeHtml" class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"></svg>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">{{course.watched}}/{{course.total}} watched</p>
+                        <p class="font-semibold">{{course.title}}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="text-xl font-bold mb-4">Continue Assistindo</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div *ngFor="let item of continueWatching()" class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                    <img [src]="item.thumbnailUrl" alt="Thumbnail" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <span class="text-xs font-semibold text-indigo-500 uppercase">{{item.category}}</span>
+                        <h4 class="font-bold mt-1 mb-2">{{item.title}}</h4>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <img [src]="item.mentorAvatar" class="h-6 w-6 rounded-full mr-2">
+                            <span>{{item.mentor}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        
+        <!-- VISÃO DO ADMIN E PROFESSOR (cards adaptados) -->
+        <ng-container *ngIf="currentUser().role === 'admin' || currentUser().role === 'professor'">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Admin: Rendimento -->
+                <ng-container *ngIf="currentUser().role === 'admin'">
+                    <div class="col-span-1 md:col-span-2 bg-white p-5 rounded-xl border border-slate-200">
+                        <p class="text-sm font-medium text-gray-500">Rendimento Mensal</p>
+                        <p class="text-3xl font-bold text-green-600">{{ monthlyRevenue() | currency:'BRL' }}</p>
+                    </div>
+                    <div class="col-span-1 md:col-span-2 bg-white p-5 rounded-xl border border-slate-200">
+                        <p class="text-sm font-medium text-gray-500">Rendimento Total</p>
+                        <p class="text-3xl font-bold text-indigo-600">{{ totalRevenue() | currency:'BRL' }}</p>
+                    </div>
+                    <div class="col-span-1 md:col-span-4 bg-white p-6 rounded-xl border border-slate-200">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Assinantes por Plano</h3>
+                        <!-- Tabela de Assinantes aqui -->
+                    </div>
+                </ng-container>
+                
+                <!-- Professor: Estatísticas -->
+                <ng-container *ngIf="currentUser().role === 'professor'">
+                    <div class="bg-white p-5 rounded-xl border border-slate-200"><p>Meus Grupos</p><p class="text-3xl font-bold">3</p></div>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200"><p>Meus Alunos</p><p class="text-3xl font-bold">42</p></div>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200"><p>Tarefas Pendentes</p><p class="text-3xl font-bold">7</p></div>
+                    <div class="bg-white p-5 rounded-xl border border-slate-200"><p>Total de Tarefas</p><p class="text-3xl font-bold">15</p></div>
+                </ng-container>
+            </div>
+        </ng-container>
+    </main>
+</div>
+
+<!-- 3. ASIDE DIREITO (Estatísticas/Social) -->
+<aside class="w-80 flex-shrink-0 bg-white border-l border-slate-200 p-6">
+    <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center">
+            <img [src]="currentUser().avatar" class="h-10 w-10 rounded-full mr-3">
+            <div>
+                <p class="font-semibold">{{currentUser().name}}</p>
+                <p class="text-sm text-gray-400">{{currentUser().role | titlecase}}</p>
+            </div>
+        </div>
+        <button class="text-gray-400 hover:text-gray-600">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+        </button>
+    </div>
+    
+    <div class="text-center mb-8">
+        <h3 class="text-lg font-bold">Bom dia, {{currentUser().name.split(' ')[0]}}</h3>
+        <p class="text-sm text-gray-500">Continue aprendendo para atingir seus objetivos!</p>
+    </div>
+    
+    <div>
+        <div class="flex justify-between items-center mb-4">
+            <h4 class="font-bold">Seus mentores</h4>
+            <a href="#" class="text-sm text-indigo-600 font-semibold">Ver todos</a>
+        </div>
+        <div class="space-y-4">
+            <div *ngFor="let mentor of mentors()" class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <img [src]="mentor.avatar" class="h-10 w-10 rounded-full mr-3">
+                    <div>
+                        <p class="font-semibold">{{mentor.name}}</p>
+                        <p class="text-sm text-gray-400">Mentor</p>
+                    </div>
+                </div>
+                <button class="px-4 py-1.5 text-xs font-semibold border border-slate-300 rounded-lg hover:bg-slate-100">Seguir</button>
+            </div>
+        </div>
+    </div>
+</aside>
+</div>
