@@ -37,11 +37,10 @@ interface Activity {
     recentUpdates: ActivityUpdate[];
 }
 
-interface SidebarLink {
+interface Tab {
     id: string;
     label: string;
-    link: string;
-    icon: string; // SVG path data
+    route: string; // Caminho para o RouterLink
 }
 
 @Component({
@@ -109,6 +108,13 @@ export class GenericTasksPageComponent implements OnInit {
         if (page > this.totalPages()) page = this.totalPages();
         this.currentPage.set(page);
     }
+    
+    tabs = signal<Tab[]>([
+        { id: 'pendentes', label: 'Pendentes', route: '/tasks/pendentes' },
+        { id: 'atrasadas', label: 'Atrasadas', route: '/tasks/atrasadas' },
+        { id: 'entregues',  label: 'Entregues',  route: '/tasks/entregues' },
+        { id: 'avaliadas', label: 'Avaliadas', route: '/tasks/avaliadas' },
+    ]);
     
     private loadMockData(): void {
         this.allActivities.set([

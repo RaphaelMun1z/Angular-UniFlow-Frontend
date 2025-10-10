@@ -1,6 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { UserRedirectionPanelPageComponent } from "../../../shared/components/general/user-redirection-panel-page/user-redirection-panel-page.component";
-import { GenericViewPageComponent } from "../generic-view-page/generic-view-page.component";
+
+interface Tab {
+    id: string;
+    label: string;
+    route: string; // Caminho para o RouterLink
+}
 
 interface ManagementCard {
     icon: string;
@@ -25,10 +30,11 @@ interface SidebarLink {
 
 @Component({
     selector: 'app-generic-navigation-page',
-    imports: [UserRedirectionPanelPageComponent, GenericViewPageComponent],
+    imports: [UserRedirectionPanelPageComponent],
     templateUrl: './generic-navigation-page.component.html',
     styleUrl: './generic-navigation-page.component.scss'
 })
+
 export class GenericNavigationPageComponent {
     userLevel: 'admin' | 'professor' | 'estudante' = 'estudante';
     

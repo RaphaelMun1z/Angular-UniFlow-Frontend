@@ -1,7 +1,6 @@
 <app-generic-view-page [title]="'Atividades'">
     <app-generic-page-header [title]="'Atividades'"></app-generic-page-header>
-    
-    <app-generic-tab-navigation class="px-8 bg-white"></app-generic-tab-navigation>
+    <app-generic-tab-navigation [tabs]="tabs()" class="px-8 bg-white"></app-generic-tab-navigation>
     
     <main class="flex-1 overflow-y-auto p-8 pt-6 relative max-h-[80vh]">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

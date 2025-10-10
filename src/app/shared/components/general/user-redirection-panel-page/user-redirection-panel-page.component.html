@@ -1,14 +1,18 @@
-<div class="bg-slate-50 min-h-screen w-full p-4 sm:p-6 lg:p-12">
-    <div class="max-w-7xl mx-auto">
-        <header class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-800">{{title}}</h1>
-            <p class="mt-1 text-md text-gray-500">{{subtitle}}</p>
-        </header>
+<app-generic-view-page [title]="'Painel Administrativo'">
+    <app-generic-page-header [title]="'Painel Administrativo'"></app-generic-page-header>
+    <app-generic-tab-navigation [tabs]="tabs()" class="px-8 bg-white"></app-generic-tab-navigation>
+    
+    <main class="flex-1 overflow-y-auto p-8 pt-6 relative max-h-[80vh]">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <app-generic-navigation-card *ngFor="let op of operations;" [operation]="op"></app-generic-navigation-card>
+        </div>
         
-        <app-tab-navigation 
-        [tabs]="tabs"
-        [activeTabIndex]="activeTabIndex"
-        (activeTabIndexChange)="selectTab($event)"
-        ></app-tab-navigation>
-    </div>
-</div>
+        <app-pager
+        [totalItems]="totalItems"
+        [itemsPerPage]="itemsPerPage"
+        [currentPage]="currentPage"
+        (currentPageChange)="currentPage.set($event)"></app-pager>
+        
+        <app-generic-floating-plus-button></app-generic-floating-plus-button>
+    </main>
+</app-generic-view-page>

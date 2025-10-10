@@ -112,7 +112,18 @@ export const routes: Routes = [
                     },
                     {
                         path: '',
-                        component: GenericGroupsPageComponent
+                        component: GenericGroupsPageComponent,
+                        children: [
+                            { 
+                                path: '', 
+                                redirectTo: 'pendentes', 
+                                pathMatch: 'full'
+                            },
+                            {
+                                path: 'pendentes',
+                                component: TeacherGroupNavigationPageComponent
+                            },
+                        ]
                     },
                     {
                         path: 'navegacao',
