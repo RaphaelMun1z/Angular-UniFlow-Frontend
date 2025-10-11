@@ -14,7 +14,6 @@ export interface User {
 export interface Tab {
     id: string;
     label: string;
-    route: string;
 }
 
 export interface Operation {
