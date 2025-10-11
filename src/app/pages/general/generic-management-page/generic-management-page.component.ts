@@ -13,13 +13,13 @@ import { CommonModule } from '@angular/common';
 import { Operation, Tab } from '../../../shared/interfaces/User.model';
 
 @Component({
-    selector: 'app-generic-navigation-page',
+    selector: 'app-generic-management-page',
     imports: [CommonModule, GenericViewPageComponent, GenericPageHeaderComponent, GenericTabNavigationComponent, GenericNavigationCardComponent, PagerComponent, GenericFloatingPlusButtonComponent],
-    templateUrl: './generic-navigation-page.component.html',
-    styleUrl: './generic-navigation-page.component.scss'
+    templateUrl: './generic-management-page.component.html',
+    styleUrl: './generic-management-page.component.scss'
 })
 
-export class GenericNavigationPageComponent implements OnInit {
+export class GenericManagementPageComponent implements OnInit {
     userLevel: 'admin' | 'professor' | 'estudante' = 'professor';
     
     // Signals para o estado da UI

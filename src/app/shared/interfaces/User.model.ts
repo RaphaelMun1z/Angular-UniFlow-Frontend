@@ -8,7 +8,6 @@ export enum UserRole {
 export interface User {
     email: string;
     role: UserRole;
-    // outros campos
 }
 
 export interface Tab {
@@ -23,6 +22,5 @@ export interface Operation {
     icon: string;
     iconBgColor: string;
     iconColor: string;
-    route: string;
     tabId: string;
 }

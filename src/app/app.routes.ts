@@ -47,9 +47,9 @@ import { TeacherGroupsManagementPageComponent } from './pages/auth-subscriber/te
 import { TeacherGroupClassPageComponent } from './pages/auth-subscriber/teacher-group-class-page/teacher-group-class-page.component';
 import { StudentGroupClassPageComponent } from './pages/auth-subscriber/student-group-class-page/student-group-class-page.component';
 import { NavigationPageComponent } from './shared/components/general/navigation-page/navigation-page.component';
-import { GenericNavigationPageComponent } from './pages/general/generic-navigation-page/generic-navigation-page.component';
 import { GenericGroupsPageComponent } from './pages/general/generic-groups-page/generic-groups-page.component';
 import { GenericTasksPageComponent } from './pages/general/generic-tasks-page/generic-tasks-page.component';
+import { GenericManagementPageComponent } from './pages/general/generic-management-page/generic-management-page.component';
 
 
 export const routes: Routes = [
@@ -236,7 +236,7 @@ export const routes: Routes = [
             },
             {
                 path: 'painel',
-                component: GenericNavigationPageComponent
+                component: GenericManagementPageComponent
             },
             {
                 path: 'grupos',
