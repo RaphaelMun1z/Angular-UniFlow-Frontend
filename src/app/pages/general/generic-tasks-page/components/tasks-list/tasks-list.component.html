@@ -1,0 +1,41 @@
+<app-generic-tasks-page>
+    <div [ngSwitch]="authService.primaryUserRole()">
+        
+        <ng-container *ngSwitchCase="'ROLE_ADMIN'">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-800">Gerenciamento de Atividades (Admin)</h2>
+                <p class="mt-1 text-base text-slate-600">Monitore todas as atividades da plataforma e acesse relatórios.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <app-generic-task-card *ngFor="let activity of filteredActivities()" [activity]="activity"></app-generic-task-card>
+            </div>
+        </ng-container>
+        
+        <ng-container *ngSwitchCase="'ROLE_PROFESSOR'">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-800">Suas Atividades e Avaliações</h2>
+                <p class="mt-1 text-base text-slate-600">Crie, corrija e gerencie as atividades para suas turmas.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <app-generic-task-card *ngFor="let activity of filteredActivities()" [activity]="activity"></app-generic-task-card>
+            </div>
+        </ng-container>
+        
+        <ng-container *ngSwitchCase="'ROLE_ESTUDANTE'">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-800">Minhas Atividades Pendentes</h2>
+                <p class="mt-1 text-base text-slate-600">Veja suas tarefas, prazos e notas.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <app-generic-task-card *ngFor="let activity of filteredActivities()" [activity]="activity"></app-generic-task-card>
+            </div>
+        </ng-container>
+        
+        <ng-container *ngSwitchDefault>
+            <div class="text-center py-10">
+                <p class="text-slate-500">Conteúdo indisponível ou você não tem permissão para visualizar esta área.</p>
+            </div>
+        </ng-container>
+        
+    </div>
+</app-generic-tasks-page>

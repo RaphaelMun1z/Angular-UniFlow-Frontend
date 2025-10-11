@@ -52,6 +52,7 @@ import { GenericManagementPageComponent } from './pages/general/generic-manageme
 import { TasksOperationsComponent } from './pages/general/generic-management-page/components/tasks-operations/tasks-operations.component';
 import { GroupsOperationsComponent } from './pages/general/generic-management-page/components/groups-operations/groups-operations.component';
 import { GroupsListComponent } from './pages/general/generic-groups-page/components/groups-list/groups-list.component';
+import { TasksListComponent } from './pages/general/generic-tasks-page/components/tasks-list/tasks-list.component';
 
 
 export const routes: Routes = [
@@ -107,7 +108,7 @@ export const routes: Routes = [
             },
             {
                 path: 'atividades',
-                component: GenericTasksPageComponent
+                component: TasksListComponent
             },
             {
                 path: 'professor',

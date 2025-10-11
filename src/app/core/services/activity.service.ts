@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 // --- INTERFACES (movidas para cá ou para um arquivo .model) ---
-export type ActivityStatus = 'current' | 'pending' | 'completed' | 'failed';
+export type ActivityStatus = 'Pendente' | 'Concluída' | 'Atrasada';
 
 export interface ActivityOwner {
     name: string;
@@ -48,7 +48,7 @@ export class ActivityService {
             title: 'Revisão de Documentação', 
             tags: ['Tempo Parcial', 'Remoto', 'Prioridade Baixa'],
             owner: { name: 'Jake Durham', role: 'Parceiro @Amazon', avatar: 'https://placehold.co/40x40/60A5FA/FFFFFF?text=JD' },
-            status: 'pending',
+            status: 'Pendente',
             progress: 15,
             recentUpdates: [
                 { text: 'Iniciou a revisão do primeiro capítulo.', time: '2h atrás', authorAvatar: 'https://placehold.co/40x40/60A5FA/FFFFFF?text=JD'}
@@ -63,7 +63,7 @@ export class ActivityService {
             title: 'Protótipo de Alta Fidelidade', 
             tags: ['Tempo Integral', 'Remoto', 'Prioridade Alta'],
             owner: { name: 'John Doe', role: 'Designer de Produto @Figma', avatar: 'https://placehold.co/40x40/F472B6/FFFFFF?text=JD' },
-            status: 'current',
+            status: 'Pendente',
             highlighted: true,
             progress: 70,
             recentUpdates: [
@@ -80,7 +80,7 @@ export class ActivityService {
             title: 'Brainstorm de Recursos', 
             tags: ['Tempo Integral', 'Híbrido', 'Prioridade Média'],
             owner: { name: 'Emma Watson', role: 'Aquisição de Talentos @Meta', avatar: 'https://placehold.co/40x40/34D399/FFFFFF?text=EW' },
-            status: 'current',
+            status: 'Pendente',
             progress: 45,
             recentUpdates: [
                 { text: 'Agendou a reunião de brainstorm.', time: '3d atrás', authorAvatar: 'https://placehold.co/40x40/34D399/FFFFFF?text=EW'}
@@ -95,7 +95,7 @@ export class ActivityService {
             title: 'Otimização de Banco de Dados', 
             tags: ['Tempo Integral', 'Remoto', 'Prioridade Alta'],
             owner: { name: 'Steve Rogers', role: 'Engenheiro de Dados @Dropbox', avatar: 'https://placehold.co/40x40/A78BFA/FFFFFF?text=SR' },
-            status: 'completed',
+            status: 'Pendente',
             progress: 100,
             recentUpdates: [
                 { text: 'Deploy da otimização realizado com sucesso.', time: '1sem atrás', authorAvatar: 'https://placehold.co/40x40/A78BFA/FFFFFF?text=SR'}
@@ -110,7 +110,7 @@ export class ActivityService {
             title: 'Correção de Bug no GPS', 
             tags: ['Tempo Integral', 'Remoto', 'Prioridade Crítica'],
             owner: { name: 'Barry Allen', role: 'Engenheiro de Android @Uber', avatar: 'https://placehold.co/40x40/FB923C/FFFFFF?text=BA' },
-            status: 'failed',
+            status: 'Pendente',
             progress: 95,
             recentUpdates: [
                 { text: 'Rollback da versão anterior efetuado.', time: '5m atrás', authorAvatar: 'https://placehold.co/40x40/FB923C/FFFFFF?text=BA'}
