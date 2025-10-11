@@ -1,8 +1,8 @@
 import { Operation, Tab } from "../interfaces/User.model";
 
 export const PROFESSOR_NAVIGATION_TABS: Tab[] = [
-    { id: 'turmas', label: 'Grupos' },
-    { id: 'atividades', label: 'Atividades' }
+    { id: 'turmas', label: 'Grupos', route: '/app/painel/grupos' },
+    { id: 'atividades', label: 'Atividades', route: '/app/painel/atividades' }
 ];
 
 // Agora, cada operação pertence a uma 'tabId'

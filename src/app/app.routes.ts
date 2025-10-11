@@ -21,7 +21,6 @@ import { PlanSelectionStepComponent } from './pages/auth-subscriber/auth-pages/r
 import { UserDataStepComponent } from './pages/auth-subscriber/auth-pages/registration-container-page/steps/user-data-step/user-data-step.component';
 import { ResetPasswordComponent } from './pages/auth-subscriber/auth-pages/reset-password/reset-password.component';
 import { GroupPageComponent } from './pages/auth-subscriber/group-pages/group-page/group-page.component';
-import { GroupsPageComponent } from './pages/auth-subscriber/group-pages/groups-page/groups-page.component';
 import { AccessDeniedPageComponent } from './pages/no-auth/general-pages/access-denied-page/access-denied-page.component';
 import { NotFoundPageComponent } from './pages/no-auth/general-pages/not-found-page/not-found-page.component';
 import { AboutUsPageComponent } from './pages/no-auth/landing-pages/about-us-page/about-us-page.component';
@@ -50,6 +49,9 @@ import { NavigationPageComponent } from './shared/components/general/navigation-
 import { GenericGroupsPageComponent } from './pages/general/generic-groups-page/generic-groups-page.component';
 import { GenericTasksPageComponent } from './pages/general/generic-tasks-page/generic-tasks-page.component';
 import { GenericManagementPageComponent } from './pages/general/generic-management-page/generic-management-page.component';
+import { TasksOperationsComponent } from './pages/general/generic-management-page/components/tasks-operations/tasks-operations.component';
+import { GroupsOperationsComponent } from './pages/general/generic-management-page/components/groups-operations/groups-operations.component';
+import { GroupsListComponent } from './pages/general/generic-groups-page/components/groups-list/groups-list.component';
 
 
 export const routes: Routes = [
@@ -101,32 +103,7 @@ export const routes: Routes = [
             },
             {
                 path: 'grupos',
-                children: [
-                    { 
-                        path: '', 
-                        redirectTo: '', 
-                        pathMatch: 'full'
-                    },
-                    {
-                        path: '',
-                        component: GenericGroupsPageComponent,
-                        children: [
-                            { 
-                                path: '', 
-                                redirectTo: 'pendentes', 
-                                pathMatch: 'full'
-                            },
-                            {
-                                path: 'pendentes',
-                                component: TeacherGroupNavigationPageComponent
-                            },
-                        ]
-                    },
-                    {
-                        path: 'navegacao',
-                        component: TeacherGroupNavigationPageComponent
-                    },
-                ]
+                component: GroupsListComponent
             },
             {
                 path: 'atividades',
@@ -211,10 +188,6 @@ export const routes: Routes = [
                                 component: NavigationPageComponent
                             },
                             {
-                                path: 'listar',
-                                component: GroupsPageComponent
-                            },
-                            {
                                 path: ':id',
                                 component: StudentGroupClassPageComponent
                             },
@@ -236,11 +209,22 @@ export const routes: Routes = [
             },
             {
                 path: 'painel',
-                component: GenericManagementPageComponent
-            },
-            {
-                path: 'grupos',
-                component: GroupsPageComponent
+                component: GenericManagementPageComponent,
+                children: [
+                    { 
+                        path: '', 
+                        redirectTo: 'grupos', 
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'grupos',
+                        component: GroupsOperationsComponent,
+                    },
+                    {
+                        path: 'atividades',
+                        component: TasksOperationsComponent,
+                    }
+                ]
             },
             {
                 path: 'grupos/:id',

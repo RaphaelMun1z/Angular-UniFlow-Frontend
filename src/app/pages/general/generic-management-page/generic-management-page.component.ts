@@ -1,9 +1,7 @@
-import { Component, computed, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { GenericViewPageComponent } from "../generic-view-page/generic-view-page.component";
 import { GenericPageHeaderComponent } from "../../../shared/components/general/generic-page-header/generic-page-header.component";
 import { GenericTabNavigationComponent } from "../../../shared/components/general/generic-tab-navigation/generic-tab-navigation.component";
-import { GenericNavigationCardComponent } from "../../../shared/components/general/generic-navigation-card/generic-navigation-card.component";
-import { PagerComponent } from "../../../shared/components/general/pager/pager.component";
 import { GenericFloatingPlusButtonComponent } from "../../../shared/components/general/generic-floating-plus-button/generic-floating-plus-button.component";
 
 import { ADMIN_NAVIGATION_TABS, ADMIN_OPERATIONS } from '../../../shared/mocks/ADMIN_MANAGEMENT_TABS';
@@ -11,10 +9,12 @@ import { PROFESSOR_NAVIGATION_TABS, PROFESSOR_OPERATIONS } from '../../../shared
 import { ESTUDANTE_NAVIGATION_TABS, ESTUDANTE_OPERATIONS } from '../../../shared/mocks/ESTUDANTE_MANAGEMENT_TABS';
 import { CommonModule } from '@angular/common';
 import { Operation, Tab } from '../../../shared/interfaces/User.model';
+import { RouterOutlet } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
     selector: 'app-generic-management-page',
-    imports: [CommonModule, GenericViewPageComponent, GenericPageHeaderComponent, GenericTabNavigationComponent, GenericNavigationCardComponent, PagerComponent, GenericFloatingPlusButtonComponent],
+    imports: [CommonModule, GenericViewPageComponent, GenericPageHeaderComponent, GenericTabNavigationComponent, GenericFloatingPlusButtonComponent, RouterOutlet],
     templateUrl: './generic-management-page.component.html',
     styleUrl: './generic-management-page.component.scss'
 })
@@ -40,11 +40,6 @@ export class GenericManagementPageComponent implements OnInit {
         }
         return operations.filter(op => op.tabId === tabId);
     });
-    
-    // Signals para paginação
-    currentPage: WritableSignal<number> = signal(1);
-    itemsPerPage: WritableSignal<number> = signal(8);
-    totalItems: number = 0; // Este valor deveria ser atualizado com base no total de 'filteredOperations'
     
     ngOnInit(): void {
         this.setupUserData();

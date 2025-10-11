@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, EventEmitter, Input, Output, signal, WritableSignal } from '@angular/core';
+import { Component, computed, EventEmitter, input, Input, model, Output, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,66 +9,72 @@ import { FormsModule } from '@angular/forms';
     styleUrl: './pager.component.scss'
 })
 export class PagerComponent {
-    // --- Inputs como WritableSignals ---
-    @Input() totalItems!: number;
-    @Input() itemsPerPage!: WritableSignal<number>;
-    @Input() currentPage!: WritableSignal<number>;
+    currentPage = model.required<number>();
+    itemsPerPage = model.required<number>();
+    totalItems = input.required<number>();
     
-    @Output() currentPageChange = new EventEmitter<number>();
-    @Output() itemsPerPageChange = new EventEmitter<number>();
+    public pageSizeOptions: number[] = [10, 25, 50, 100];
     
-    pageSizeOptions = [10, 20, 50, 100];
-    jumpPage = 1;
+    totalPages = computed(() => {
+        return Math.ceil(this.totalItems() / this.itemsPerPage());
+    });
     
-    totalPages = computed(() => Math.ceil(this.totalItems / this.itemsPerPage()));
+    startItem = computed(() => {
+        if (this.totalItems() === 0) return 0;
+        return (this.currentPage() - 1) * this.itemsPerPage() + 1;
+    });
     
-    visiblePages(): number[] {
+    endItem = computed(() => {
+        return Math.min(this.currentPage() * this.itemsPerPage(), this.totalItems());
+    });
+    
+    visiblePages = computed(() => {
         const total = this.totalPages();
         const current = this.currentPage();
-        const pages: number[] = [];
+        const pageBuffer = 2;
+        const pages = new Set<number>();
         
-        if (total <= 7) {
-            for (let i = 1; i <= total; i++) pages.push(i);
-        } else {
-            pages.push(1);
-            if (current > 4) pages.push(-1);
-            const start = Math.max(2, current - 1);
-            const end = Math.min(total - 1, current + 1);
-            for (let i = start; i <= end; i++) pages.push(i);
-            if (current < total - 3) pages.push(-1);
-            pages.push(total);
+        pages.add(1);
+        
+        for (let i = Math.max(2, current - pageBuffer); i <= Math.min(total - 1, current + pageBuffer); i++) {
+            pages.add(i);
         }
         
-        return pages;
+        if (total > 1) {
+            pages.add(total);
+        }
+        
+        const result: number[] = [];
+        let lastPage = 0;
+        for (const page of Array.from(pages).sort((a, b) => a - b)) {
+            if (page > lastPage + 1) {
+                result.push(-1); // -1 representa a elipse "..."
+            }
+            result.push(page);
+            lastPage = page;
+        }
+        return result;
+    });
+    
+    // --- MÉTODOS DE NAVEGAÇÃO ---
+    
+    goToPage(page: number | string): void {
+        const pageNum = Number(page);
+        if (pageNum >= 1 && pageNum <= this.totalPages()) {
+            this.currentPage.set(pageNum);
+        }
     }
     
-    goToPage(page: number) {
-        if (page < 1) page = 1;
-        if (page > this.totalPages()) page = this.totalPages();
-        this.currentPage.set(page);
-        this.currentPageChange.emit(page);
-        this.jumpPage = page;
+    nextPage(): void {
+        this.goToPage(this.currentPage() + 1);
     }
     
-    previousPage() {
-        if (this.currentPage() > 1) this.goToPage(this.currentPage() - 1);
+    previousPage(): void {
+        this.goToPage(this.currentPage() - 1);
     }
     
-    nextPage() {
-        if (this.currentPage() < this.totalPages()) this.goToPage(this.currentPage() + 1);
-    }
-    
-    goToFirstPage() {
-        this.goToPage(1);
-    }
-    
-    goToLastPage() {
-        this.goToPage(this.totalPages());
-    }
-    
-    setItemsPerPage(value: number) {
-        this.itemsPerPage.set(value);
-        this.itemsPerPageChange.emit(value);
-        this.goToFirstPage();
+    onPageSizeChange(size: number): void {
+        this.itemsPerPage.set(Number(size));
+        this.goToPage(1); // Volta para a primeira página ao mudar a quantidade de itens
     }
 }

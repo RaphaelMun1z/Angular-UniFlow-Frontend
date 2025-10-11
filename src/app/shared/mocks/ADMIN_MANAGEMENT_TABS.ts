@@ -1,9 +1,9 @@
 import { Operation, Tab } from "../interfaces/User.model";
 
 export const ADMIN_NAVIGATION_TABS: Tab[] = [
-    { id: 'dashboard', label: 'Dashboard' },
-    { id: 'logs', label: 'Logs de Atividade' },
-    { id: 'reports', label: 'Relatórios' },
+    { id: 'dashboard', label: 'Dashboard', route: 'teste' },
+    { id: 'logs', label: 'Logs de Atividade', route: 'teste' },
+    { id: 'reports', label: 'Relatórios', route: 'teste' },
 ];
 
 export const ADMIN_OPERATIONS: Operation[] = [

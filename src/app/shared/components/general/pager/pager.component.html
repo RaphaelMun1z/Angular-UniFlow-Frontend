@@ -1,80 +1,62 @@
-<div class="flex flex-col items-center mt-6 space-y-2">
-    <!-- Botões de navegação e páginas -->
-    <div class="flex items-center space-x-1 flex-wrap justify-center">
-        <button
-        (click)="goToFirstPage()"
-        [disabled]="currentPage() === 1"
-        class="px-2 py-1 rounded bg-gray-200 text-gray-700 disabled:opacity-50"
-        >
-        &laquo;
+<div class="mt-5 flex flex-wrap items-center justify-between gap-4 px-4 py-3 bg-white border-t border-slate-200">
+  
+  <div class="flex items-center gap-2 text-sm text-slate-600">
+    <span>Itens por pág:</span>
+    <select
+      [ngModel]="itemsPerPage()"
+      (ngModelChange)="onPageSizeChange($event)"
+      class="h-9 rounded-md border border-slate-300 bg-transparent px-2 text-sm font-medium transition-colors hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+    >
+      <option *ngFor="let size of pageSizeOptions" [value]="size">{{ size }}</option>
+    </select>
+    <span class="hidden sm:inline-block">
+      | Mostrando {{ startItem() }} - {{ endItem() }} de {{ totalItems() }}
+    </span>
+  </div>
+
+  <div class="flex items-center gap-1">
+    <button
+      (click)="previousPage()"
+      [disabled]="currentPage() === 1"
+      class="flex h-9 w-9 items-center justify-center rounded-md border border-slate-300 text-slate-500 transition-colors hover:bg-slate-100 disabled:pointer-events-none disabled:opacity-50"
+      aria-label="Página anterior"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" /></svg>
     </button>
     
+    <ng-container *ngFor="let page of visiblePages()">
+      <span *ngIf="page === -1" class="flex h-9 w-9 items-center justify-center text-slate-500">...</span>
+      
+      <button
+        *ngIf="page !== -1"
+        (click)="goToPage(page)"
+        [ngClass]="{
+          'bg-indigo-600 text-white hover:bg-indigo-700': currentPage() === page,
+          'border border-slate-300 text-slate-500 hover:bg-slate-100': currentPage() !== page
+        }"
+        class="flex h-9 w-9 items-center justify-center rounded-md text-sm font-semibold transition-colors"
+      >
+        {{ page }}
+      </button>
+    </ng-container>
+    
     <button
-    (click)="previousPage()"
-    [disabled]="currentPage() === 1"
-    class="px-2 py-1 rounded bg-gray-200 text-gray-700 disabled:opacity-50"
+      (click)="nextPage()"
+      [disabled]="currentPage() === totalPages()"
+      class="flex h-9 w-9 items-center justify-center rounded-md border border-slate-300 text-slate-500 transition-colors hover:bg-slate-100 disabled:pointer-events-none disabled:opacity-50"
+      aria-label="Próxima página"
     >
-    &lsaquo;
-</button>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+    </button>
 
-<ng-container *ngFor="let page of visiblePages()">
-    <button
-    *ngIf="page !== -1"
-    (click)="goToPage(page)"
-    [ngClass]="
-    currentPage() === page
-    ? 'bg-indigo-600 text-white'
-    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-    "
-    class="px-3 py-1 rounded"
-    >
-    {{ page }}
-</button>
-<span *ngIf="page === -1" class="px-2">..</span>
-</ng-container>
-
-<button
-(click)="nextPage()"
-[disabled]="currentPage() === totalPages()"
-class="px-2 py-1 rounded bg-gray-200 text-gray-700 disabled:opacity-50"
->
-&rsaquo;
-</button>
-
-<button
-(click)="goToLastPage()"
-[disabled]="currentPage() === totalPages()"
-class="px-2 py-1 rounded bg-gray-200 text-gray-700 disabled:opacity-50"
->
-&raquo;
-</button>
-
-<!-- Jump to page -->
-<input
-type="number"
-min="1"
-[max]="totalPages()"
-[(ngModel)]="jumpPage"
-class="ml-2 w-16 px-2 py-1 border rounded text-center"
-/>
-<button
-(click)="goToPage(jumpPage)"
-class="ml-1 px-3 py-1 bg-indigo-600 text-white rounded"
->
-Go
-</button>
-</div>
-
-<!-- Itens por página -->
-<div class="flex items-center space-x-2 text-gray-700 mt-2">
-    <span>Showing</span>
-    <select
-    [ngModel]="itemsPerPage()"
-    (ngModelChange)="itemsPerPage.set($event); goToFirstPage()"
-    class="px-2 py-1 border rounded"
-    >
-    <option *ngFor="let opt of pageSizeOptions" [value]="opt">{{ opt }}</option>
-</select>
-<span>items out of {{ totalItems }}</span>
-</div>
+    <input
+      type="number"
+      [ngModel]="currentPage()"
+      (keydown.enter)="goToPage($any($event.target).value)"
+      min="1"
+      [max]="totalPages()"
+      class="ml-2 h-9 w-16 rounded-md border border-slate-300 text-center text-sm font-medium transition-colors hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+      aria-label="Pular para a página"
+    />
+  </div>
 </div>

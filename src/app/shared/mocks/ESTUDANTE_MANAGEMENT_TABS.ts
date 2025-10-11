@@ -1,11 +1,11 @@
 import { Operation, Tab } from "../interfaces/User.model";
 
 export const ESTUDANTE_NAVIGATION_TABS: Tab[] = [
-    { id: 'geral', label: 'Geral' }, // Aba geral
-    { id: 'pendentes', label: 'Pendentes' },
-    { id: 'atrasadas', label: 'Atrasadas' },
-    { id: 'entregues', label: 'Entregues' },
-    { id: 'avaliadas', label: 'Avaliadas' },
+    { id: 'geral', label: 'Geral', route: 'geral' },
+    { id: 'pendentes', label: 'Pendentes', route: 'teste' },
+    { id: 'atrasadas', label: 'Atrasadas', route: 'teste' },
+    { id: 'entregues', label: 'Entregues', route: 'teste' },
+    { id: 'avaliadas', label: 'Avaliadas', route: 'teste' },
 ];
 
 export const ESTUDANTE_OPERATIONS: Operation[] = [

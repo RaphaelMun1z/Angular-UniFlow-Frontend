@@ -1,0 +1,47 @@
+<app-generic-groups-page>    
+    <div [ngSwitch]="authService.primaryUserRole()">
+
+        <ng-container *ngSwitchCase="'ROLE_ADMIN'">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-800">Gerenciamento de Todos os Grupos</h2>
+                <p class="mt-1 text-base text-slate-600">Visualize e administre todos os grupos existentes na plataforma.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <app-generic-group-card 
+                *ngFor="let group of paginatedGroups()" 
+                [group]="group"></app-generic-group-card>
+            </div>
+        </ng-container>
+        
+        <ng-container *ngSwitchCase="'ROLE_PROFESSOR'">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-800">Seus Grupos e Turmas</h2>
+                <p class="mt-1 text-base text-slate-600">Acesse os grupos que você gerencia.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <app-generic-group-card 
+                *ngFor="let group of paginatedGroups()" 
+                [group]="group"></app-generic-group-card>
+            </div>
+        </ng-container>
+        
+        <ng-container *ngSwitchCase="'ROLE_ESTUDANTE'">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-800">Grupos que você participa</h2>
+                <p class="mt-1 text-base text-slate-600">Acesse o material e as atividades dos seus grupos.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <app-generic-group-card 
+                *ngFor="let group of paginatedGroups()" 
+                [group]="group"></app-generic-group-card>
+            </div>
+        </ng-container>
+        
+        <ng-container *ngSwitchDefault>
+            <div class="text-center py-10">
+                <p class="text-slate-500">Conteúdo indisponível ou você não tem permissão para visualizar esta área.</p>
+            </div>
+        </ng-container>
+        
+    </div>
+</app-generic-groups-page>

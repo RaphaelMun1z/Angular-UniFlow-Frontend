@@ -15,10 +15,9 @@
         </div>
         
         <app-pager
-        [totalItems]="totalItems"
-        [itemsPerPage]="itemsPerPage"
-        [currentPage]="currentPage"
-        (currentPageChange)="currentPage.set($event)"></app-pager>
+        [totalItems]="totalDeItensDoSeuSignal()"
+        [(currentPage)]="paginaAtualSignal"
+        [(itemsPerPage)]="itensPorPaginaSignal"/>
         
         <app-generic-floating-plus-button></app-generic-floating-plus-button>
     </main>

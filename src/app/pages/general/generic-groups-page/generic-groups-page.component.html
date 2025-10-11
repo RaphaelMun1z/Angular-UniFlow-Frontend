@@ -4,15 +4,12 @@
     <app-generic-tab-navigation [tabs]="tabs()" class="px-8 bg-white"></app-generic-tab-navigation>
     
     <main class="flex-1 overflow-y-auto p-8 pt-6 relative max-h-[80vh]">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <app-generic-group-card *ngFor="let group of groups" [group]="group"></app-generic-group-card>
-        </div>
+        <ng-content></ng-content>
         
         <app-pager
-        [totalItems]="totalItems"
-        [itemsPerPage]="itemsPerPage"
-        [currentPage]="currentPage"
-        (currentPageChange)="currentPage.set($event)"></app-pager>
+        [totalItems]="totalDeItensDoSeuSignal()"
+        [(currentPage)]="paginaAtualSignal"
+        [(itemsPerPage)]="itensPorPaginaSignal"/>
         
         <app-generic-floating-plus-button></app-generic-floating-plus-button>
     </main>

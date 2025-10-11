@@ -27,10 +27,10 @@ export class GenericTasksPageComponent {
     title = signal('Minhas Atividades');
     
     tabs = signal<Tab[]>([
-        { id: 'current', label: 'Em Andamento'},
-        { id: 'pending', label: 'Pendentes'},
-        { id: 'completed', label: 'Concluídas'},
-        { id: 'failed', label: 'Avaliadas'},
+        { id: 'current', label: 'Em Andamento', route: ''},
+        { id: 'pending', label: 'Pendentes', route: ''},
+        { id: 'completed', label: 'Concluídas', route: ''},
+        { id: 'failed', label: 'Avaliadas', route: ''},
     ]);
     
     private activities$ = this.route.queryParamMap.pipe(
@@ -41,7 +41,7 @@ export class GenericTasksPageComponent {
     
     filteredActivities = toSignal(this.activities$, { initialValue: [] as Activity[] });
     
-    totalItems = 0;
-    itemsPerPage = signal(8);
-    currentPage = signal(1);
+    totalDeItensDoSeuSignal = signal(157);
+    paginaAtualSignal = signal(1);
+    itensPorPaginaSignal = signal(10);
 }

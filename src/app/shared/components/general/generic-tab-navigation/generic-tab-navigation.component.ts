@@ -1,7 +1,7 @@
 import { Component, signal, ViewChildren, ElementRef, QueryList, AfterViewInit, HostListener, ViewChild, afterNextRender, input, EventEmitter, Output, runInInjectionContext, inject, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { Tab } from '../../../interfaces/User.model';
+import { RouterModule, Router, NavigationEnd } from '@angular/router'; import { Tab } from '../../../interfaces/User.model';
+import { filter, startWith } from 'rxjs';
 
 @Component({
     selector: 'app-generic-tab-navigation',
@@ -13,12 +13,8 @@ import { Tab } from '../../../interfaces/User.model';
 export class GenericTabNavigationComponent implements AfterViewInit {
     tabs = input.required<Tab[]>();
     
-    @Output() tabSelected = new EventEmitter<string>();
-    
-    activeTabId = signal<string>('');
-    
-    @ViewChildren('tabLink', { read: ElementRef }) tabElements!: QueryList<ElementRef>;
     @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef<HTMLDivElement>;
+    @ViewChildren('tabLink', { read: ElementRef }) tabElements!: QueryList<ElementRef>;
     
     indicatorWidth = signal(0);
     indicatorPosition = signal(0);
@@ -27,83 +23,62 @@ export class GenericTabNavigationComponent implements AfterViewInit {
     private startX = 0;
     private scrollLeft = 0;
     
-    // Injeta o Injector para ser usado com runInInjectionContext
     private injector = inject(Injector);
-    
-    constructor() {
-        // Lógica inicial que pode ser executada na criação do componente
-    }
-    
-    ngOnChanges() {
-        const currentTabs = this.tabs();
-        if (currentTabs.length > 0 && !this.activeTabId()) {
-            this.selectTab(currentTabs[0].id);
-        }
-    }
-    
-    ngAfterViewInit() {
-        this.enableDragScroll();
-        // Garante que o indicador seja atualizado após a renderização inicial
-        runInInjectionContext(this.injector, () => {
-            afterNextRender(() => {
-                this.updateIndicatorAndScroll();
-            });
-        });
-    }
-    
-    @HostListener('window:resize')
-    onResize() {
-        this.updateIndicatorAndScroll();
-    }
-    
-    selectTab(tabId: string): void {
-        this.activeTabId.set(tabId);
-        this.tabSelected.emit(tabId);
+    private router = inject(Router);
         
-        runInInjectionContext(this.injector, () => {
-            afterNextRender(() => {
-                this.updateIndicatorAndScroll();
+    constructor() {
+        this.router.events.pipe(
+            filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+            startWith(null)
+        ).subscribe(() => {
+            runInInjectionContext(this.injector, () => {
+                afterNextRender(() => this.updateIndicatorBasedOnActiveRoute());
             });
         });
     }
     
-    private updateIndicatorAndScroll(): void {
-        const activeTabElement = this.tabElements?.find(el => 
-            el.nativeElement.getAttribute('data-tab-id') === this.activeTabId()
+    ngAfterViewInit(): void {
+        this.enableDragScroll();
+    }
+    
+    private updateIndicatorBasedOnActiveRoute(): void {
+        const activeElement = this.tabElements?.find(el => 
+            el.nativeElement.classList.contains('tab-active')
         );
         
-        if (activeTabElement) {
-            const el = activeTabElement.nativeElement;
+        if (activeElement) {
+            const el = activeElement.nativeElement;
             this.indicatorWidth.set(el.offsetWidth);
             this.indicatorPosition.set(el.offsetLeft);
+            
             el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        } else {
+            this.indicatorWidth.set(0);
         }
     }
     
     private enableDragScroll(): void {
         const container = this.scrollContainer.nativeElement;
-        
-        container.addEventListener('mousedown', (e) => {
+        const startDragging = (e: MouseEvent) => {
             this.isDragging = true;
-            container.classList.add('grabbing');
+            container.classList.add('is-grabbing');
             this.startX = e.pageX - container.offsetLeft;
             this.scrollLeft = container.scrollLeft;
-        });
-        
+        };
         const stopDragging = () => {
             this.isDragging = false;
-            container.classList.remove('grabbing');
+            container.classList.remove('is-grabbing');
         };
-        
-        container.addEventListener('mouseleave', stopDragging);
-        container.addEventListener('mouseup', stopDragging);
-        
-        container.addEventListener('mousemove', (e) => {
+        const doDrag = (e: MouseEvent) => {
             if (!this.isDragging) return;
             e.preventDefault();
             const x = e.pageX - container.offsetLeft;
-            const walk = (x - this.startX) * 1;
+            const walk = (x - this.startX) * 1.5;
             container.scrollLeft = this.scrollLeft - walk;
-        });
+        };
+        container.addEventListener('mousedown', startDragging);
+        container.addEventListener('mouseleave', stopDragging);
+        container.addEventListener('mouseup', stopDragging);
+        container.addEventListener('mousemove', doDrag);
     }
 }

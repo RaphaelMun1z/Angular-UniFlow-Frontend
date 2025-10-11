@@ -1,8 +1,15 @@
-a.active-tab {
-    color: #4f46e5;
+:host {
+    display: block;
 }
 
-.dragging {
-    cursor: grabbing;
-    user-select: none;
+nav {
+    scrollbar-width: none;
+    
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.tab-active {
+    color: #6366f1;
 }
