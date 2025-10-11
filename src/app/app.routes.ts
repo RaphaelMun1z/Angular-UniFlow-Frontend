@@ -46,10 +46,7 @@ import { TeacherGroupsManageJoinRequestsPageComponent } from './pages/auth-subsc
 import { TeacherGroupsManagementPageComponent } from './pages/auth-subscriber/teacher-groups-management-page/teacher-groups-management-page.component';
 import { TeacherGroupClassPageComponent } from './pages/auth-subscriber/teacher-group-class-page/teacher-group-class-page.component';
 import { StudentGroupClassPageComponent } from './pages/auth-subscriber/student-group-class-page/student-group-class-page.component';
-import { UserRedirectionPanelPageComponent } from './shared/components/general/user-redirection-panel-page/user-redirection-panel-page.component';
 import { NavigationPageComponent } from './shared/components/general/navigation-page/navigation-page.component';
-import { StudentNavigationComponent } from './pages/auth-subscriber/student-navigation/student-navigation.component';
-import { TeacherNavigationComponent } from './pages/auth-subscriber/teacher-navigation/teacher-navigation.component';
 import { GenericNavigationPageComponent } from './pages/general/generic-navigation-page/generic-navigation-page.component';
 import { GenericGroupsPageComponent } from './pages/general/generic-groups-page/generic-groups-page.component';
 import { GenericTasksPageComponent } from './pages/general/generic-tasks-page/generic-tasks-page.component';

@@ -36,6 +36,8 @@ interface Tab {
 })
 
 export class GenericGroupsPageComponent {
+    title = signal<string>('');
+    
     groups: Group[] = [
         {
             title: 'UI / UX Designer',

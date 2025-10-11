@@ -1,173 +1,96 @@
-import { Component, signal } from '@angular/core';
-import { UserRedirectionPanelPageComponent } from "../../../shared/components/general/user-redirection-panel-page/user-redirection-panel-page.component";
+import { Component, computed, OnInit, signal, WritableSignal } from '@angular/core';
+import { GenericViewPageComponent } from "../generic-view-page/generic-view-page.component";
+import { GenericPageHeaderComponent } from "../../../shared/components/general/generic-page-header/generic-page-header.component";
+import { GenericTabNavigationComponent } from "../../../shared/components/general/generic-tab-navigation/generic-tab-navigation.component";
+import { GenericNavigationCardComponent } from "../../../shared/components/general/generic-navigation-card/generic-navigation-card.component";
+import { PagerComponent } from "../../../shared/components/general/pager/pager.component";
+import { GenericFloatingPlusButtonComponent } from "../../../shared/components/general/generic-floating-plus-button/generic-floating-plus-button.component";
 
-interface Tab {
-    id: string;
-    label: string;
-    route: string; // Caminho para o RouterLink
-}
-
-interface ManagementCard {
-    icon: string;
-    title: string;
-    description: string;
-    route: string;
-    iconBgColor: string;
-    iconTextColor: string;
-}
-
-interface ManagementTab {
-    label: string;
-    cards: ManagementCard[];
-}
-
-interface SidebarLink {
-    id: string;
-    label: string;
-    link: string;
-    icon: string; // SVG path data
-}
+import { ADMIN_NAVIGATION_TABS, ADMIN_OPERATIONS } from '../../../shared/mocks/ADMIN_MANAGEMENT_TABS';
+import { PROFESSOR_NAVIGATION_TABS, PROFESSOR_OPERATIONS } from '../../../shared/mocks/PROFESSOR_MANAGEMENT_TABS';
+import { ESTUDANTE_NAVIGATION_TABS, ESTUDANTE_OPERATIONS } from '../../../shared/mocks/ESTUDANTE_MANAGEMENT_TABS';
+import { CommonModule } from '@angular/common';
+import { Operation, Tab } from '../../../shared/interfaces/User.model';
 
 @Component({
     selector: 'app-generic-navigation-page',
-    imports: [UserRedirectionPanelPageComponent],
+    imports: [CommonModule, GenericViewPageComponent, GenericPageHeaderComponent, GenericTabNavigationComponent, GenericNavigationCardComponent, PagerComponent, GenericFloatingPlusButtonComponent],
     templateUrl: './generic-navigation-page.component.html',
     styleUrl: './generic-navigation-page.component.scss'
 })
 
-export class GenericNavigationPageComponent {
-    userLevel: 'admin' | 'professor' | 'estudante' = 'estudante';
+export class GenericNavigationPageComponent implements OnInit {
+    userLevel: 'admin' | 'professor' | 'estudante' = 'professor';
     
-    adminTabs: ManagementTab[] = [
-        {
-            label: 'Usuários',
-            cards: [
-                {
-                    icon: 'person',
-                    title: 'Gerenciar Usuários',
-                    description: 'Adicione, edite ou remova usuários do sistema.',
-                    route: '/admin/usuarios',
-                    iconBgColor: 'bg-blue-100',
-                    iconTextColor: 'text-blue-700'
-                }
-            ]
-        },
-        {
-            label: 'Grupos',
-            cards: [
-                {
-                    icon: 'groups',
-                    title: 'Gerenciar Grupos',
-                    description: 'Crie, edite ou exclua grupos de usuários.',
-                    route: '/admin/grupos',
-                    iconBgColor: 'bg-green-100',
-                    iconTextColor: 'text-green-700'
-                }
-            ]
-        },
-        {
-            label: 'Configurações',
-            cards: [
-                {
-                    icon: 'settings',
-                    title: 'Configurações do Sistema',
-                    description: 'Ajuste preferências e parâmetros globais.',
-                    route: '/admin/configuracoes',
-                    iconBgColor: 'bg-gray-100',
-                    iconTextColor: 'text-gray-700'
-                }
-            ]
+    // Signals para o estado da UI
+    title = signal<string>('');
+    subtitle = signal<string>('');
+    tabs = signal<Tab[]>([]);
+    
+    // Signals para a lógica de filtragem
+    private allOperations = signal<Operation[]>([]);
+    activeTabId = signal<string>('');
+    
+    // Signal computado que filtra os cards com base na aba ativa
+    filteredOperations = computed(() => {
+        const tabId = this.activeTabId();
+        const operations = this.allOperations();
+        if (!tabId) {
+            return []; // Retorna vazio se nenhuma aba estiver ativa
         }
-    ];
+        return operations.filter(op => op.tabId === tabId);
+    });
     
-    professorTabs: ManagementTab[] = [
-        {
-            label: 'Minhas Turmas',
-            cards: [
-                {
-                    icon: 'class',
-                    title: 'Turmas',
-                    description: 'Gerencie suas turmas e alunos.',
-                    route: '/professor/turmas',
-                    iconBgColor: 'bg-indigo-100',
-                    iconTextColor: 'text-indigo-700'
-                }
-            ]
-        },
-        {
-            label: 'Notas',
-            cards: [
-                {
-                    icon: 'grading',
-                    title: 'Notas',
-                    description: 'Lance e visualize notas dos alunos.',
-                    route: '/professor/notas',
-                    iconBgColor: 'bg-yellow-100',
-                    iconTextColor: 'text-yellow-700'
-                }
-            ]
-        },
-        {
-            label: 'Conteúdos',
-            cards: [
-                {
-                    icon: 'menu_book',
-                    title: 'Conteúdos',
-                    description: 'Adicione e gerencie materiais de aula.',
-                    route: '/professor/conteudos',
-                    iconBgColor: 'bg-pink-100',
-                    iconTextColor: 'text-pink-700'
-                }
-            ]
+    // Signals para paginação
+    currentPage: WritableSignal<number> = signal(1);
+    itemsPerPage: WritableSignal<number> = signal(8);
+    totalItems: number = 0; // Este valor deveria ser atualizado com base no total de 'filteredOperations'
+    
+    ngOnInit(): void {
+        this.setupUserData();
+    }
+    
+    // Método chamado pelo evento (tabSelected) do componente de abas
+    onTabChange(tabId: string): void {
+        this.activeTabId.set(tabId);
+    }
+    
+    private setupUserData(): void {
+        let currentTabs: Tab[] = [];
+        let currentOps: Operation[] = [];
+        
+        switch (this.userLevel) {
+            case 'admin':
+            this.title.set('Painel do Administrador');
+            this.subtitle.set('Gerencie usuários, grupos e configurações do sistema');
+            currentTabs = ADMIN_NAVIGATION_TABS;
+            currentOps = ADMIN_OPERATIONS;
+            break;
+            case 'professor':
+            this.title.set('Painel do Professor');
+            this.subtitle.set('Gerencie suas turmas, notas e conteúdos');
+            currentTabs = PROFESSOR_NAVIGATION_TABS;
+            currentOps = PROFESSOR_OPERATIONS;
+            break;
+            case 'estudante':
+            this.title.set('Painel do Estudante');
+            this.subtitle.set('Acesse suas disciplinas, notas e grupos');
+            currentTabs = ESTUDANTE_NAVIGATION_TABS;
+            currentOps = ESTUDANTE_OPERATIONS;
+            break;
+            default:
+            this.title.set('Bem-vindo(a)');
+            this.subtitle.set('Selecione uma opção para começar');
+            break;
         }
-    ];
-    
-    estudanteTabs: ManagementTab[] = [
-        {
-            label: 'Disciplinas',
-            cards: [
-                {
-                    icon: 'school',
-                    title: 'Minhas Disciplinas',
-                    description: 'Acesse conteúdos e atividades das disciplinas.',
-                    route: '/estudante/disciplinas',
-                    iconBgColor: 'bg-blue-100',
-                    iconTextColor: 'text-blue-700'
-                }
-            ]
-        },
-        {
-            label: 'Notas',
-            cards: [
-                {
-                    icon: 'grading',
-                    title: 'Minhas Notas',
-                    description: 'Consulte suas notas e avaliações.',
-                    route: '/estudante/notas',
-                    iconBgColor: 'bg-green-100',
-                    iconTextColor: 'text-green-700'
-                }
-            ]
-        },
-        {
-            label: 'Grupos',
-            cards: [
-                {
-                    icon: 'groups',
-                    title: 'Meus Grupos',
-                    description: 'Participe e interaja em grupos de estudo.',
-                    route: '/estudante/grupos',
-                    iconBgColor: 'bg-purple-100',
-                    iconTextColor: 'text-purple-700'
-                }
-            ]
+        
+        this.tabs.set(currentTabs);
+        this.allOperations.set(currentOps);
+        
+        if (currentTabs.length > 0) {
+            this.activeTabId.set(currentTabs[0].id);
+        } else {
+            this.activeTabId.set('');
         }
-    ];
-    
-    sidebarLinks = signal<SidebarLink[]>([
-        { id: 'grupos', label: 'Meus Grupos', link: '/app/grupos', icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />' },
-        { id: 'tasks', label: 'Minhas Atividades', link: '/app/atividades', icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v11.494m-9-8.994v11.494m18-11.494v11.494M5.25 8.25h13.5M5.25 11.25h13.5m-13.5 3h13.5M21 21H3a2 2 0 01-2-2V5a2 2 0 012-2h18a2 2 0 012 2v14a2 2 0 01-2 2z" />' }
-    ]);
-    
-    constructor() {}
+    }
 }

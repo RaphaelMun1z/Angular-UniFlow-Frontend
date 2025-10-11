@@ -1,13 +1,7 @@
-import { Component, ChangeDetectionStrategy, signal, ViewChildren, ElementRef, QueryList, AfterViewInit, HostListener, ViewChild, afterNextRender, inject, input } from '@angular/core';
+import { Component, signal, ViewChildren, ElementRef, QueryList, AfterViewInit, HostListener, ViewChild, afterNextRender, input, EventEmitter, Output, runInInjectionContext, inject, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { filter } from 'rxjs';
-
-interface Tab {
-    id: string;
-    label: string;
-    route: string; // Caminho para o RouterLink
-}
+import { RouterModule } from '@angular/router';
+import { Tab } from '../../../interfaces/User.model';
 
 @Component({
     selector: 'app-generic-tab-navigation',
@@ -19,10 +13,12 @@ interface Tab {
 export class GenericTabNavigationComponent implements AfterViewInit {
     tabs = input.required<Tab[]>();
     
+    @Output() tabSelected = new EventEmitter<string>();
+    
+    activeTabId = signal<string>('');
+    
     @ViewChildren('tabLink', { read: ElementRef }) tabElements!: QueryList<ElementRef>;
     @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef<HTMLDivElement>;
-    
-    private router = inject(Router);
     
     indicatorWidth = signal(0);
     indicatorPosition = signal(0);
@@ -31,18 +27,28 @@ export class GenericTabNavigationComponent implements AfterViewInit {
     private startX = 0;
     private scrollLeft = 0;
     
+    // Injeta o Injector para ser usado com runInInjectionContext
+    private injector = inject(Injector);
+    
     constructor() {
-        this.router.events.pipe(
-            filter((event): event is NavigationEnd => event instanceof NavigationEnd)
-        ).subscribe(() => {
-            afterNextRender(() => {
-                this.updateIndicatorAndScroll();
-            });
-        });
+        // Lógica inicial que pode ser executada na criação do componente
+    }
+    
+    ngOnChanges() {
+        const currentTabs = this.tabs();
+        if (currentTabs.length > 0 && !this.activeTabId()) {
+            this.selectTab(currentTabs[0].id);
+        }
     }
     
     ngAfterViewInit() {
         this.enableDragScroll();
+        // Garante que o indicador seja atualizado após a renderização inicial
+        runInInjectionContext(this.injector, () => {
+            afterNextRender(() => {
+                this.updateIndicatorAndScroll();
+            });
+        });
     }
     
     @HostListener('window:resize')
@@ -50,9 +56,20 @@ export class GenericTabNavigationComponent implements AfterViewInit {
         this.updateIndicatorAndScroll();
     }
     
+    selectTab(tabId: string): void {
+        this.activeTabId.set(tabId);
+        this.tabSelected.emit(tabId);
+        
+        runInInjectionContext(this.injector, () => {
+            afterNextRender(() => {
+                this.updateIndicatorAndScroll();
+            });
+        });
+    }
+    
     private updateIndicatorAndScroll(): void {
         const activeTabElement = this.tabElements?.find(el => 
-            el.nativeElement.classList.contains('active-tab')
+            el.nativeElement.getAttribute('data-tab-id') === this.activeTabId()
         );
         
         if (activeTabElement) {
@@ -68,12 +85,18 @@ export class GenericTabNavigationComponent implements AfterViewInit {
         
         container.addEventListener('mousedown', (e) => {
             this.isDragging = true;
+            container.classList.add('grabbing');
             this.startX = e.pageX - container.offsetLeft;
             this.scrollLeft = container.scrollLeft;
         });
         
-        container.addEventListener('mouseleave', () => { this.isDragging = false; });
-        container.addEventListener('mouseup', () => { this.isDragging = false; });
+        const stopDragging = () => {
+            this.isDragging = false;
+            container.classList.remove('grabbing');
+        };
+        
+        container.addEventListener('mouseleave', stopDragging);
+        container.addEventListener('mouseup', stopDragging);
         
         container.addEventListener('mousemove', (e) => {
             if (!this.isDragging) return;

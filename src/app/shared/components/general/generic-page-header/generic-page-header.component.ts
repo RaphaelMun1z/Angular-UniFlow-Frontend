@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 
 import { TooltipDirective } from '../../../../core/directives/tooltip.directive';
 
@@ -11,6 +11,6 @@ import { TooltipDirective } from '../../../../core/directives/tooltip.directive'
 })
 
 export class GenericPageHeaderComponent {
-    @Input() title!: string;
+    @Input() title = signal<string>('');
     textoDoTooltip = 'Clique para ver suas notificações!';
 }

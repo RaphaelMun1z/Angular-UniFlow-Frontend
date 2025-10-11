@@ -45,19 +45,13 @@ interface Tab {
 
 @Component({
     selector: 'app-generic-tasks-page',
-    imports: [
-        CommonModule,
-        GenericTaskCardComponent,
-        GenericViewPageComponent,
-        GenericPageHeaderComponent,
-        GenericTabNavigationComponent,
-        PagerComponent,
-        GenericFloatingPlusButtonComponent
-    ],
+    imports: [ CommonModule, GenericTaskCardComponent, GenericViewPageComponent, GenericPageHeaderComponent, GenericTabNavigationComponent, PagerComponent, GenericFloatingPlusButtonComponent],
     templateUrl: './generic-tasks-page.component.html',
     styleUrl: './generic-tasks-page.component.scss'
 })
 export class GenericTasksPageComponent implements OnInit {
+    title = signal<string>('');
+    
     activities = signal<Activity[]>([]);
     allActivities = signal<Activity[]>([]);
     activeFilter = signal<ActivityStatus | 'all'>('all');

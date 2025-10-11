@@ -1,20 +1,25 @@
-@if (userLevel === 'admin') {
-    <app-user-redirection-panel-page
-    [title]="'Painel Administrativo'"
-    [subtitle]="'Gerencie usuários, grupos e configurações do sistema'">
-</app-user-redirection-panel-page>
-}
-
-@if (userLevel === 'professor') {
-    <app-user-redirection-panel-page
-    [title]="'Painel do Professor'"
-    [subtitle]="'Gerencie suas turmas, notas e conteúdos'">
-</app-user-redirection-panel-page>
-}
-
-@if (userLevel === 'estudante') {
-    <app-user-redirection-panel-page
-    [title]="'Meu Painel'"
-    [subtitle]="'Acesse suas disciplinas, notas e muito mais'">
-</app-user-redirection-panel-page>
-}
+<app-generic-view-page>
+    <app-generic-page-header 
+    [title]="title"></app-generic-page-header>
+    
+    <app-generic-tab-navigation 
+    [tabs]="tabs()"
+    (tabSelected)="onTabChange($event)"
+    class="px-8 bg-white"></app-generic-tab-navigation>
+    
+    <main class="flex-1 overflow-y-auto p-8 pt-6 relative max-h-[80vh]">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <app-generic-navigation-card 
+            *ngFor="let op of filteredOperations();" 
+            [operation]="op"></app-generic-navigation-card>
+        </div>
+        
+        <app-pager
+        [totalItems]="totalItems"
+        [itemsPerPage]="itemsPerPage"
+        [currentPage]="currentPage"
+        (currentPageChange)="currentPage.set($event)"></app-pager>
+        
+        <app-generic-floating-plus-button></app-generic-floating-plus-button>
+    </main>
+</app-generic-view-page>

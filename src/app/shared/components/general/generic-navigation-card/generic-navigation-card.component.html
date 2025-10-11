@@ -1,34 +1,26 @@
-<a
-[routerLink]="operation.route"
-class="group flex h-full cursor-pointer flex-col rounded-lg bg-white p-6 shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
->
-<div class="flex items-start justify-between">
-    <div
-    class="flex h-12 w-12 items-center justify-center rounded-full transition-colors"
-    [ngClass]="operation.iconBgColor"
-    >
-    <svg
-    class="h-6 w-6 transition-colors"
-    [ngClass]="operation.iconColor"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
-    >
-    <path
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-width="2"
-    [attr.d]="operation.icon"
-    ></path>
-</svg>
-</div>
-</div>
-
-<div class="mt-4 flex-grow">
-    <h3 class="text-lg font-bold text-gray-800 group-hover:text-blue-600">
-        {{ operation.title }}
-    </h3>
-    <p class="mt-1 text-sm text-gray-500">{{ operation.description }}</p>
-</div>
+<a [routerLink]="operation.route" class="group flex h-full cursor-pointer flex-col rounded-lg bg-white p-6 shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1" >
+    <div class="flex items-start justify-between">
+        <div class="flex h-12 w-12 items-center justify-center rounded-full transition-colors" [ngClass]="operation.iconBgColor" >
+            <svg
+            class="h-6 w-6 transition-colors"
+            [ngClass]="operation.iconColor"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            [attr.d]="operation.icon"
+            ></path></svg>
+        </div>
+    </div>
+    
+    <div class="mt-4 flex-grow">
+        <h3 class="text-lg font-bold text-gray-800 group-hover:text-blue-600">
+            {{ operation.title }}
+        </h3>
+        <p class="mt-1 text-sm text-gray-500">{{ operation.description }}</p>
+    </div>
 </a>
