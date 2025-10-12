@@ -1,48 +1,20 @@
 import { CommonModule } from "@angular/common";
-import { Component, computed, inject, signal } from "@angular/core";
-import { AuthService } from "../../../../../core/services/auth.service";
+import { Component, computed, OnInit, signal } from "@angular/core";
 import { GenericTaskCardComponent } from "../../../../../shared/components/general/generic-task-card/generic-task-card.component";
 import { GenericTasksPageComponent } from "../../generic-tasks-page.component";
-import { Activity, ActivityOwner, ActivityStatus } from "../../../../../core/services/activity.service";
+import { UserRole } from "../../../../../core/services/auth.service";
+import { Activity } from "../../../../../core/services/activity.service";
 
-const owners: ActivityOwner[] = [
-    { name: 'Ana Silva', role: 'Professora', avatar: 'https://i.pravatar.cc/40?u=ana' },
-    { name: 'Carlos Souza', role: 'Professor', avatar: 'https://i.pravatar.cc/40?u=carlos' },
-    { name: 'Admin Geral', role: 'Admin', avatar: 'https://i.pravatar.cc/40?u=admin' }
-];
+interface StatusOption {
+    key: string;
+    label: string;
+}
 
-const generateMockActivities = (userPrefix: string, count: number): Activity[] => {
-    const statuses: ActivityStatus[] = ['Pendente', 'Concluída', 'Atrasada'];
-    const statusColors: { [key in ActivityStatus]: string } = {
-        'Pendente': 'bg-yellow-100 text-yellow-800',
-        'Concluída': 'bg-green-100 text-green-800',
-        'Atrasada': 'bg-red-100 text-red-800'
-    };
-    
-    return Array.from({ length: count }, (_, i) => {
-        const status = statuses[i % statuses.length];
-        return {
-            id: i + 1,
-            icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z" /></svg>',
-            iconIsUrl: false,
-            company: `Turma de ${userPrefix} ${i % 3 + 1}`,
-            statusTag: { text: status, color: statusColors[status] },
-            title: `Atividade de ${userPrefix} #${i + 1}`,
-            tags: ['Prova', 'Online'],
-            owner: owners[i % owners.length],
-            status: status,
-            highlighted: i % 5 === 0,
-            progress: Math.floor(Math.random() * 100),
-            recentUpdates: [
-                { text: 'Prazo estendido.', time: '2h atrás', authorAvatar: 'https://i.pravatar.cc/40?u=carlos' }
-            ]
-        };
-    });
-};
-
-const ADMIN_ACTIVITIES = generateMockActivities('Admin', 40);
-const PROFESSOR_ACTIVITIES = generateMockActivities('Professor', 25);
-const ESTUDANTE_ACTIVITIES = generateMockActivities('Estudante', 15);
+interface RoleConfig {
+    title: string;
+    subtitle: string;
+    statusOptions: StatusOption[];
+}
 
 @Component({
     selector: 'app-tasks-list',
@@ -51,53 +23,116 @@ const ESTUDANTE_ACTIVITIES = generateMockActivities('Estudante', 15);
     styleUrl: './tasks-list.component.scss'
 })
 
-export class TasksListComponent {
-    public authService = inject(AuthService);
+export class TasksListComponent implements OnInit {
+    role: UserRole = 'ROLE_PROFESSOR';
+    status = signal<string>('pendente');
     
-    public selectedStatus = signal<ActivityStatus | 'Todos'>('Pendente');
-    public currentPage = signal(1);
-    public itemsPerPage = signal(8);
+    title = '';
+    subtitle = '';
+    statusOptions: StatusOption[] = [];
     
-    private sourceActivities = computed<Activity[]>(() => {
-        const role = this.authService.primaryUserRole();
-        switch (role) {
-            case 'ROLE_ADMIN':
-            return ADMIN_ACTIVITIES;
-            case 'ROLE_PROFESSOR':
-            return PROFESSOR_ACTIVITIES;
-            case 'ROLE_ESTUDANTE':
-            return ESTUDANTE_ACTIVITIES;
-            default:
-            return [];
-        }
-    });
-    
-    public totalItems = computed(() => this.sourceActivities().length);
-    
-    public filteredActivities = computed<Activity[]>(() => {
-        const activities = this.sourceActivities();
-        const status = this.selectedStatus();
-        
-        if (status === 'Todos') {
-            return activities;
-        }
-        
-        return activities.filter(activity => activity.status === status);
-    });
-    
-    public paginatedActivities = computed<Activity[]>(() => {
-        const data = this.filteredActivities();
-        const page = this.currentPage();
-        const limit = this.itemsPerPage();
-        
-        const startIndex = (page - 1) * limit;
-        const endIndex = startIndex + limit;
-        
-        return data.slice(startIndex, endIndex);
-    });
-    
-    public setStatusFilter(status: ActivityStatus | 'Todos'): void {
-        this.selectedStatus.set(status);
-        this.currentPage.set(1);
+    ngOnInit() {
+        const config = this.getConfigByRole(this.role);
+        this.title = config.title;
+        this.subtitle = config.subtitle;
+        this.statusOptions = config.statusOptions;
     }
+    
+    getConfigByRole(role: UserRole): RoleConfig {
+        const baseConfig: Record<UserRole, RoleConfig> = {
+            ROLE_ESTUDANTE: {
+                title: 'Minhas Atividades',
+                subtitle: 'Veja suas tarefas, prazos e notas.',
+                statusOptions: [
+                    { key: 'pendente', label: 'Pendentes' },
+                    { key: 'concluida', label: 'Concluídas' },
+                    { key: 'atrasada', label: 'Atrasadas' },
+                ],
+            },
+            ROLE_PROFESSOR: {
+                title: 'Suas Atividades e Avaliações',
+                subtitle: 'Crie, corrija e gerencie as atividades para suas turmas.',
+                statusOptions: [
+                    { key: 'pendente', label: 'Pendentes' },
+                    { key: 'avaliacao', label: 'A Avaliar' },
+                    { key: 'finalizada', label: 'Finalizadas' },
+                ],
+            },
+            ROLE_ADMIN: {
+                title: 'Gerenciamento de Atividades (Admin)',
+                subtitle: 'Monitore todas as atividades e relatórios do sistema.',
+                statusOptions: [
+                    { key: 'todas', label: 'Todas' },
+                    { key: 'ativas', label: 'Ativas' },
+                    { key: 'inativas', label: 'Inativas' },
+                ],
+            },
+        };
+        
+        return baseConfig[role] ?? baseConfig.ROLE_ESTUDANTE;
+    }
+    
+    updateStatus(key: string) {
+        this.status.set(key);
+    }
+    
+    activities = signal<Activity[]>([
+        {
+            id: 1,
+            icon: 'book-open',
+            iconIsUrl: false,
+            company: 'Turma A - Matemática',
+            statusTag: { text: 'Pendente', color: 'bg-yellow-100 text-yellow-800' },
+            title: 'Atividade sobre Equações do 2º Grau',
+            tags: ['Matemática', 'Álgebra'],
+            owner: { name: 'Prof. João Silva', role: 'ROLE_PROFESSOR', avatar: 'https://i.pravatar.cc/150?img=3' },
+            status: 'Pendente',
+            highlighted: true,
+            progress: 40,
+            recentUpdates: [
+                { text: 'Publicada há 2 dias', time: '2d', authorAvatar: 'https://i.pravatar.cc/150?img=3' },
+            ],
+        },
+        {
+            id: 2,
+            icon: 'clipboard-check',
+            iconIsUrl: false,
+            company: 'Turma B - História',
+            statusTag: { text: 'Concluída', color: 'bg-green-100 text-green-800' },
+            title: 'Trabalho sobre a Revolução Francesa',
+            tags: ['História', 'Europa'],
+            owner: { name: 'Profª Ana Souza', role: 'ROLE_PROFESSOR', avatar: 'https://i.pravatar.cc/150?img=4' },
+            status: 'Concluída',
+            progress: 100,
+            recentUpdates: [
+                { text: 'Atividade corrigida', time: '1d', authorAvatar: 'https://i.pravatar.cc/150?img=4' },
+            ],
+        },
+        {
+            id: 3,
+            icon: 'clock',
+            iconIsUrl: false,
+            company: 'Turma C - Física',
+            statusTag: { text: 'Atrasada', color: 'bg-red-100 text-red-800' },
+            title: 'Relatório de Experimento de Queda Livre',
+            tags: ['Física', 'Gravidade'],
+            owner: { name: 'Prof. Carlos Lima', role: 'ROLE_PROFESSOR', avatar: 'https://i.pravatar.cc/150?img=5' },
+            status: 'Atrasada',
+            progress: 60,
+            recentUpdates: [
+                { text: 'Prazo expirado há 1 dia', time: '1d', authorAvatar: 'https://i.pravatar.cc/150?img=5' },
+            ],
+        },
+    ]);
+    
+    filteredActivities = computed(() =>
+        this.activities().filter(activity => {
+        const current = this.status().toLowerCase();
+        if (current === 'pendente') return activity.status === 'Pendente';
+        if (current === 'concluida' || current === 'finalizada') return activity.status === 'Concluída';
+        if (current === 'atrasada') return activity.status === 'Atrasada';
+        if (current === 'todas') return true;
+        return true;
+    })
+);
 }

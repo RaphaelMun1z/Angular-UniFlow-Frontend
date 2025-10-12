@@ -1,47 +1,32 @@
-<app-generic-groups-page>    
-    <div [ngSwitch]="authService.primaryUserRole()">
-
-        <ng-container *ngSwitchCase="'ROLE_ADMIN'">
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold text-slate-800">Gerenciamento de Todos os Grupos</h2>
-                <p class="mt-1 text-base text-slate-600">Visualize e administre todos os grupos existentes na plataforma.</p>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <app-generic-group-card 
-                *ngFor="let group of paginatedGroups()" 
-                [group]="group"></app-generic-group-card>
-            </div>
-        </ng-container>
-        
-        <ng-container *ngSwitchCase="'ROLE_PROFESSOR'">
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold text-slate-800">Seus Grupos e Turmas</h2>
-                <p class="mt-1 text-base text-slate-600">Acesse os grupos que você gerencia.</p>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <app-generic-group-card 
-                *ngFor="let group of paginatedGroups()" 
-                [group]="group"></app-generic-group-card>
-            </div>
-        </ng-container>
-        
-        <ng-container *ngSwitchCase="'ROLE_ESTUDANTE'">
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold text-slate-800">Grupos que você participa</h2>
-                <p class="mt-1 text-base text-slate-600">Acesse o material e as atividades dos seus grupos.</p>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <app-generic-group-card 
-                *ngFor="let group of paginatedGroups()" 
-                [group]="group"></app-generic-group-card>
-            </div>
-        </ng-container>
-        
-        <ng-container *ngSwitchDefault>
-            <div class="text-center py-10">
-                <p class="text-slate-500">Conteúdo indisponível ou você não tem permissão para visualizar esta área.</p>
-            </div>
-        </ng-container>
-        
+<app-generic-groups-page>
+    <div class="mb-6">
+        <h2 class="text-2xl font-bold text-slate-800">{{ title }}</h2>
+        <p class="mt-1 text-base text-slate-600">{{ subtitle }}</p>
+        <p class="mt-1 text-sm text-slate-500">{{ description }}</p>
     </div>
+    
+    <div class="flex flex-wrap gap-3 mb-6">
+        <button
+        *ngFor="let option of statusOptions"
+        (click)="updateStatus(option.key)"
+        class="px-4 py-2 rounded-lg text-sm font-medium transition"
+        [class.bg-slate-900]="status() === option.key"
+        [class.text-white]="status() === option.key"
+        [class.bg-slate-100]="status() !== option.key"
+        [class.text-slate-700]="status() !== option.key">
+        {{ option.label }}</button>
+    </div>
+    
+    <!-- 🔹 LISTAGEM -->
+    <div *ngIf="filteredGroups().length; else noGroups" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" >
+        <app-generic-group-card
+        *ngFor="let group of paginatedGroups()"
+        [group]="group"></app-generic-group-card>
+    </div>
+    
+    <ng-template #noGroups>
+        <div class="text-center py-10 text-slate-500">
+            Nenhum grupo encontrado para o filtro selecionado.
+        </div>
+    </ng-template>
 </app-generic-groups-page>

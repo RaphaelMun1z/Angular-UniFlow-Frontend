@@ -20,6 +20,6 @@ export class AppComponent {
     constructor(private titleService: Title, public authService: AuthService) {
         this.titleService.setTitle('UniFlow | Gestão Acadêmica');
         
-        this.authService.simularRole('ROLE_PROFESSOR');
+        this.authService.simularRole('ROLE_ESTUDANTE');
     }
 }

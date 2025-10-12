@@ -1,7 +1,7 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { GenericGroupCardComponent } from "../../../../../shared/components/general/generic-group-card/generic-group-card.component";
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../../../../core/services/auth.service';
+import { AuthService, UserRole } from '../../../../../core/services/auth.service';
 import { GenericGroupsPageComponent } from '../../generic-groups-page.component';
 
 export interface Group {
@@ -10,28 +10,20 @@ export interface Group {
     title: string;
     description: string;
     tags: string[];
+    status: string;
 }
 
-const generateMockGroups = (prefix: string, count: number): Group[] => {
-    const logos = [
-        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z" /></svg>',
-        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>',
-        '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>'
-    ];
-    const colors = ['bg-indigo-600', 'bg-rose-500', 'bg-slate-900', 'bg-teal-500'];
-    
-    return Array.from({ length: count }, (_, i) => ({
-        title: `${prefix} #${i + 1}`,
-        description: `Descrição para o grupo ${prefix.toLowerCase()} número ${i + 1}.`,
-        logo: logos[i % logos.length],
-        logoBgColor: colors[i % colors.length],
-        tags: ['Online', 'Projeto', `${prefix}`],
-    }));
-};
+interface StatusOption {
+    key: string;
+    label: string;
+}
 
-const ADMIN_GROUPS = generateMockGroups('Admin', 35);
-const PROFESSOR_GROUPS = generateMockGroups('Professor', 22);
-const ESTUDANTE_GROUPS = generateMockGroups('Estudante', 18);
+interface RoleConfig {
+    title: string;
+    subtitle: string;
+    description: string;
+    statusOptions: StatusOption[];
+}
 
 @Component({
     selector: 'app-groups-list',
@@ -40,36 +32,114 @@ const ESTUDANTE_GROUPS = generateMockGroups('Estudante', 18);
     styleUrl: './groups-list.component.scss'
 })
 
-export class GroupsListComponent {
-    public authService = inject(AuthService);
+export class GroupsListComponent implements OnInit {
+    role: UserRole = "ROLE_PROFESSOR";
     
-    public currentPage = signal(1);
-    public itemsPerPage = signal(8);
+    title = "";
+    subtitle = "";
+    description = "";
+    statusOptions: StatusOption[] = [];
     
-    private sourceData = computed<Group[]>(() => {
-        const role = this.authService.primaryUserRole();
-        switch (role) {
-            case 'ROLE_ADMIN':
-            return ADMIN_GROUPS;
-            case 'ROLE_PROFESSOR':
-            return PROFESSOR_GROUPS;
-            case 'ROLE_ESTUDANTE':
-            return ESTUDANTE_GROUPS;
-            default:
-            return [];
-        }
-    });
+    status = signal<string>("ativos"); // 🔹 status selecionado
+    groups = signal<Group[]>([]);
+    currentPage = signal(1);
+    itemsPerPage = 6;
     
-    public totalItems = computed(() => this.sourceData().length);
+    ngOnInit() {
+        const config = this.getConfigByRole(this.role);
+        this.title = config.title;
+        this.subtitle = config.subtitle;
+        this.description = config.description;
+        this.statusOptions = config.statusOptions;
+        this.groups.set(this.getMockGroups());
+    }
     
-    public paginatedGroups = computed<Group[]>(() => {
-        const data = this.sourceData();
-        const page = this.currentPage();
-        const limit = this.itemsPerPage();
+    getConfigByRole(role: UserRole): RoleConfig {
+        const baseConfig: Record<UserRole, RoleConfig> = {
+            ROLE_ESTUDANTE: {
+                title: "Grupos que você participa",
+                subtitle: "Veja seus grupos e suas atividades.",
+                description:
+                "Acesse o material compartilhado e acompanhe o progresso dos grupos.",
+                statusOptions: [
+                    { key: "ativos", label: "Ativos" },
+                    { key: "convidado", label: "Convites Pendentes" },
+                    { key: "arquivado", label: "Arquivados" },
+                ],
+            },
+            ROLE_PROFESSOR: {
+                title: "Seus Grupos e Turmas",
+                subtitle: "Gerencie suas turmas e os grupos de alunos.",
+                description:
+                "Acompanhe os grupos que você criou e veja suas atividades.",
+                statusOptions: [
+                    { key: "ativos", label: "Ativos" },
+                    { key: "encerrado", label: "Encerrados" },
+                    { key: "aguardando", label: "Aguardando Aprovação" },
+                ],
+            },
+            ROLE_ADMIN: {
+                title: "Gerenciamento de Todos os Grupos",
+                subtitle: "Administre todos os grupos existentes na plataforma.",
+                description:
+                "Visualize e monitore os grupos criados por professores e alunos.",
+                statusOptions: [
+                    { key: "todos", label: "Todos" },
+                    { key: "ativos", label: "Ativos" },
+                    { key: "inativos", label: "Inativos" },
+                    { key: "bloqueado", label: "Bloqueados" },
+                ],
+            },
+        };
         
-        const startIndex = (page - 1) * limit;
-        const endIndex = startIndex + limit;
-        
-        return data.slice(startIndex, endIndex);
-    });
+        return baseConfig[role] ?? baseConfig.ROLE_ESTUDANTE;
+    }
+    
+    updateStatus(key: string) {
+        this.status.set(key);
+    }
+    
+    getMockGroups(): Group[] {
+        return [
+            {
+                logo: "💻",
+                logoBgColor: "#E0F2FE",
+                title: "Programação Avançada",
+                description:
+                "Projetos e desafios em Java e C++ para aprimorar lógica e algoritmos.",
+                tags: ["Java", "C++", "Algoritmos"],
+                status: "ativos",
+            },
+            {
+                logo: "🧩",
+                logoBgColor: "#FEF3C7",
+                title: "Engenharia de Software",
+                description:
+                "Discuta arquitetura, padrões de projeto e boas práticas de desenvolvimento.",
+                tags: ["Arquitetura", "Padrões de Projeto", "Scrum"],
+                status: "encerrado",
+            },
+            {
+                logo: "🗄️",
+                logoBgColor: "#DCFCE7",
+                title: "Banco de Dados II",
+                description:
+                "Exercícios e projetos práticos sobre modelagem e consultas SQL.",
+                tags: ["PostgreSQL", "Modelagem", "SQL"],
+                status: "aguardando",
+            },
+        ];
+    }
+    
+    filteredGroups() {
+        const current = this.status();
+        if (current === "todos") return this.groups();
+        return this.groups().filter((g) => g.status === current);
+    }
+    
+    paginatedGroups() {
+        const filtered = this.filteredGroups();
+        const start = (this.currentPage() - 1) * this.itemsPerPage;
+        return filtered.slice(start, start + this.itemsPerPage);
+    }
 }

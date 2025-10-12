@@ -9,6 +9,12 @@ import { FormsModule } from '@angular/forms';
     styleUrl: './pager.component.scss'
 })
 export class PagerComponent {
+    showPageSizeDropdown = false;
+    
+    togglePageSizeDropdown() {
+        this.showPageSizeDropdown = !this.showPageSizeDropdown;
+    }
+    
     currentPage = model.required<number>();
     itemsPerPage = model.required<number>();
     totalItems = input.required<number>();
@@ -73,8 +79,8 @@ export class PagerComponent {
         this.goToPage(this.currentPage() - 1);
     }
     
-    onPageSizeChange(size: number): void {
-        this.itemsPerPage.set(Number(size));
-        this.goToPage(1); // Volta para a primeira página ao mudar a quantidade de itens
+    onPageSizeChange(size: number) {
+        this.itemsPerPage.set(size);
+        this.currentPage.set(1); // reset página ao mudar o tamanho
     }
 }
