@@ -20,4 +20,17 @@ export interface CurrentUser {
 export class ProfileButtonComponent {
     @Input() currentUser: CurrentUser | null = null;
     isProfileMenuOpen = false;
+    
+    private closeTimer: any;
+    
+    openMenu(): void {
+        clearTimeout(this.closeTimer);
+        this.isProfileMenuOpen = true;
+    }
+    
+    closeMenu(): void {
+        this.closeTimer = setTimeout(() => {
+            this.isProfileMenuOpen = false;
+        }, 200);
+    }
 }

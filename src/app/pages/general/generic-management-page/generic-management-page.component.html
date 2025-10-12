@@ -1,10 +1,6 @@
 <app-generic-view-page>
-    <app-generic-page-header 
-    [title]="title"></app-generic-page-header>
-    
-    <app-generic-tab-navigation 
-    [tabs]="tabs()"
-    class="px-8 bg-white"></app-generic-tab-navigation>
+    <app-generic-page-header [title]="title"></app-generic-page-header>
+    <app-generic-tab-navigation class="px-8 bg-white"></app-generic-tab-navigation>
     
     <main class="flex-1 overflow-y-auto p-8 pt-6 relative max-h-[80vh]">
         <router-outlet></router-outlet>

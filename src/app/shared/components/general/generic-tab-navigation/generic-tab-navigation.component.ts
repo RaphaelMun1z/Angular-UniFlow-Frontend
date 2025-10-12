@@ -11,7 +11,10 @@ import { filter, startWith } from 'rxjs';
 })
 
 export class GenericTabNavigationComponent implements AfterViewInit {
-    tabs = input.required<Tab[]>();
+    tabs: Tab[] = [
+        { id: '1', label: 'Grupos', route: '/app/painel/grupos' },
+        { id: '2', label: 'Atividades', route: '/app/painel/atividades' }
+    ];
     
     @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef<HTMLDivElement>;
     @ViewChildren('tabLink', { read: ElementRef }) tabElements!: QueryList<ElementRef>;
@@ -25,7 +28,7 @@ export class GenericTabNavigationComponent implements AfterViewInit {
     
     private injector = inject(Injector);
     private router = inject(Router);
-        
+    
     constructor() {
         this.router.events.pipe(
             filter((event): event is NavigationEnd => event instanceof NavigationEnd),

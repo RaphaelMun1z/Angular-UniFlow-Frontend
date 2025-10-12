@@ -1,7 +1,6 @@
 import { Component, computed, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { GenericViewPageComponent } from "../generic-view-page/generic-view-page.component";
 import { GenericPageHeaderComponent } from "../../../shared/components/general/generic-page-header/generic-page-header.component";
-import { GenericTabNavigationComponent } from "../../../shared/components/general/generic-tab-navigation/generic-tab-navigation.component";
 import { GenericFloatingPlusButtonComponent } from "../../../shared/components/general/generic-floating-plus-button/generic-floating-plus-button.component";
 
 import { ADMIN_NAVIGATION_TABS, ADMIN_OPERATIONS } from '../../../shared/mocks/ADMIN_MANAGEMENT_TABS';
@@ -10,11 +9,11 @@ import { ESTUDANTE_NAVIGATION_TABS, ESTUDANTE_OPERATIONS } from '../../../shared
 import { CommonModule } from '@angular/common';
 import { Operation, Tab } from '../../../shared/interfaces/User.model';
 import { RouterOutlet } from '@angular/router';
-import { AuthService } from '../../../core/services/auth.service';
+import { GenericTabNavigationComponent } from "../../../shared/components/general/generic-tab-navigation/generic-tab-navigation.component";
 
 @Component({
     selector: 'app-generic-management-page',
-    imports: [CommonModule, GenericViewPageComponent, GenericPageHeaderComponent, GenericTabNavigationComponent, GenericFloatingPlusButtonComponent, RouterOutlet],
+    imports: [CommonModule, GenericViewPageComponent, GenericPageHeaderComponent, GenericFloatingPlusButtonComponent, RouterOutlet, GenericTabNavigationComponent],
     templateUrl: './generic-management-page.component.html',
     styleUrl: './generic-management-page.component.scss'
 })
@@ -25,7 +24,6 @@ export class GenericManagementPageComponent implements OnInit {
     // Signals para o estado da UI
     title = signal<string>('');
     subtitle = signal<string>('');
-    tabs = signal<Tab[]>([]);
     
     // Signals para a lógica de filtragem
     private allOperations = signal<Operation[]>([]);
@@ -51,26 +49,22 @@ export class GenericManagementPageComponent implements OnInit {
     }
     
     private setupUserData(): void {
-        let currentTabs: Tab[] = [];
         let currentOps: Operation[] = [];
         
         switch (this.userLevel) {
             case 'admin':
             this.title.set('Painel do Administrador');
             this.subtitle.set('Gerencie usuários, grupos e configurações do sistema');
-            currentTabs = ADMIN_NAVIGATION_TABS;
             currentOps = ADMIN_OPERATIONS;
             break;
             case 'professor':
-            this.title.set('Painel do Professor');
+            this.title.set('Painel Administrativo do Professor');
             this.subtitle.set('Gerencie suas turmas, notas e conteúdos');
-            currentTabs = PROFESSOR_NAVIGATION_TABS;
             currentOps = PROFESSOR_OPERATIONS;
             break;
             case 'estudante':
-            this.title.set('Painel do Estudante');
+            this.title.set('Painel Administrativo do Estudante');
             this.subtitle.set('Acesse suas disciplinas, notas e grupos');
-            currentTabs = ESTUDANTE_NAVIGATION_TABS;
             currentOps = ESTUDANTE_OPERATIONS;
             break;
             default:
@@ -79,13 +73,7 @@ export class GenericManagementPageComponent implements OnInit {
             break;
         }
         
-        this.tabs.set(currentTabs);
+
         this.allOperations.set(currentOps);
-        
-        if (currentTabs.length > 0) {
-            this.activeTabId.set(currentTabs[0].id);
-        } else {
-            this.activeTabId.set('');
-        }
     }
 }

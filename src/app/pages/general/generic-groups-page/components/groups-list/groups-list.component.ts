@@ -1,8 +1,9 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { GenericGroupCardComponent } from "../../../../../shared/components/general/generic-group-card/generic-group-card.component";
 import { CommonModule } from '@angular/common';
-import { AuthService, UserRole } from '../../../../../core/services/auth.service';
+import { UserRole } from '../../../../../core/services/auth.service';
 import { GenericGroupsPageComponent } from '../../generic-groups-page.component';
+import { Tab } from '../../../../../shared/interfaces/User.model';
 
 export interface Group {
     logo: string;
@@ -142,4 +143,6 @@ export class GroupsListComponent implements OnInit {
         const start = (this.currentPage() - 1) * this.itemsPerPage;
         return filtered.slice(start, start + this.itemsPerPage);
     }
+    
+    tabs = signal<Tab[]>([]);
 }

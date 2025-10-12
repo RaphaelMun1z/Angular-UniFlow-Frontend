@@ -1,8 +1,16 @@
-<div class="relative">
-    <app-user-avatar 
-    [currentUser]="currentUser" 
-    (click)="isProfileMenuOpen = !isProfileMenuOpen"></app-user-avatar>      
-    <div *ngIf="isProfileMenuOpen" class="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-2xl border border-gray-200 origin-top-right z-20">
+<div 
+    class="relative" 
+    (mouseenter)="openMenu()" 
+    (mouseleave)="closeMenu()">
+
+    <app-user-avatar [currentUser]="currentUser"></app-user-avatar>      
+
+    <div 
+        class="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-2xl border border-gray-200 origin-top-right z-20 transition-all duration-200 ease-out"
+        [ngClass]="{
+            'opacity-100 translate-y-0': isProfileMenuOpen,
+            'opacity-0 -translate-y-2 pointer-events-none': !isProfileMenuOpen
+        }">
         <app-profile-popup></app-profile-popup>
     </div>
 </div>
