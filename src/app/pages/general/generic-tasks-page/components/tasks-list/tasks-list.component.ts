@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { Component, computed, inject, signal } from '@angular/core';
+import { CommonModule } from "@angular/common";
+import { Component, computed, inject, signal } from "@angular/core";
+import { AuthService } from "../../../../../core/services/auth.service";
 import { GenericTaskCardComponent } from "../../../../../shared/components/general/generic-task-card/generic-task-card.component";
-import { AuthService } from '../../../../../core/services/auth.service';
-import { Activity, ActivityOwner, ActivityStatus } from '../../../../../core/services/activity.service';
-import { GenericTasksPageComponent } from '../../generic-tasks-page.component';
+import { GenericTasksPageComponent } from "../../generic-tasks-page.component";
+import { Activity, ActivityOwner, ActivityStatus } from "../../../../../core/services/activity.service";
 
 const owners: ActivityOwner[] = [
     { name: 'Ana Silva', role: 'Professora', avatar: 'https://i.pravatar.cc/40?u=ana' },
@@ -55,6 +55,8 @@ export class TasksListComponent {
     public authService = inject(AuthService);
     
     public selectedStatus = signal<ActivityStatus | 'Todos'>('Pendente');
+    public currentPage = signal(1);
+    public itemsPerPage = signal(8);
     
     private sourceActivities = computed<Activity[]>(() => {
         const role = this.authService.primaryUserRole();
@@ -70,6 +72,8 @@ export class TasksListComponent {
         }
     });
     
+    public totalItems = computed(() => this.sourceActivities().length);
+    
     public filteredActivities = computed<Activity[]>(() => {
         const activities = this.sourceActivities();
         const status = this.selectedStatus();
@@ -81,7 +85,19 @@ export class TasksListComponent {
         return activities.filter(activity => activity.status === status);
     });
     
+    public paginatedActivities = computed<Activity[]>(() => {
+        const data = this.filteredActivities();
+        const page = this.currentPage();
+        const limit = this.itemsPerPage();
+        
+        const startIndex = (page - 1) * limit;
+        const endIndex = startIndex + limit;
+        
+        return data.slice(startIndex, endIndex);
+    });
+    
     public setStatusFilter(status: ActivityStatus | 'Todos'): void {
         this.selectedStatus.set(status);
+        this.currentPage.set(1);
     }
 }

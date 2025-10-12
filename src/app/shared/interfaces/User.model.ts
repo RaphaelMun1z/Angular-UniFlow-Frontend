@@ -26,7 +26,6 @@ export interface Operation {
     tabId: string;
 }
 
-
 type ActivityStatus = 'current' | 'pending' | 'completed' | 'failed';
 
 interface ActivityOwner {
