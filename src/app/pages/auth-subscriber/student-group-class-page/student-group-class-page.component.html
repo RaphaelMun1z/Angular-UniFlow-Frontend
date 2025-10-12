@@ -1,178 +1,147 @@
 <div class="min-h-screen bg-slate-100 font-sans antialiased">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        <!-- Cabeçalho do Grupo -->
-        <header class="mb-8 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-            <div class="h-48 bg-slate-200">
-                <img [src]="group.bannerUrl" class="w-full h-full object-cover" alt="Banner do Grupo">
-            </div>
-            <div class="p-6">
-                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start">
-                    <div>
-                        <h1 class="text-3xl font-bold text-slate-900">{{ group.title }}</h1>
-                        <div class="flex items-center gap-2 mt-2">
-                            <img [src]="group.professor.avatarUrl" class="h-6 w-6 rounded-full" [alt]="group.professor.name">
-                            <span class="text-sm text-slate-600">Lecionado por <span class="font-medium">{{ group.professor.name }}</span></span>
+        <header class="bg-white rounded-xl border border-slate-200 shadow-sm">
+            <div class="p-6 sm:p-8">
+                <div class="flex flex-col sm:flex-row items-start gap-6">
+                    <div class="flex-shrink-0">
+                        <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center">
+                            <svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-2.178 6.955a1.125 1.125 0 001.125 1.413l6.955-2.178m0 0l2.178-6.955m0 0l2.178 6.955m0 0l6.955 2.178a1.125 1.125 0 001.413-1.125l-2.178-6.955m0 0l-6.955-2.178" /></svg>
                         </div>
                     </div>
-                    <button class="mt-4 sm:mt-0 px-4 py-2 border border-red-300 text-sm font-semibold text-red-700 rounded-lg hover:bg-red-50 transition-colors flex items-center gap-2">
-                        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>
-                        <span>Sair do Grupo</span>
-                    </button>
-                </div>
-                <div class="mt-4 flex items-center gap-6 text-slate-500">
-                    <div class="flex items-center">
-                        <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.962A3 3 0 013 10.5V12a3 3 0 013 3v.5a3 3 0 013 3m-3.75-9.08a3.001 3.001 0 00-2.923-2.185 3.001 3.001 0 00-2.923 2.185M12 6.75a3 3 0 116 0 3 3 0 01-6 0zM12 18.75a3 3 0 116 0 3 3 0 01-6 0z" /></svg>
-                        <span class="font-medium">{{ group.memberCount }} Membros</span>
-                    </div>
-                    @if(group.pendingActivities > 0) {
-                        <div class="flex items-center font-semibold text-rose-600">
-                            <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            <span>{{ group.pendingActivities }} Atividades Pendentes</span>
+                    <div class="flex-grow">
+                        <div class="flex flex-col sm:flex-row justify-between sm:items-start">
+                            <div>
+                                <h1 class="text-3xl font-bold text-slate-900 leading-tight">{{ group.title }}</h1>
+                                <div class="flex items-center gap-2 mt-2">
+                                    <img [src]="group.professor.avatarUrl" class="h-6 w-6 rounded-full object-cover" [alt]="group.professor.name">
+                                    <span class="text-sm text-slate-600">Lecionado por <span class="font-medium text-slate-800">{{ group.professor.name }}</span></span>
+                                </div>
+                            </div>
+                            <button class="mt-4 sm:mt-0 flex-shrink-0 px-4 py-2 border border-slate-300 bg-slate-50 text-sm font-semibold text-slate-700 rounded-lg hover:bg-slate-100 hover:border-slate-400 transition-colors flex items-center gap-2">
+                                <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>
+                                <span>Sair do Grupo</span>
+                            </button>
                         </div>
-                    }
+                        <div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-slate-600">
+                            <div class="flex items-center text-sm">
+                                <svg class="h-5 w-5 mr-1.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.962A3 3 0 013 10.5V12a3 3 0 013 3v.5a3 3 0 013 3m-3.75-9.08a3.001 3.001 0 00-2.923-2.185 3.001 3.001 0 00-2.923 2.185M12 6.75a3 3 0 116 0 3 3 0 01-6 0zM12 18.75a3 3 0 116 0 3 3 0 01-6 0z" /></svg>
+                                <span class="font-medium">{{ group.memberCount }}</span><span class="ml-1">Membros</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Abas de Navegação -->
-            <div class="px-6 border-t border-slate-200">
+            <div class="px-6 sm:px-8 border-t border-slate-200">
                 <nav class="-mb-px flex space-x-8 overflow-x-auto">
                     <button (click)="setActiveTab('visaoGeral')" [ngClass]="activeTab === 'visaoGeral' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'" class="flex items-center gap-2 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
-                        <i class="fas fa-home"></i> Visão Geral
+                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
+                        <span>Visão Geral</span>
                     </button>
                     <button (click)="setActiveTab('atividades')" [ngClass]="activeTab === 'atividades' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'" class="flex items-center gap-2 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
-                        <i class="fas fa-tasks"></i> Atividades
-                    </button>
-                    <button (click)="setActiveTab('membros')" [ngClass]="activeTab === 'membros' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'" class="flex items-center gap-2 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
-                        <i class="fas fa-users"></i> Membros
-                    </button>
-                    <button (click)="setActiveTab('materiais')" [ngClass]="activeTab === 'materiais' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'" class="flex items-center gap-2 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
-                        <i class="fas fa-file-alt"></i> Materiais
-                    </button>
-                    <button (click)="setActiveTab('discussoes')" [ngClass]="activeTab === 'discussoes' ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'" class="flex items-center gap-2 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">
-                        <i class="fas fa-comments"></i> Discussões
+                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>
+                        <span>Atividades</span>
                     </button>
                 </nav>
             </div>
         </header>
         
-        <!-- Conteúdo Principal -->
-        <main>
+        <main class="mt-8">
             @if(activeTab === 'visaoGeral') {
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <!-- Coluna Principal (Mural) -->
                     <div class="lg:col-span-2 space-y-6">
-                        <!-- Feed de Postagens -->
-                        @for(post of posts; track post.id) {
-                            <div class="bg-white rounded-xl border border-slate-200 shadow-sm">
-                                <div class="p-5">
-                                    <div class="flex items-start justify-between">
-                                        <div class="flex items-start gap-4">
-                                            <img class="h-10 w-10 rounded-full" [src]="post.author.avatarUrl" [alt]="post.author.name">
-                                            <div>
-                                                <p class="font-semibold text-slate-800">{{ post.author.name }}</p>
-                                                <p class="text-xs text-slate-500">{{ post.timestamp | date:'dd/MM/yyyy HH:mm' }}</p>
-                                            </div>
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <div class="flex items-start gap-4">
+                                <img class="h-10 w-10 rounded-full object-cover" [src]="currentUser.avatarUrl" [alt]="currentUser.name">
+                                <div class="flex-grow">
+                                    <textarea rows="3" class="w-full text-base p-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow" placeholder="No que você está pensando, {{ currentUser.name }}?"></textarea>
+                                    <div class="mt-3 flex flex-col sm:flex-row items-center justify-between">
+                                        <div class="flex items-center gap-4 text-slate-500">
+                                            <button class="flex items-center gap-1.5 p-2 rounded-md hover:bg-slate-100 transition-colors"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg><span class="text-sm font-medium">Imagem</span></button>
+                                            <button class="flex items-center gap-1.5 p-2 rounded-md hover:bg-slate-100 transition-colors"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3.375 3.375 0 0119.5 7.372l-10.94 10.94a2.25 2.25 0 01-3.182-3.182l7.693-7.693a.75.75 0 011.06 1.06l-7.693 7.693a1.125 1.125 0 001.591 1.591l10.94-10.94a2.25 2.25 0 00-3.182-3.182z" /></svg><span class="text-sm font-medium">Anexo</span></button>
                                         </div>
-                                        <button class="p-2 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg></button>
-                                    </div>
-                                    <p class="mt-4 text-slate-700 whitespace-pre-wrap">{{ post.content }}</p>
-                                </div>
-                                
-                                <!-- Ações e Comentários -->
-                                <div class="px-5 pb-5">
-                                    <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center text-sm font-medium text-slate-500">
-                                        <button class="flex items-center gap-2 hover:text-indigo-600 transition-colors" [class.text-indigo-600]="post.likedByUser">
-                                            <svg class="h-5 w-5" [class.fill-indigo-600]="post.likedByUser" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0118 4.5v1.546A4.498 4.498 0 0018.322 7.7c.303.759.93 1.331 1.653 1.715a9.041 9.041 0 012.861 2.4c.498.634 1.225 1.08 2.031 1.08h.384a.75.75 0 01.75.75v.253a.75.75 0 01-.75.75h-.384a1.875 1.875 0 01-1.495-.715a9.053 9.053 0 00-2.861-2.4c-.723-.384-1.35-.956-1.653-1.715a4.498 4.498 0 00-.322-1.672V6.75A2.25 2.25 0 0015 4.5v-1.5a2.25 2.25 0 00-2.25-2.25H9A2.25 2.25 0 006.75 4.5v1.546A4.498 4.498 0 006.428 7.7c-.303.759-.93 1.331-1.653 1.715a9.041 9.041 0 00-2.861 2.4c-.498.634-1.225 1.08-2.031 1.08H1.5a.75.75 0 00-.75.75v.253a.75.75 0 00.75.75h.384a1.875 1.875 0 001.495-.715a9.053 9.053 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 01.322-1.672V6.75a2.25 2.25 0 012.25-2.25h1.5A2.25 2.25 0 0115 6.75v1.546A4.498 4.498 0 0114.678 9.8c-.303.759-.93 1.331-1.653 1.715a9.041 9.041 0 01-2.861 2.4c-.498.634-1.225 1.08-2.031 1.08h-.384a.75.75 0 01-.75-.75V10.5a.75.75 0 01.75-.75h.384z" /></svg>
-                                            <span>{{ post.likesCount }}</span>
-                                        </button>
-                                        <button class="flex items-center gap-2 hover:text-indigo-600 transition-colors">
-                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c.243.534.64 1.036 1.134 1.482.493.446 1.065.823 1.696 1.128a1.69 1.69 0 001.032.324 1.683 1.683 0 001.033-.324c.63-.305 1.202-.682 1.696-1.128.493-.446.89-.948 1.134-1.482.243-.534.365-1.09.365-1.653 0-.562-.122-1.119-.365-1.653a4.704 4.704 0 00-1.134-1.482c-.493-.446-1.065-.823-1.696-1.128a1.69 1.69 0 00-1.032-.324 1.683 1.683 0 00-1.033.324c-.63.305-1.202.682-1.696 1.128a4.704 4.704 0 00-1.134 1.482c-.243.534-.365 1.09-.365 1.653 0 .562.122 1.119.365 1.653zM12 12.76c.243.534.64 1.036 1.134 1.482.493.446 1.065.823 1.696 1.128a1.69 1.69 0 001.032.324 1.683 1.683 0 001.033-.324c.63-.305 1.202-.682 1.696-1.128.493-.446.89-.948 1.134-1.482.243-.534.365-1.09.365-1.653 0-.562-.122-1.119-.365-1.653a4.704 4.704 0 00-1.134-1.482c-.493-.446-1.065-.823-1.696-1.128a1.69 1.69 0 00-1.032-.324 1.683 1.683 0 00-1.033.324c-.63.305-1.202.682-1.696 1.128a4.704 4.704 0 00-1.134 1.482c-.243.534-.365 1.09-.365 1.653 0 .562.122 1.119.365 1.653z" /></svg>
-                                            <span>{{ post.commentsCount }} Comentários</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="mt-4 space-y-4">
-                                    @for(comment of post.comments; track comment.id){
-                                        <div class="flex items-start gap-3">
-                                            <img [src]="comment.author.avatarUrl" class="h-8 w-8 rounded-full" [alt]="comment.author.name">
-                                            <div class="bg-slate-100 px-3 py-2 rounded-lg w-full">
-                                                <p class="font-semibold text-sm text-slate-800">{{ comment.author.name }}</p>
-                                                <p class="text-sm text-slate-600">{{ comment.content }}</p>
-                                            </div>
-                                        </div>
-                                    }
-                                </div>
-                                <div class="mt-4 flex items-start gap-3">
-                                    <img [src]="currentUser.avatarUrl" class="h-8 w-8 rounded-full" [alt]="currentUser.name">
-                                    <div class="flex-grow">
-                                        <input type="text" placeholder="Escreva um comentário..." class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                        <button class="w-full sm:w-auto mt-3 sm:mt-0 px-6 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-sm">Publicar</button>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div class="flex items-center gap-2 text-sm font-medium"><button class="px-3 py-1.5 bg-white border border-slate-200 rounded-full shadow-sm text-indigo-700">Todas</button><button class="px-3 py-1.5 text-slate-600 hover:text-slate-900">Apenas do Professor</button><button class="px-3 py-1.5 text-slate-600 hover:text-slate-900">Minhas Publicações</button></div>
+                            <div><select class="text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"><option>Ordenar por: Mais Recentes</option><option>Ordenar por: Mais Curtidas</option><option>Ordenar por: Mais Comentadas</option></select></div>
+                        </div>
+                        @for(post of posts; track post.id) {
+                            <div class="bg-white rounded-xl border border-slate-200 shadow-sm">
+                            </div>
                         }
                     </div>
-                    <!-- Coluna Lateral -->
                     <div class="lg:col-span-1 space-y-6">
                         <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                            <h3 class="font-bold text-slate-800 mb-4">Sobre a Turma</h3>
+                            <h3 class="font-bold text-slate-800 mb-4">Comunidade da Turma</h3>
                             <div class="flex items-center gap-3">
-                                <img [src]="group.professor.avatarUrl" class="h-10 w-10 rounded-full" [alt]="group.professor.name">
+                                <img [src]="group.professor.avatarUrl" class="h-10 w-10 rounded-full object-cover" [alt]="group.professor.name">
                                 <div>
                                     <p class="font-semibold text-slate-800">{{ group.professor.name }}</p>
                                     <p class="text-xs text-slate-500">Professor Responsável</p>
                                 </div>
                             </div>
                             <div class="mt-4 pt-4 border-t border-slate-100">
-                                <a href="#" class="w-full text-center block px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-sm">Ver todos os {{group.memberCount}} membros</a>
+                                <p class="text-sm font-medium text-slate-600 mb-3">Alguns membros:</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex -space-x-2 overflow-hidden">
+                                        @for(member of group.membersSample; track member.id) {
+                                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white" [src]="member.avatarUrl" [alt]="member.name">
+                                        }
+                                    </div>
+                                    <a href="#" class="text-sm font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">Ver todos →</a>
+                                </div>
                             </div>
                         </div>
                         <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                            <h3 class="font-bold text-slate-800 mb-4">Atividades Pendentes</h3>
+                            <h3 class="font-bold text-slate-800 mb-4">Atividades a Fazer</h3>
                             @if(activities.length > 0) {
                                 <ul class="space-y-4 text-sm">
                                     @for(activity of activities; track activity.id) {
-                                        <li class="flex items-start gap-3">
-                                            <div class="flex-shrink-0 bg-rose-100 text-rose-600 h-8 w-8 flex items-center justify-center rounded-lg mt-1"><i class="fas fa-exclamation"></i></div>
+                                        <li class="flex items-start gap-4">
+                                            <div class="flex-shrink-0 bg-rose-100 text-rose-600 h-9 w-9 flex items-center justify-center rounded-lg mt-1"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg></div>
                                             <div>
-                                                <p class="font-medium text-slate-700">{{ activity.title }}</p>
+                                                <p class="font-medium text-slate-800 hover:text-indigo-600 transition-colors"><a href="#">{{ activity.title }}</a></p>
                                                 <p class="text-slate-500 text-xs">Entrega: {{ activity.dueDate | date:'dd/MM/yyyy' }}</p>
-                                                <a href="#" class="text-indigo-600 hover:text-indigo-800 font-semibold text-xs">Ver Detalhes &rarr;</a>
                                             </div>
                                         </li>
                                     }
                                 </ul>
+                                <div class="mt-5 pt-5 border-t border-slate-100"><a href="#" class="w-full text-center block px-4 py-2 bg-indigo-50 text-indigo-700 text-sm font-semibold rounded-lg hover:bg-indigo-100 transition-colors">Ver todas as atividades</a></div>
                             } @else {
-                                <p class="text-sm text-slate-500">Nenhuma atividade pendente no momento. Bom trabalho!</p>
+                                <div class="text-center py-4">
+                                    <svg class="mx-auto h-12 w-12 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    <h4 class="mt-2 text-sm font-semibold text-slate-800">Tudo em dia!</h4>
+                                    <p class="mt-1 text-sm text-slate-500">Nenhuma atividade pendente. Bom trabalho!</p>
+                                </div>
                             }
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <h3 class="font-bold text-slate-800 mb-4">Recursos Rápidos</h3>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex items-center gap-3"><svg class="h-5 w-5 flex-shrink-0 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg><a href="#" class="font-medium text-slate-700 hover:text-indigo-600 transition-colors">Plano_de_Ensino.pdf</a></li>
+                                <li class="flex items-center gap-3"><svg class="h-5 w-5 flex-shrink-0 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" /></svg><a href="#" class="font-medium text-slate-700 hover:text-indigo-600 transition-colors">Link para a aula inaugural</a></li>
+                                <li class="flex items-center gap-3"><svg class="h-5 w-5 flex-shrink-0 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg><a href="#" class="font-medium text-slate-700 hover:text-indigo-600 transition-colors">Contato da monitoria</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             }
-            @if(activeTab === 'atividades') {
+            @if(activeTab !== 'visaoGeral') {
                 <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-slate-800 mb-4">Atividades da Turma</h2>
-                    <p class="text-slate-600">Esta seção listará todas as atividades, provas e trabalhos.</p>
-                </div>
-            }
-            @if(activeTab === 'membros') {
-                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-slate-800 mb-4">Membros da Turma</h2>
-                    <p class="text-slate-600">Aqui será exibida a lista completa de participantes.</p>
-                </div>
-            }
-            @if(activeTab === 'materiais') {
-                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-slate-800 mb-4">Materiais de Apoio</h2>
-                    <p class="text-slate-600">Acesse aqui os arquivos e links compartilhados pelo professor.</p>
-                </div>
-            }
-            @if(activeTab === 'discussoes') {
-                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                    <h2 class="text-xl font-bold text-slate-800 mb-4">Fórum de Discussões</h2>
-                    <p class="text-slate-600">Participe dos debates e tire suas dúvidas com a turma.</p>
+                    @if(activeTab === 'atividades') {
+                        <h2 class="text-xl font-bold text-slate-800 mb-4">Atividades da Turma</h2>
+                        <p class="text-slate-600">Esta seção listará todas as atividades, provas e trabalhos.</p>
+                    }
+                    @if(activeTab === 'membros') {
+                        <h2 class="text-xl font-bold text-slate-800 mb-4">Membros da Turma</h2>
+                        <p class="text-slate-600">Aqui será exibida a lista completa de participantes.</p>
+                    }
                 </div>
             }
         </main>
-        
     </div>
 </div>

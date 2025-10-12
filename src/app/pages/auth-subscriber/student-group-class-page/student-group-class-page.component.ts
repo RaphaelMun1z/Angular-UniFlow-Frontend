@@ -1,20 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-interface User {
+// src/app/pages/student-group-class-page/group.models.ts
+
+export interface User {
+    id: string; // Adicione esta linha
     name: string;
     avatarUrl: string;
-    role?: 'Professor' | 'Aluno' | 'Monitor';
 }
 
-interface Comment {
+export interface Comment {
     id: string;
     author: User;
     content: string;
     timestamp: string;
 }
 
-interface Post {
+export interface Post {
     id: string;
     author: User;
     content: string;
@@ -25,22 +27,21 @@ interface Post {
     comments: Comment[];
 }
 
-interface Activity {
+export interface Activity {
     id: string;
     title: string;
     dueDate: string;
-    status: 'Pendente' | 'Entregue' | 'Atrasado';
 }
 
-interface GroupDetails {
+export interface GroupDetails {
     id: string;
     title: string;
     professor: User;
-    description: string;
-    bannerUrl: string;
     memberCount: number;
-    pendingActivities: number;
+    membersSample: User[];
 }
+
+export type GroupTab = 'visaoGeral' | 'atividades' | 'membros' | 'materiais' | 'discussoes';
 
 @Component({
     selector: 'app-student-group-class-page',
@@ -49,75 +50,86 @@ interface GroupDetails {
     styleUrl: './student-group-class-page.component.scss'
 })
 
-export class StudentGroupClassPageComponent {
-    activeTab: 'visaoGeral' | 'atividades' | 'membros' | 'materiais' | 'discussoes' = 'visaoGeral';
+export class StudentGroupClassPageComponent implements OnInit {
     
-    currentUser: User = {
-        name: 'Ana Clara',
-        avatarUrl: 'https://i.pravatar.cc/100?img=1'
+    activeTab: GroupTab = 'visaoGeral';
+    currentUser!: User;
+    group!: GroupDetails;
+    activities: Activity[] = [];
+    posts: Post[] = [];
+    pendingActivitiesCount = 0;
+    
+    ngOnInit(): void {
+        this.loadMockData();
     }
     
-    group: GroupDetails = {
-        id: 'grp_001',
-        title: 'Cálculo I - Turma A',
-        professor: { name: 'Prof. Carlos Aguiar', avatarUrl: 'https://i.pravatar.cc/100?u=professor' },
-        description: 'Turma oficial da disciplina de Cálculo I, para o primeiro semestre de 2025.',
-        bannerUrl: 'https://placehold.co/1200x300/0d9488/ffffff?text=Cálculo+I',
-        memberCount: 45,
-        pendingActivities: 2
+    setActiveTab(tab: GroupTab): void {
+        this.activeTab = tab;
+    }
+    
+    private loadMockData(): void {
+        this.currentUser = this._mockCurrentUser;
+        this.group = this._mockGroup;
+        this.activities = this._mockActivities;
+        this.posts = this._mockPosts;
+        this.pendingActivitiesCount = this._mockActivities.length;
+    }
+    
+    // --- DADOS MOCADOS (MOCK DATA) ---
+    
+    private readonly _mockCurrentUser: User = {
+        id: 'usr_001', // ID adicionado
+        name: 'Ana Clara',
+        avatarUrl: 'https://i.pravatar.cc/100?img=1',
     };
     
-    activities: Activity[] = [
-        { id: 'act_01', title: 'Entrega do Trabalho 1', dueDate: '2025-10-07', status: 'Pendente' },
-        { id: 'act_02', title: 'Lista de Exercícios - Limites', dueDate: '2025-10-14', status: 'Pendente' }
+    private readonly _mockGroup: GroupDetails = {
+        id: 'grp_001',
+        title: 'Cálculo I - Turma A',
+        professor: { 
+            id: 'prof_01',
+            name: 'Prof. Carlos Aguiar', 
+            avatarUrl: 'https://i.pravatar.cc/100?u=professor' 
+        },
+        memberCount: 45,
+        membersSample: [
+            { id: 'usr_002', name: 'Bruno Gomes', avatarUrl: 'https://i.pravatar.cc/100?img=2' },
+            { id: 'usr_003', name: 'Carla Dias', avatarUrl: 'https://i.pravatar.cc/100?img=3' },
+            { id: 'usr_004', name: 'Daniela Faria', avatarUrl: 'https://i.pravatar.cc/100?img=4' },
+            { id: 'usr_005', name: 'Eduardo Lima', avatarUrl: 'https://i.pravatar.cc/100?img=5' },
+        ]
+    };
+    
+    private readonly _mockActivities: Activity[] = [
+        { id: 'act_01', title: 'Entrega do Trabalho 1', dueDate: '2025-10-14' },
+        { id: 'act_02', title: 'Lista de Exercícios - Limites', dueDate: '2025-10-21' }
     ];
     
-    posts: Post[] = [
+    private readonly _mockPosts: Post[] = [
         {
             id: 'post_002',
-            author: { name: 'Prof. Carlos Aguiar', avatarUrl: 'https://i.pravatar.cc/100?u=professor' },
+            author: { id: 'prof_01', name: 'Prof. Carlos Aguiar', avatarUrl: 'https://i.pravatar.cc/100?u=professor' },
             content: 'Prezados, a data final para entrega do Trabalho 1 foi prorrogada para amanhã, 23:59, sem prejuízo na nota. \n\nQualquer dúvida, me procurem.',
-            timestamp: '2025-10-06T14:30:00Z',
+            timestamp: '2025-10-11T14:30:00Z',
             commentsCount: 2,
             likesCount: 22,
             likedByUser: false,
             comments: [
-                { id: 'c_001', author: { name: 'Bruno Gomes', avatarUrl: 'https://i.pravatar.cc/100?img=2' }, content: 'Obrigado, professor!', timestamp: '2025-10-06T15:00:00Z'},
-                { id: 'c_002', author: { name: 'Daniela Faria', avatarUrl: 'https://i.pravatar.cc/100?img=4' }, content: 'Perfeito!', timestamp: '2025-10-06T15:05:00Z'},
+                { id: 'c_001', author: { id: 'usr_002', name: 'Bruno Gomes', avatarUrl: 'https://i.pravatar.cc/100?img=2' }, content: 'Obrigado, professor!', timestamp: '2025-10-11T15:00:00Z'},
+                { id: 'c_002', author: { id: 'usr_004', name: 'Daniela Faria', avatarUrl: 'https://i.pravatar.cc/100?img=4' }, content: 'Perfeito!', timestamp: '2025-10-11T15:05:00Z'},
             ]
         },
         {
             id: 'post_001',
-            author: { name: 'Prof. Carlos Aguiar', avatarUrl: 'https://i.pravatar.cc/100?u=professor' },
+            author: { id: 'prof_01', name: 'Prof. Carlos Aguiar', avatarUrl: 'https://i.pravatar.cc/100?u=professor' },
             content: 'Olá, pessoal! Sejam bem-vindos à turma de Cálculo I. O plano de ensino e o cronograma de aulas já estão disponíveis na aba "Materiais". \n\nBons estudos a todos!',
             timestamp: '2025-08-01T09:00:00Z',
             commentsCount: 1,
             likesCount: 38,
             likedByUser: true,
             comments: [
-                { id: 'c_003', author: { name: 'Ana Clara', avatarUrl: 'https://i.pravatar.cc/100?img=1' }, content: 'Obrigada por compartilhar, professor!', timestamp: '2025-08-01T10:15:00Z'},
+                { id: 'c_003', author: { id: 'usr_001', name: 'Ana Clara', avatarUrl: 'https://i.pravatar.cc/100?img=1' }, content: 'Obrigada por compartilhar, professor!', timestamp: '2025-08-01T10:15:00Z'},
             ]
         }
     ];
-    
-    constructor() {
-        this.injectFonts();
-    }
-    
-    setActiveTab(tab: 'visaoGeral' | 'atividades' | 'membros' | 'materiais' | 'discussoes') {
-        this.activeTab = tab;
-    }
-    
-    private injectFonts() {
-        const interFont = document.createElement('link');
-        interFont.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap';
-        interFont.rel = 'stylesheet';
-        
-        const fontAwesome = document.createElement('link');
-        fontAwesome.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
-        fontAwesome.rel = 'stylesheet';
-        
-        document.head.appendChild(interFont);
-        document.head.appendChild(fontAwesome);
-    }
 }
