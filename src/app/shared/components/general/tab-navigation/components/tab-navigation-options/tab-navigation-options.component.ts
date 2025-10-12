@@ -24,7 +24,7 @@ interface ManagementTab {
 
 export class TabNavigationOptionsComponent {
     @Input() tabs: ManagementTab[] = [];
-    @Input() activeTabIndex!: Number;
+    @Input() activeTabIndex!: number;
 
     @Output() activeTabIndexChange = new EventEmitter<number>();
     

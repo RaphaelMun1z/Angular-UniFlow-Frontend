@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { GenericNavigationCardComponent } from "../../../../../shared/components/general/generic-navigation-card/generic-navigation-card.component";
 import { Operation } from '../../../../../shared/interfaces/User.model';
 import { CommonModule } from '@angular/common';

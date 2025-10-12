@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, Input } from '@angular/core';
+import { Component, OnInit, signal, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SafeHtmlPipe } from '../safe-html.pipe';
 import { LogoLinkComponent } from "../logo-link/logo-link.component";
@@ -19,7 +19,7 @@ interface SidebarLink {
     styleUrl: './generic-aside.component.scss'
 })
 
-export class GenericAsideComponent implements OnInit {
+export class GenericAsideComponent implements OnInit, OnDestroy {
     isMinimized = signal(false);
     activeSidebarLink = signal('lessons');
     isMobileView = signal(false);

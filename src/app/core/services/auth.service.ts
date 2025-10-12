@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs';
+import { DecodedToken } from '../../shared/interfaces/User.model';
 
 export type UserRole = 'ROLE_ADMIN' | 'ROLE_PROFESSOR' | 'ROLE_ESTUDANTE';
 
@@ -36,10 +37,11 @@ export class AuthService {
         }
         
         try {
-            const decodedToken: any = jwtDecode(token);
+            const decodedToken: DecodedToken = jwtDecode(token);
             const roles = decodedToken.roles || [];
             return roles.includes(role);
         } catch (error) {
+            console.log(error)
             return false;
         }
     }
@@ -64,6 +66,7 @@ export class AuthService {
             }
             this.primaryUserRole.set(null);
         } catch (error) {
+            console.log(error)
             this.primaryUserRole.set(null);
         }
     }

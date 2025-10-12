@@ -7,6 +7,6 @@ import { Component, Input } from '@angular/core';
     styleUrl: './stat-item.component.scss'
 })
 export class StatItemComponent {
-    @Input() title: any;
-    @Input() i_value: any;
+    @Input() title!: string;
+    @Input() i_value!: string;
 }

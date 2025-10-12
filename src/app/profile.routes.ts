@@ -3,7 +3,6 @@ import { UserProfilePageComponent } from './pages/auth-subscriber/auth-pages/pro
 import { UserNotificationsComponent } from './pages/auth-subscriber/auth-pages/profile-pages/user-notifications/user-notifications.component';
 import { UserPaymentHistoryComponent } from './pages/auth-subscriber/auth-pages/profile-pages/user-payment-history/user-payment-history.component';
 import { UserPlanPageComponent } from './pages/auth-subscriber/auth-pages/profile-pages/user-plan-page/user-plan-page.component';
-import { UserProfileInfoComponent } from './pages/auth-subscriber/auth-pages/profile-pages/user-profile-info/user-profile-info.component';
 import { GroupsListComponent } from './pages/general/generic-groups-page/components/groups-list/groups-list.component';
 import { TasksListComponent } from './pages/general/generic-tasks-page/components/tasks-list/tasks-list.component';
 

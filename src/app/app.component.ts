@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -17,7 +17,10 @@ import { NavbarAuthComponent } from "./shared/components/navbars/navbar-auth/nav
 export class AppComponent {
     title = 'UniFlow | Gestão Acadêmica';
     
-    constructor(private titleService: Title, public authService: AuthService) {
+    titleService = inject(Title);
+    authService = inject(AuthService);
+    
+    constructor() {
         this.titleService.setTitle('UniFlow | Gestão Acadêmica');
         
         this.authService.simularRole('ROLE_ESTUDANTE');

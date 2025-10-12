@@ -1,50 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, signal, computed } from '@angular/core';
+import { Component, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SafeHtmlPipe } from "../../../shared/components/general/safe-html.pipe";
-
-// --- INTERFACES E TIPOS ---
-type UserRole = 'admin' | 'professor' | 'estudante';
-
-interface User {
-    id: number;
-    name: string;
-    avatar: string;
-    role: UserRole;
-}
-
-interface NavLink {
-    label: string;
-    icon: string;
-}
-
-interface CourseProgress {
-    title: string;
-    watched: number;
-    total: number;
-    icon: string;
-    color: string;
-}
-
-interface MediaContent {
-    title: string;
-    category: string;
-    mentor: string;
-    mentorAvatar: string;
-    thumbnailUrl: string;
-}
-
-interface Lesson {
-    mentor: string;
-    mentorAvatar: string;
-    type: string;
-    description: string;
-    date: string;
-}
-
-interface SubscriptionPlan {
-    name: string;
-    subscribers: number;
-}
+import { CourseProgress, MediaContent, SubscriptionPlan, NavLink, UserRole, User } from '../../../shared/interfaces/User.model';
 
 @Component({
     selector: 'app-dashboard-page',
@@ -55,7 +12,7 @@ interface SubscriptionPlan {
 
 export class DashboardPageComponent implements OnInit {
     // --- SIGNALS ---
-    currentUser = signal<User>({ id: 0, name: '', avatar: '', role: 'estudante' });
+    currentUser = signal<User>({ id: '0', name: '', avatar: '', role: 'estudante' });
     
     // Dados Estudante
     courseProgress = signal<CourseProgress[]>([]);
@@ -69,15 +26,15 @@ export class DashboardPageComponent implements OnInit {
     
     // --- DADOS MOCKADOS ---
     private allUsers: User[] = [
-        { id: 1, name: 'Admin Geral', role: 'admin', avatar: 'https://placehold.co/100x100/A78BFA/FFFFFF?text=A' },
-        { id: 2, name: 'Prof. Ana Silva', role: 'professor', avatar: 'https://placehold.co/100x100/F472B6/FFFFFF?text=P' },
-        { id: 3, name: 'Jason Ranti', role: 'estudante', avatar: 'https://placehold.co/100x100/60A5FA/FFFFFF?text=J' },
+        { id: '1', name: 'Admin Geral', role: 'admin', avatar: 'https://placehold.co/100x100/A78BFA/FFFFFF?text=A' },
+        { id: '2', name: 'Prof. Ana Silva', role: 'professor', avatar: 'https://placehold.co/100x100/F472B6/FFFFFF?text=P' },
+        { id: '3', name: 'Jason Ranti', role: 'estudante', avatar: 'https://placehold.co/100x100/60A5FA/FFFFFF?text=J' },
     ];
     
     private allMentors: User[] = [
-        { id: 5, name: 'Padhang Satrio', role: 'professor', avatar: 'https://placehold.co/100x100/34D399/FFFFFF?text=PS' },
-        { id: 6, name: 'Zakir Horizontal', role: 'professor', avatar: 'https://placehold.co/100x100/FBBF24/FFFFFF?text=ZH' },
-        { id: 7, name: 'Leonardo Samuel', role: 'professor', avatar: 'https://placehold.co/100x100/F87171/FFFFFF?text=LS' },
+        { id: '5', name: 'Padhang Satrio', role: 'professor', avatar: 'https://placehold.co/100x100/34D399/FFFFFF?text=PS' },
+        { id: '6', name: 'Zakir Horizontal', role: 'professor', avatar: 'https://placehold.co/100x100/FBBF24/FFFFFF?text=ZH' },
+        { id: '7', name: 'Leonardo Samuel', role: 'professor', avatar: 'https://placehold.co/100x100/F87171/FFFFFF?text=LS' },
     ];
     
     // --- ÍCONES ---
@@ -138,9 +95,18 @@ export class DashboardPageComponent implements OnInit {
             { title: 'Front-End', watched: 6, total: 12, icon: this.icons.code, color: 'bg-blue-400' },
         ]);
         this.continueWatching.set([
-            { title: "Guia de Iniciante para se Tornar um Desenvolvedor Front-End", category: 'Front-End', mentor: 'Leonardo Samuel', mentorAvatar: 'https://placehold.co/100x100/F87171/FFFFFF?text=LS', thumbnailUrl: 'https://placehold.co/600x400/333/FFF?text=Video+1' },
-            { title: "Otimizando a Experiência do Usuário com o Melhor UI/UX", category: 'UI/UX Design', mentor: 'Bayu Salto', mentorAvatar: 'https://placehold.co/100x100/60A5FA/FFFFFF?text=BS', thumbnailUrl: 'https://placehold.co/600x400/444/FFF?text=Video+2' },
-            { title: "Revivendo e Atualizando a Imagem da sua Empresa", category: 'Branding', mentor: 'Padhang Satrio', mentorAvatar: 'https://placehold.co/100x100/34D399/FFFFFF?text=PS', thumbnailUrl: 'https://placehold.co/600x400/555/FFF?text=Video+3' },
+            {
+                title: "Guia de Iniciante para se Tornar um Desenvolvedor Front-End", category: 'Front-End', mentor: 'Leonardo Samuel', mentorAvatar: 'https://placehold.co/100x100/F87171/FFFFFF?text=LS', thumbnailUrl: 'https://placehold.co/600x400/333/FFF?text=Video+1',
+                mentorName: ''
+            },
+            {
+                title: "Otimizando a Experiência do Usuário com o Melhor UI/UX", category: 'UI/UX Design', mentor: 'Bayu Salto', mentorAvatar: 'https://placehold.co/100x100/60A5FA/FFFFFF?text=BS', thumbnailUrl: 'https://placehold.co/600x400/444/FFF?text=Video+2',
+                mentorName: ''
+            },
+            {
+                title: "Revivendo e Atualizando a Imagem da sua Empresa", category: 'Branding', mentor: 'Padhang Satrio', mentorAvatar: 'https://placehold.co/100x100/34D399/FFFFFF?text=PS', thumbnailUrl: 'https://placehold.co/600x400/555/FFF?text=Video+3',
+                mentorName: ''
+            },
         ]);
         this.mentors.set(this.allMentors);
     }

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { of, delay } from 'rxjs';
+import { GrupoApiResponse, PagedResponse } from '../../../shared/interfaces/User.model';
 
 export interface GrupoAdminViewModel {
     id: string;
@@ -54,24 +55,22 @@ export class ListGroupsManagementComponent implements OnInit {
     public totalElements = 0;
     public pageSize = 10;
     
-    // Injetar o AdminService aqui
-    constructor() { }
-    
     ngOnInit(): void {
         this.buscarGrupos(0);
     }
     
     buscarGrupos(page: number): void {
+        console.log(page)
         this.isLoading = true;
         this.openActionMenuId = null;
         this.selectedGroups.clear();
         
-        // Simulação da chamada ao AdminService
         of(mockApiResponse).pipe(delay(500)).subscribe({
-            next: (response) => {
-                this.grupos = response.content.map((grupo: any) => ({
+            next: (response: PagedResponse<GrupoApiResponse>) => {
+                this.grupos = response.content.map((grupo): GrupoAdminViewModel => ({
                     ...grupo,
-                    tipo: grupo.tipo as 'Turma' | 'Grupo de Estudo'
+                    tipo: grupo.tipo as 'Turma' | 'Grupo de Estudo',
+                    status: grupo.status as 'Ativo' | 'Inativo',
                 }));
                 this.currentPage = response.currentPage;
                 this.totalPages = response.totalPages;

@@ -13,7 +13,7 @@ export class MvvCardComponent {
     @Input() description: string | undefined;
     @Input() listItems: string[] | undefined;
     
-    @Input() iconColor: string = 'blue';
+    @Input() iconColor = 'blue';
     
     get iconClasses(): string {
         switch (this.iconColor.toLowerCase()) {

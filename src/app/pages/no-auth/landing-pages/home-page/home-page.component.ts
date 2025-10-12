@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { loadActivities } from '../../../../store/activities.actions';
 import { IActivityItem } from '../../../../store/activities.state';
@@ -22,7 +22,7 @@ import { FinalCTASectionComponent } from './components/final-ctasection/final-ct
 export class HomePageComponent implements OnInit{
     @Input() activities?: IActivityItem[];
     
-    constructor(private store: Store) {}
+    private store = inject(Store);
     
     ngOnInit(): void {
         this.store.dispatch(loadActivities());

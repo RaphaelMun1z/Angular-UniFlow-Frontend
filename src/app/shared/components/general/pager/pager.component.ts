@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, EventEmitter, input, Input, model, Output, signal, WritableSignal } from '@angular/core';
+import { Component, computed, input, model } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({

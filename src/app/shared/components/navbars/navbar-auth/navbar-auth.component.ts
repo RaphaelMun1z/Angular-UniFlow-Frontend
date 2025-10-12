@@ -1,9 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ProfilePopupComponent } from "./components/profile-popup/profile-popup.component";
-import { NotificationsPopupComponent } from "./components/notifications-popup/notifications-popup.component";
-import { UserAvatarComponent } from "./components/user-avatar/user-avatar.component";
 import { NavigationComponent } from "./components/navigation/navigation.component";
 import { LogoLinkComponent } from "../../general/logo-link/logo-link.component";
 import { NotificationButtonComponent } from "../../general/notification-button/notification-button.component";
@@ -24,12 +21,9 @@ export interface CurrentUser {
 })
 
 export class NavbarAuthComponent implements OnInit {
-    @Input() bgStyle: number = 0;
+    @Input() bgStyle = 0;
     
     currentUser: CurrentUser | null = null;
-    unreadNotificationsCount: any;
-    
-    constructor() {}
     
     ngOnInit(): void {
         this.currentUser = {

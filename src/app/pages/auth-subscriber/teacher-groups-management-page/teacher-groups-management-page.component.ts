@@ -1,16 +1,6 @@
-import { CommonModule, DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
-
-interface ProfessorGroup {
-    id: string;
-    title: string;
-    description: string;
-    type: 'Turma' | 'Grupo de Estudo';
-    status: 'Ativo' | 'Arquivado';
-    bannerUrl: string;
-    memberCount: number;
-    pendingRequests: number;
-}
+import { CommonModule } from '@angular/common';
+import { Component, HostListener, signal } from '@angular/core';
+import { ProfessorGroup } from '../../../shared/interfaces/User.model';
 
 @Component({
     selector: 'app-teacher-groups-management-page',
@@ -20,10 +10,16 @@ interface ProfessorGroup {
 })
 
 export class TeacherGroupsManagementPageComponent {
-    // Estado para controlar o modal
-    isActionModalOpen = false;
-    selectedGroup: ProfessorGroup | null = null;
-    modalPosition = { top: 0, right: 0 };
+    isActionModalOpen = signal(false);
+    selectedGroup = signal<ProfessorGroup | null>(null);
+    modalPosition = signal({ top: 0, right: 0 });
+    
+    @HostListener('document:keydown.escape')
+    onEscapeKey(): void {
+        if (this.isActionModalOpen()) {
+            this.closeActionModal();
+        }
+    }
     
     // Dados de exemplo para a demonstração.
     groups: ProfessorGroup[] = [
@@ -59,30 +55,17 @@ export class TeacherGroupsManagementPageComponent {
         }
     ];
     
-    constructor() {
-        this.injectFonts();
-    }
-    
-    // Abre o modal com o grupo selecionado e calcula a posição
     openActionModal(group: ProfessorGroup, event: MouseEvent) {
         const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
-        this.modalPosition = {
-            top: rect.bottom + window.scrollY + 8, // 8px abaixo do botão
+        this.modalPosition.set({
+            top: rect.bottom + window.scrollY + 8,
             right: window.innerWidth - rect.right,
-        };
-        this.selectedGroup = group;
-        this.isActionModalOpen = true;
+        });
+        this.selectedGroup.set(group);
+        this.isActionModalOpen.set(true);
     }
     
-    // Fecha o modal
     closeActionModal() {
-        this.isActionModalOpen = false;
-    }
-    
-    private injectFonts() {
-        const link = document.createElement('link');
-        link.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap';
-        link.rel = 'stylesheet';
-        document.head.appendChild(link);
+        this.isActionModalOpen.set(false);
     }
 }

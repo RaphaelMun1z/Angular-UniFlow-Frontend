@@ -12,13 +12,14 @@ export class PlanSelectionStepComponent {
     goBack() {
         throw new Error('Method not implemented.');
     }
-    selectedPlan: any;
+    selectedPlan!: string;
     onPlanChange(arg0: string) {
         throw new Error('Method not implemented.');
+        console.log(arg0)
     }
     onSubmit() {
         throw new Error('Method not implemented.');
     }
-    planForm!: FormGroup<any>;
+    planForm!: FormGroup<string>;
     
 }

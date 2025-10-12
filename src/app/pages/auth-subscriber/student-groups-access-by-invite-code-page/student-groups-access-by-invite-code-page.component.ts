@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
+import { StudentGroup } from '../../../shared/interfaces/User.model';
 
 @Component({
     selector: 'app-student-groups-access-by-invite-code-page',
@@ -11,9 +12,9 @@ import { Component, signal } from '@angular/core';
 export class StudentGroupsAccessByInviteCodePageComponent {
     loading = signal(false);
     searched = signal(false);
-    foundGroup = signal<any | null>(null);
+    foundGroup = signal<StudentGroup | null>(null);
     
-    mockGroupData: { [key: string]: any } = {
+    mockGroupData: Record<string, StudentGroup> = {
         'TURMA123-CALCULO': {
             name: 'Turma de Cálculo I',
             type: 'Turma',

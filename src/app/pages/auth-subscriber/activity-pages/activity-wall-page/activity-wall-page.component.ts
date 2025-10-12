@@ -26,8 +26,6 @@ export class ActivityWallPageComponent implements OnInit {
     public atividadesFiltradas: AtividadeViewModel[] = [];
     public activeTab: 'todas' | 'pendentes' | 'concluidas' | 'atrasadas' = 'todas';
     
-    constructor() { }
-    
     ngOnInit(): void {
         // Em um app real, os dados viriam de um service
         this.todasAtividades = [

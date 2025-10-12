@@ -3,8 +3,6 @@ import { DashboardPageComponent } from './pages/general/dashboard-page/dashboard
 import { FinancePageComponent } from './pages/auth-admin/finance-page/finance-page.component';
 import { PlanManagementPageComponent } from './pages/auth-admin/plan-management-page/plan-management-page.component';
 import { UserManagementPageComponent } from './pages/auth-admin/user-management-page/user-management-page.component';
-import { adminGuard } from './core/guards/admin.guard';
-import { AuthGuard } from './core/guards/auth.guard';
 import { AdminGroupsAuditPageComponent } from './pages/auth-admin/admin-groups-audit-page/admin-groups-audit-page.component';
 import { AdminGroupsGlobalSettingsPageComponent } from './pages/auth-admin/admin-groups-global-settings-page/admin-groups-global-settings-page.component';
 import { AdminGroupsReportsAndStatisticsPageComponent } from './pages/auth-admin/admin-groups-reports-and-statistics-page/admin-groups-reports-and-statistics-page.component';

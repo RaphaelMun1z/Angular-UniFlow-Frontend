@@ -1,4 +1,4 @@
-import { Component, OnInit, LOCALE_ID } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { of, delay } from 'rxjs'; 
@@ -41,14 +41,12 @@ export class UserPaymentHistoryComponent implements OnInit {
     public totalElements = 0;
     public pageSize = 5;
     
-    // Injetar o ProfileService aqui no futuro
-    constructor() { }
-    
     ngOnInit(): void {
         this.buscarPagamentos(0);
     }
     
     buscarPagamentos(page: number): void {
+        console.log(page)
         this.isLoading = true;
         
         of(mockApiResponse).pipe(delay(500)).subscribe({

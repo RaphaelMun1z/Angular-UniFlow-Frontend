@@ -155,11 +155,10 @@
     </footer>
 </div>
 
-<div *ngIf="isAddUserModalOpen" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4" (click)="isAddUserModalOpen = false">
-    <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl" (click)="$event.stopPropagation()">
-        
+<div *ngIf="isAddUserModalOpen" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4" role="button" tabindex="0" (click)="isAddUserModalOpen = false" (keydown.enter)="isAddUserModalOpen = false">
+    
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl" tabindex="0" (click)="$event.stopPropagation()" (keydown.enter)="$event.stopPropagation()" (keydown.space)="$event.stopPropagation()" >
         <form (ngSubmit)="criarNovoUsuario()">
-            
             <div class="flex items-start justify-between p-6 border-b border-gray-200">
                 <div>
                     <h2 class="text-2xl font-bold text-gray-900">Adicionar Novo Usuário</h2>
@@ -183,7 +182,7 @@
                 </div>
                 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">Tipo de Usuário</label>
+                    <p class="block text-sm font-medium text-gray-700">Tipo de Usuário</p>
                     <fieldset class="mt-2">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <label class="flex items-center p-3 border rounded-md cursor-pointer" [ngClass]="novoUsuario.tipo === 'ESTUDANTE' ? 'border-indigo-500 ring-1 ring-indigo-500' : 'border-gray-300'">
@@ -199,7 +198,7 @@
                 </div>
                 
                 <div *ngIf="novoUsuario.tipo === 'ESTUDANTE'">
-                    <label class="block text-sm font-medium text-gray-700">Período de Ingresso</label>
+                    <p class="block text-sm font-medium text-gray-700">Período de Ingresso</p>
                     <div class="grid grid-cols-2 gap-4 mt-1">
                         <input type="number" placeholder="Ano (ex: 2023)" [(ngModel)]="novoUsuario.anoIngresso" name="anoIngresso" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                         <input type="number" placeholder="Semestre (1 ou 2)" [(ngModel)]="novoUsuario.semestreIngresso" name="semestreIngresso" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
@@ -211,7 +210,7 @@
                 </div>
                 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">Senha</label>
+                    <p class="block text-sm font-medium text-gray-700">Senha</p>
                     <div class="mt-2 space-y-4">
                         <div class="flex items-center">
                             <input id="generate-password" type="checkbox" [(ngModel)]="gerarSenha" name="gerarSenha" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
@@ -234,4 +233,4 @@
             </div>
         </form>
     </div>
-</div>
+</div> 

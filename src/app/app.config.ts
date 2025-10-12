@@ -6,8 +6,7 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 
 import { routes } from './app.routes';
-import { provideState, provideStore } from '@ngrx/store';
-import { activitiesReducer } from './store/activities.reducer';
+import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideHttpClient } from '@angular/common/http';
 

@@ -9,22 +9,22 @@
             <nav aria-label="Progress" class="mb-8">
                 <ol role="list" class="space-y-4 md:flex md:space-x-8 md:space-y-0">
                     <li class="md:flex-1">
-                        <div (click)="goToStep(1)" class="group flex flex-col border-l-4 py-2 pl-4 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0" [ngClass]="currentStep >= 1 ? 'border-indigo-600' : 'border-gray-200'" [class.cursor-pointer]="currentStep > 1">
+                        <button (click)="goToStep(1)" class="group flex flex-col border-l-4 py-2 pl-4 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0" [ngClass]="currentStep >= 1 ? 'border-indigo-600' : 'border-gray-200'" [class.cursor-pointer]="currentStep > 1">
                             <span class="text-sm font-semibold" [ngClass]="currentStep >= 1 ? 'text-indigo-600' : 'text-gray-500'">Passo 1</span>
                             <span class="text-sm font-medium text-gray-900">Tópico</span>
-                        </div>
+                        </button>
                     </li>
                     <li class="md:flex-1">
-                        <div (click)="goToStep(2)" class="group flex flex-col border-l-4 py-2 pl-4 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0" [ngClass]="currentStep >= 2 ? 'border-indigo-600' : 'border-gray-200'" [class.cursor-pointer]="currentStep > 2">
+                        <button (click)="goToStep(2)" class="group flex flex-col border-l-4 py-2 pl-4 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0" [ngClass]="currentStep >= 2 ? 'border-indigo-600' : 'border-gray-200'" [class.cursor-pointer]="currentStep > 2">
                             <span class="text-sm font-semibold" [ngClass]="currentStep >= 2 ? 'text-indigo-600' : 'text-gray-500'">Passo 2</span>
                             <span class="text-sm font-medium text-gray-900">Detalhes</span>
-                        </div>
+                        </button>
                     </li>
                     <li class="md:flex-1">
-                        <div (click)="goToStep(3)" class="group flex flex-col border-l-4 py-2 pl-4 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0" [ngClass]="currentStep >= 3 ? 'border-indigo-600' : 'border-gray-200'" [class.cursor-pointer]="currentStep > 3">
+                        <button (click)="goToStep(3)" class="group flex flex-col border-l-4 py-2 pl-4 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0" [ngClass]="currentStep >= 3 ? 'border-indigo-600' : 'border-gray-200'" [class.cursor-pointer]="currentStep > 3">
                             <span class="text-sm font-semibold" [ngClass]="currentStep >= 3 ? 'text-indigo-600' : 'text-gray-500'">Passo 3</span>
                             <span class="text-sm font-medium text-gray-900">Membros</span>
-                        </div>
+                        </button>
                     </li>
                     <li class="md:flex-1">
                         <div class="group flex flex-col border-l-4 py-2 pl-4 md:border-l-0 md:border-t-4 md:pl-0 md:pt-4 md:pb-0" [ngClass]="currentStep >= 4 ? 'border-indigo-600' : 'border-gray-200'">
@@ -50,149 +50,171 @@
                                     <input type="text" id="topic-name" formControlName="nome" placeholder="Ex: Cálculo I, Inteligência Artificial" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700">Dificuldade Percebida</label>
-                                    <fieldset class="mt-2">
-                                        <div class="grid grid-cols-3 gap-3">
-                                            <label *ngFor="let option of ['FACIL', 'MEDIO', 'DIFICIL']" class="relative flex cursor-pointer rounded-lg border bg-white p-4 focus:outline-none" [ngClass]="disciplinaForm.get('dificuldade')?.value === option ? 'border-indigo-600 ring-2 ring-indigo-600' : 'border-gray-300'">
-                                                <input type="radio" formControlName="dificuldade" [value]="option" class="sr-only">
-                                                <span class="flex flex-1 justify-center"><span class="block text-sm font-medium text-gray-900">{{ option | titlecase }}</span></span>
-                                                <svg class="h-5 w-5 text-indigo-600 absolute top-4 right-4" viewBox="0 0 20 20" fill="currentColor" *ngIf="disciplinaForm.get('dificuldade')?.value === option"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
-                                            </label>
-                                        </div>
-                                    </fieldset>
+                                    <label for="dificuldade-select" class="block text-sm font-medium text-gray-700">
+                                        Dificuldade Percebida
+                                    </label>
+                                    
+                                    <select 
+                                    id="dificuldade-select" 
+                                    name="dificuldade" 
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm ...">
+                                    
+                                    <option>Fácil</option>
+                                    <option>Médio</option>
+                                    <option>Difícil</option>
+                                </select>
+                                <fieldset class="mt-2">
+                                    <div class="grid grid-cols-3 gap-3">
+                                        <label *ngFor="let option of ['FACIL', 'MEDIO', 'DIFICIL']" class="relative flex cursor-pointer rounded-lg border bg-white p-4 focus:outline-none" [ngClass]="disciplinaForm.get('dificuldade')?.value === option ? 'border-indigo-600 ring-2 ring-indigo-600' : 'border-gray-300'">
+                                            <input type="radio" formControlName="dificuldade" [value]="option" class="sr-only">
+                                            <span class="flex flex-1 justify-center"><span class="block text-sm font-medium text-gray-900">{{ option | titlecase }}</span></span>
+                                            <svg class="h-5 w-5 text-indigo-600 absolute top-4 right-4" viewBox="0 0 20 20" fill="currentColor" *ngIf="disciplinaForm.get('dificuldade')?.value === option"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+                                        </label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        
+                        <div *ngSwitchCase="2" formGroupName="grupo" class="space-y-8 animate-fade-in">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900">2. Detalhes do Grupo</h3>
+                                <p class="text-sm text-gray-500 mt-1">Agora, dê um nome e uma descrição para identificar seu grupo de estudo.</p>
+                            </div>
+                            
+                            <div>
+                                <label for="group-title" class="block text-sm font-medium text-gray-700">Nome do Grupo</label>
+                                <div class="mt-1 relative rounded-lg shadow-sm">
+                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.962a3.75 3.75 0 015.25 0m-5.25 0a3.75 3.75 0 00-5.25 0M3 13.06l7.547 4.425A1.5 1.5 0 0012 16.5v8.25" /></svg>
+                                    </div>
+                                    <input type="text" id="group-title" formControlName="titulo" 
+                                    placeholder="Ex: Estudos para a Prova de Cálculo" 
+                                    class="block w-full rounded-lg border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500">
                                 </div>
                             </div>
                             
-                            <div *ngSwitchCase="2" formGroupName="grupo" class="space-y-8 animate-fade-in">
-                                <div>
-                                    <h3 class="text-xl font-bold text-gray-900">2. Detalhes do Grupo</h3>
-                                    <p class="text-sm text-gray-500 mt-1">Agora, dê um nome e uma descrição para identificar seu grupo de estudo.</p>
-                                </div>
-                                
-                                <div>
-                                    <label for="group-title" class="block text-sm font-medium text-gray-700">Nome do Grupo</label>
-                                    <div class="mt-1 relative rounded-lg shadow-sm">
-                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.962a3.75 3.75 0 015.25 0m-5.25 0a3.75 3.75 0 00-5.25 0M3 13.06l7.547 4.425A1.5 1.5 0 0012 16.5v8.25" /></svg>
-                                        </div>
-                                        <input type="text" id="group-title" formControlName="titulo" 
-                                        placeholder="Ex: Estudos para a Prova de Cálculo" 
-                                        class="block w-full rounded-lg border-gray-300 pl-10 focus:border-indigo-500 focus:ring-indigo-500">
-                                    </div>
-                                </div>
-                                
-                                <div>
-                                    <label for="group-description" class="block text-sm font-medium text-gray-700">Descrição (Opcional)</label>
-                                    <div class="mt-1">
-                                        <textarea id="group-description" rows="4" formControlName="descricao" 
-                                        placeholder="Qual o objetivo principal deste grupo? Ex: Resolver a lista de exercícios e revisar a matéria para a prova P1." 
-                                        class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div *ngSwitchCase="3" class="animate-fade-in">
-                                <div>
-                                    <h3 class="text-xl font-bold text-gray-900">3. Convidar Membros</h3>
-                                    <p class="text-sm text-gray-500 mt-1">Busque e adicione os participantes do seu grupo de estudo.</p>
-                                </div>
-                                <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-x-8">
-                                    <div class="space-y-2">
-                                        <label for="search-student" class="block text-sm font-medium text-gray-700">Buscar Membro</label>
-                                        <div class="relative">
-                                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
-                                            </div>
-                                            <input type="text" id="search-student" placeholder="Digite o nome ou email..." class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 pl-10">
-                                        </div>
-                                        <div class="border border-gray-200 rounded-lg max-h-60 overflow-y-auto">
-                                            <ul class="divide-y divide-gray-200">
-                                                <li *ngFor="let aluno of alunosEncontrados" class="p-3 flex justify-between items-center">
-                                                    <div class="flex items-center space-x-3">
-                                                        <img [src]="aluno.avatarUrl" [alt]="aluno.nome" class="h-8 w-8 rounded-full">
-                                                        <div>
-                                                            <p class="text-sm font-medium text-gray-900">{{ aluno.nome }}</p>
-                                                            <p class="text-xs text-gray-500">{{ aluno.email }}</p>
-                                                        </div>
-                                                    </div>
-                                                    <button (click)="adicionarAluno(aluno)" type="button" [disabled]="isAlunoSelecionado(aluno.id)"
-                                                    class="px-2.5 py-1 text-xs font-semibold rounded-full disabled:cursor-not-allowed"
-                                                    [ngClass]="isAlunoSelecionado(aluno.id) ? 'bg-gray-100 text-gray-400' : 'bg-indigo-100 text-indigo-700 hover:bg-indigo-200'">
-                                                    {{ isAlunoSelecionado(aluno.id) ? 'Adicionado' : 'Adicionar' }}
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="mt-6 md:mt-0 space-y-2">
-                                    <label class="block text-sm font-medium text-gray-700">Membros a Convidar ({{ alunosSelecionados.length }})</label>
-                                    <div class="border border-gray-200 rounded-lg max-h-60 overflow-y-auto">
-                                        <ul class="divide-y divide-gray-200">
-                                            <li *ngIf="alunosSelecionados.length === 0" class="p-4 text-center text-sm text-gray-500">Nenhum membro adicionado.</li>
-                                            <li *ngFor="let aluno of alunosSelecionados" class="p-3 flex justify-between items-center">
-                                                <div class="flex items-center space-x-3">
-                                                    <img [src]="aluno.avatarUrl" [alt]="aluno.nome" class="h-8 w-8 rounded-full">
-                                                    <p class="text-sm font-medium text-gray-900">{{ aluno.nome }}</p>
-                                                </div>
-                                                <button (click)="removerAluno(aluno.id)" type="button" class="p-1 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-full">
-                                                    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </div>
+                            <div>
+                                <label for="group-description" class="block text-sm font-medium text-gray-700">Descrição (Opcional)</label>
+                                <div class="mt-1">
+                                    <textarea id="group-description" rows="4" formControlName="descricao" 
+                                    placeholder="Qual o objetivo principal deste grupo? Ex: Resolver a lista de exercícios e revisar a matéria para a prova P1." 
+                                    class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
                                 </div>
                             </div>
                         </div>
                         
-                        <div *ngSwitchCase="4" class="animate-fade-in">
+                        <div *ngSwitchCase="3" class="animate-fade-in">
                             <div>
-                                <h3 class="text-xl font-bold text-gray-900">4. Revisão e Confirmação</h3>
-                                <p class="text-sm text-gray-500 mt-1">Confira se todas as informações estão corretas antes de criar o grupo.</p>
+                                <h3 class="text-xl font-bold text-gray-900">3. Convidar Membros</h3>
+                                <p class="text-sm text-gray-500 mt-1">Busque e adicione os participantes do seu grupo de estudo.</p>
                             </div>
-                            <div class="mt-6 space-y-6 rounded-lg border border-gray-200 p-6 bg-gray-50/50">
-                                <div>
-                                    <h4 class="font-semibold text-gray-800 border-b pb-2 mb-3">Tópico de Estudo</h4>
-                                    <dl class="text-sm grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
-                                        <dt class="text-gray-500">Nome:</dt>
-                                        <dd class="text-gray-900 font-medium">{{ form.value.disciplina.nome }}</dd>
-                                        <dt class="text-gray-500">Dificuldade:</dt>
-                                        <dd class="text-gray-900 font-medium">{{ form.value.disciplina.dificuldade | titlecase }}</dd>
-                                    </dl>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800 border-b pb-2 mb-3">Detalhes do Grupo</h4>
-                                    <dl class="text-sm grid grid-cols-1">
-                                        <dt class="text-gray-500">Título:</dt>
-                                        <dd class="text-gray-900 font-medium">{{ form.value.grupo.titulo }}</dd>
-                                        <dt class="mt-2 text-gray-500">Descrição:</dt>
-                                        <dd class="text-gray-900 font-medium">{{ form.value.grupo.descricao || 'Nenhuma descrição fornecida.' }}</dd>
-                                    </dl>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800 border-b pb-2 mb-3">Membros Convidados ({{ alunosSelecionados.length }})</h4>
-                                    <p *ngIf="alunosSelecionados.length === 0" class="text-sm text-gray-500">Nenhum membro será convidado inicialmente.</p>
-                                    <ul *ngIf="alunosSelecionados.length > 0" class="text-sm list-disc list-inside text-gray-600 columns-1 sm:columns-2">
-                                        <li *ngFor="let aluno of alunosSelecionados">{{ aluno.nome }}</li>
+                            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-x-8">
+                                <div class="space-y-2">
+                                    <label for="search-student" class="block text-sm font-medium text-gray-700">Buscar Membro</label>
+                                    <div class="relative">
+                                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+                                        </div>
+                                        <input type="text" id="search-student" placeholder="Digite o nome ou email..." class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 pl-10">
+                                    </div>
+                                    <div class="border border-gray-200 rounded-lg max-h-60 overflow-y-auto">
+                                        <ul class="divide-y divide-gray-200">
+                                            <li *ngFor="let aluno of alunosEncontrados" class="p-3 flex justify-between items-center">
+                                                <div class="flex items-center space-x-3">
+                                                    <img [src]="aluno.avatarUrl" [alt]="aluno.nome" class="h-8 w-8 rounded-full">
+                                                    <div>
+                                                        <p class="text-sm font-medium text-gray-900">{{ aluno.nome }}</p>
+                                                        <p class="text-xs text-gray-500">{{ aluno.email }}</p>
+                                                    </div>
+                                                </div>
+                                                <button (click)="adicionarAluno(aluno)" type="button" [disabled]="isAlunoSelecionado(aluno.id)"
+                                                class="px-2.5 py-1 text-xs font-semibold rounded-full disabled:cursor-not-allowed"
+                                                [ngClass]="isAlunoSelecionado(aluno.id) ? 'bg-gray-100 text-gray-400' : 'bg-indigo-100 text-indigo-700 hover:bg-indigo-200'">
+                                                {{ isAlunoSelecionado(aluno.id) ? 'Adicionado' : 'Adicionar' }}
+                                            </button>
+                                        </li>
                                     </ul>
                                 </div>
+                            </div>
+                            <div class="mt-6 md:mt-0 space-y-2">
+                                <label 
+                                for="convidar-membros" 
+                                class="block text-sm font-medium text-gray-700">
+                                Membros a Convidar ({{ alunosSelecionados.length }})
+                            </label>
+                            
+                            <input 
+                            type="text" 
+                            id="convidar-membros"
+                            placeholder="Digite o nome ou e-mail..."
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm ...">
+                            <div class="border border-gray-200 rounded-lg max-h-60 overflow-y-auto">
+                                <ul class="divide-y divide-gray-200">
+                                    <li *ngIf="alunosSelecionados.length === 0" class="p-4 text-center text-sm text-gray-500">Nenhum membro adicionado.</li>
+                                    <li *ngFor="let aluno of alunosSelecionados" class="p-3 flex justify-between items-center">
+                                        <div class="flex items-center space-x-3">
+                                            <img [src]="aluno.avatarUrl" [alt]="aluno.nome" class="h-8 w-8 rounded-full">
+                                            <p class="text-sm font-medium text-gray-900">{{ aluno.nome }}</p>
+                                        </div>
+                                        <button (click)="removerAluno(aluno.id)" type="button" class="p-1 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-full">
+                                            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                                        </button>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 flex rounded-b-xl" [ngClass]="currentStep > 1 ? 'justify-between' : 'justify-end'">
-                    <button (click)="prevStep()" type="button" *ngIf="currentStep > 1" class="px-4 py-2 border border-gray-300 text-sm font-semibold text-gray-700 rounded-lg hover:bg-gray-100">
-                        Voltar
-                    </button>
-                    <button (click)="nextStep()" type="button" *ngIf="currentStep < 4" class="bg-indigo-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-indigo-700 shadow-sm">
-                        Próximo
-                    </button>
-                    <button type="submit" *ngIf="currentStep === 4" class="bg-green-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-green-700 shadow-sm">
-                        Criar Grupo
-                    </button>
+                <div *ngSwitchCase="4" class="animate-fade-in">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">4. Revisão e Confirmação</h3>
+                        <p class="text-sm text-gray-500 mt-1">Confira se todas as informações estão corretas antes de criar o grupo.</p>
+                    </div>
+                    <div class="mt-6 space-y-6 rounded-lg border border-gray-200 p-6 bg-gray-50/50">
+                        <div>
+                            <h4 class="font-semibold text-gray-800 border-b pb-2 mb-3">Tópico de Estudo</h4>
+                            <dl class="text-sm grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+                                <dt class="text-gray-500">Nome:</dt>
+                                <dd class="text-gray-900 font-medium">{{ form.value.disciplina.nome }}</dd>
+                                <dt class="text-gray-500">Dificuldade:</dt>
+                                <dd class="text-gray-900 font-medium">{{ form.value.disciplina.dificuldade | titlecase }}</dd>
+                            </dl>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 border-b pb-2 mb-3">Detalhes do Grupo</h4>
+                            <dl class="text-sm grid grid-cols-1">
+                                <dt class="text-gray-500">Título:</dt>
+                                <dd class="text-gray-900 font-medium">{{ form.value.grupo.titulo }}</dd>
+                                <dt class="mt-2 text-gray-500">Descrição:</dt>
+                                <dd class="text-gray-900 font-medium">{{ form.value.grupo.descricao || 'Nenhuma descrição fornecida.' }}</dd>
+                            </dl>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 border-b pb-2 mb-3">Membros Convidados ({{ alunosSelecionados.length }})</h4>
+                            <p *ngIf="alunosSelecionados.length === 0" class="text-sm text-gray-500">Nenhum membro será convidado inicialmente.</p>
+                            <ul *ngIf="alunosSelecionados.length > 0" class="text-sm list-disc list-inside text-gray-600 columns-1 sm:columns-2">
+                                <li *ngFor="let aluno of alunosSelecionados">{{ aluno.nome }}</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
+        
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 flex rounded-b-xl" [ngClass]="currentStep > 1 ? 'justify-between' : 'justify-end'">
+            <button (click)="prevStep()" type="button" *ngIf="currentStep > 1" class="px-4 py-2 border border-gray-300 text-sm font-semibold text-gray-700 rounded-lg hover:bg-gray-100">
+                Voltar
+            </button>
+            <button (click)="nextStep()" type="button" *ngIf="currentStep < 4" class="bg-indigo-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-indigo-700 shadow-sm">
+                Próximo
+            </button>
+            <button type="submit" *ngIf="currentStep === 4" class="bg-green-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-green-700 shadow-sm">
+                Criar Grupo
+            </button>
+        </div>
+    </form>
+</div>
+</div>
 </div>
 </main>

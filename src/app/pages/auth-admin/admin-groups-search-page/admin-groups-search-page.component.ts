@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
+import { Group2 } from '../../../shared/interfaces/User.model';
 
 @Component({
     selector: 'app-admin-groups-search-page',
@@ -11,9 +12,9 @@ import { Component, signal } from '@angular/core';
 export class AdminGroupsSearchPageComponent {
     loading = signal(false);
     searched = signal(false);
-    foundGroup = signal<any | null>(null);
+    foundGroup = signal<Group2 | null>(null);
     
-    mockGroupData: { [key: string]: any } = {
+    mockGroupData: Record<string, Group2> = {
         'TURMA123-CALCULO': {
             id: 'grp_abc123',
             name: 'Turma de Cálculo I',

@@ -20,7 +20,7 @@ export interface AlunoEntrega {
 
 export class ProfessorActivityPageComponent implements OnInit {
     
-    public activeTab: string = 'todos';
+    public activeTab = 'todos';
     
     // Lista completa de todas as entregas (viria do service)
     public todasEntregas: AlunoEntrega[] = [];

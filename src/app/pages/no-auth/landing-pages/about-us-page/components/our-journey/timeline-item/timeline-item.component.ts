@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 })
 
 export class TimelineItemComponent {
-    @Input() date: String | undefined;
-    @Input() title: String | undefined;
-    @Input() description: String | undefined;
+    @Input() date: string | undefined;
+    @Input() title: string | undefined;
+    @Input() description: string | undefined;
 }

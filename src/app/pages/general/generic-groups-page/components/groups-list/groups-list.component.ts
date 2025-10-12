@@ -3,28 +3,7 @@ import { GenericGroupCardComponent } from "../../../../../shared/components/gene
 import { CommonModule } from '@angular/common';
 import { UserRole } from '../../../../../core/services/auth.service';
 import { GenericGroupsPageComponent } from '../../generic-groups-page.component';
-import { Tab } from '../../../../../shared/interfaces/User.model';
-
-export interface Group {
-    logo: string;
-    logoBgColor: string;
-    title: string;
-    description: string;
-    tags: string[];
-    status: string;
-}
-
-interface StatusOption {
-    key: string;
-    label: string;
-}
-
-interface RoleConfig {
-    title: string;
-    subtitle: string;
-    description: string;
-    statusOptions: StatusOption[];
-}
+import { Group, RoleConfig, StatusOption, Tab } from '../../../../../shared/interfaces/User.model';
 
 @Component({
     selector: 'app-groups-list',

@@ -119,8 +119,6 @@ export class ActivityService {
         }
     ];
     
-    constructor() { }
-    
     // Este método simula a chamada ao back-end
     getActivitiesByStatus(status: string | null): Observable<Activity[]> {
         console.log(`Buscando no 'back-end' atividades com status: ${status}`);

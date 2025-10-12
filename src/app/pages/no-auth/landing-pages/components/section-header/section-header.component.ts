@@ -8,6 +8,6 @@ import { Component, Input } from '@angular/core';
 })
 
 export class SectionHeaderComponent {
-    @Input() title: String = "Nossa História";
-    @Input() description: String = "Revolucionando a gestão acadêmica com tecnologia e paixão por educar.";
+    @Input() title = "Nossa História";
+    @Input() description = "Revolucionando a gestão acadêmica com tecnologia e paixão por educar.";
 }

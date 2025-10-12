@@ -27,5 +27,5 @@ interface ManagementTab {
 export class TabNavigationCardsComponent {
     @Input() tabs: ManagementTab[] = [];
 
-    @Input() activeTabIndex!: Number;
+    @Input() activeTabIndex!: number;
 }

@@ -1,4 +1,4 @@
-import { Component, inject, Input, signal } from '@angular/core';
+import { Component, inject, Input, signal, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LinkCardComponent } from '../link-card/link-card.component';
 import { SectionHeaderAltComponent } from '../section-header-alt/section-header-alt.component';
@@ -74,13 +74,13 @@ const ADMIN_NAV_LINKS: NavLink[] = [
     styleUrl: './navigation-page.component.scss'
 })
 
-export class NavigationPageComponent {
+export class NavigationPageComponent implements OnInit {
     userType: string | undefined = "student";
     
     sanitizer = inject(DomSanitizer);
     
-    @Input() title: string = 'Meus Grupos e Comunidades';
-    @Input() subtitle: string = 'Acesse seus grupos, junte-se a novas turmas e colabore com seus colegas.';
+    @Input() title = 'Meus Grupos e Comunidades';
+    @Input() subtitle = 'Acesse seus grupos, junte-se a novas turmas e colabore com seus colegas.';
     
     userNavLinks = signal<NavLink[]>([]);
     

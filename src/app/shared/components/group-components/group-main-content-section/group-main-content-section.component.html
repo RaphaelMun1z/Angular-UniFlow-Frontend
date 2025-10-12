@@ -413,9 +413,9 @@
             <p class="text-sm text-gray-600 mb-4">Compartilhe o código abaixo ou envie convites por e-mail:</p>
             
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 mb-1">Código do Grupo</label>
+                <label for="codigo-grupo" class="block text-sm font-medium text-gray-700 mb-1">Código do Grupo</label>
                 <div class="flex">
-                    <input type="text" readonly value="MATH2023-XPTO" class="flex-grow px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-academic-primary focus:border-academic-primary">
+                    <input id="codigo-grupo" type="text" readonly value="MATH2023-XPTO" class="flex-grow px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-academic-primary focus:border-academic-primary">
                     <button class="bg-academic-primary text-white px-4 py-2 rounded-r-md hover:bg-academic-secondary transition">
                         <i class="fas fa-copy"></i>
                     </button>
@@ -423,7 +423,10 @@
             </div>
             
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Enviar convite</label>
+                <label for="inviteInput" class="block text-sm font-medium text-gray-700 mb-1">
+                    Enviar convite
+                </label>
+                <input id="inviteInput" type="email" name="email" class="..." placeholder="email@exemplo.com">
                 <div class="flex">
                     <input type="email" placeholder="E-mails separados por vírgula" class="flex-grow px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-academic-primary focus:border-academic-primary">
                     <button class="bg-academic-primary text-white px-4 py-2 rounded-r-md hover:bg-academic-secondary transition">

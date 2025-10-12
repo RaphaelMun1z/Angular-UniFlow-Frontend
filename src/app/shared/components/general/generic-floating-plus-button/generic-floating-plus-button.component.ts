@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-generic-floating-plus-button',
@@ -11,9 +11,6 @@ import { Component, ElementRef, HostListener } from '@angular/core';
 export class GenericFloatingPlusButtonComponent {
     isMenuOpen = false;
     
-    // Variável para guardar o timer
-    private closeTimer: any;
-    
     mainOptions = [
         { icon: 'blog', title: 'Blog', description: 'Artigos e novidades sobre educação e tecnologia.' },
         { icon: 'tutorials', title: 'Tutoriais', description: 'Guias passo a passo para usar a plataforma.' },
@@ -21,17 +18,11 @@ export class GenericFloatingPlusButtonComponent {
     ];
     
     openMenu(): void {
-        // Cancela qualquer timer de fechamento que esteja pendente
-        clearTimeout(this.closeTimer);
         this.isMenuOpen = true;
     }
     
     closeMenu(): void {
-        // Em vez de fechar imediatamente, inicia um timer.
-        // 200ms é tempo suficiente para mover o mouse sobre o gap.
-        this.closeTimer = setTimeout(() => {
-            this.isMenuOpen = false;
-        }, 200);
+        this.isMenuOpen = false;
     }
     
     onItemClick(itemTitle: string): void {

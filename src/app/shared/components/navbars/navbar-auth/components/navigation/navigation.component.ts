@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SafeHtmlPipe } from "../../../../general/safe-html.pipe";
 
@@ -29,7 +29,7 @@ export interface CurrentUser {
     styleUrl: './navigation.component.scss'
 })
 
-export class NavigationComponent {
+export class NavigationComponent implements OnInit {
     @Input() currentUser: CurrentUser | null = null;
     
     // Array que define toda a estrutura da navegação

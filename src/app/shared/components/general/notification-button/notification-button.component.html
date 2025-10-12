@@ -1,5 +1,5 @@
 <div 
-    class="relative"
+    class="relative pt-2"
     (mouseenter)="openPopup()"
     (mouseleave)="closePopup()">
 
@@ -12,11 +12,12 @@
     </button>
     
     <div 
-        class="absolute right-0 mt-2 w-[calc(100vw-2rem)] max-w-sm sm:w-96 bg-white rounded-lg shadow-2xl border border-gray-200 origin-top-right z-20 transition-all duration-200 ease-out"
+        class="absolute right-0 w-[calc(100vw-2rem)] max-w-sm sm:w-96 bg-white rounded-lg shadow-2xl border border-gray-200 origin-top-right z-20 transition-all duration-200 ease-out"
         [ngClass]="{
             'opacity-100 translate-y-0': isNotificationsOpen,
             'opacity-0 -translate-y-2 pointer-events-none': !isNotificationsOpen
         }">
+        
         <app-notifications-popup></app-notifications-popup>
     </div>
 </div>

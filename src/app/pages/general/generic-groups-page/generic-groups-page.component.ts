@@ -1,23 +1,10 @@
-import { Component, signal, WritableSignal } from "@angular/core";
-import { GenericGroupCardComponent } from "../../../shared/components/general/generic-group-card/generic-group-card.component";
+import { Component, signal } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { GenericViewPageComponent } from "../generic-view-page/generic-view-page.component";
 import { PagerComponent } from "../../../shared/components/general/pager/pager.component";
 import { GenericFloatingPlusButtonComponent } from "../../../shared/components/general/generic-floating-plus-button/generic-floating-plus-button.component";
 import { GenericPageHeaderComponent } from "../../../shared/components/general/generic-page-header/generic-page-header.component";
-
-interface SidebarLink {
-    id: string;
-    label: string;
-    link: string;
-    icon: string; // SVG path data
-}
-
-interface Tab {
-    id: string;
-    label: string;
-    route: string; // Caminho para o RouterLink
-}
+import { Tab } from "../../../shared/interfaces/User.model";
 
 @Component({
     selector: 'app-generic-groups-page',

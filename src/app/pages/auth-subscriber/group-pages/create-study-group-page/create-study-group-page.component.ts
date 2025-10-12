@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 interface Aluno {
@@ -25,7 +25,7 @@ export class CreateStudyGroupPageComponent implements OnInit {
     public alunosEncontrados: Aluno[] = [];
     public alunosSelecionados: Aluno[] = [];
     
-    constructor(private fb: FormBuilder) { }
+    fb = inject(FormBuilder);
     
     ngOnInit(): void {
         this.form = this.fb.group({

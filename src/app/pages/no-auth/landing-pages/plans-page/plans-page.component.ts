@@ -15,8 +15,6 @@ export class PlansPageComponent implements OnInit {
     public billingCycle: 'mensal' | 'anual' = 'mensal';
     public planos: PlanoViewModel[] = [];
     
-    constructor() { }
-    
     ngOnInit(): void {
         this.planos = [
             {

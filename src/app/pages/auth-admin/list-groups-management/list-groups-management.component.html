@@ -126,81 +126,98 @@
                                         <div class="my-1 border-t border-gray-100"></div>
                                         
                                         <div>
-                                            <a (click)="abrirModalExclusao(grupo)" class="cursor-pointer group flex items-start rounded-lg p-3 transition-colors hover:bg-red-50">
-                                                <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-600">
-                                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.134-2.09-2.134H8.09a2.09 2.09 0 00-2.09 2.134v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
-                                                </div>
-                                                <div class="ml-4">
-                                                    <p class="text-sm font-semibold text-red-700">Excluir Grupo</p>
-                                                    <p class="text-sm text-gray-500">Esta ação é irreversível.</p>
-                                                </div>
-                                            </a>
-                                        </div>
+                                            <button 
+                                            type="button"
+                                            (click)="abrirModalExclusao(grupo)"
+                                            class="cursor-pointer group flex items-start rounded-lg p-3 transition-colors hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500"
+                                            >
+                                            <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-600">
+                                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" 
+                                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21
+                                                    c.342.052.682.107 1.022.166m-1.022-.165L18.16
+                                                    19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25
+                                                    2.25 0 01-2.244-2.077L4.772 5.79m14.456
+                                                    0a48.108 48.108 0 00-3.478-.397m-12
+                                                    .562c.34-.059.68-.114 1.022-.165m0
+                                                    0a48.11 48.11 0 013.478-.397m7.5
+                                                    0v-.916c0-1.18-.91-2.134-2.09-2.134H8.09a2.09
+                                                    2.09 0 00-2.09 2.134v.916m7.5
+                                                    0a48.667 48.667 0 00-7.5 0" />
+                                                </svg>
+                                            </div>
+                                            <div class="ml-4 text-left">
+                                                <p class="text-sm font-semibold text-red-700">Excluir Grupo</p>
+                                                <p class="text-sm text-gray-500">Esta ação é irreversível.</p>
+                                            </div>
+                                        </button>
+                                        
                                     </div>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div *ngSwitchCase="'grid'" class="p-6">
+            <div *ngIf="isLoading" class="text-center py-12 text-gray-500">Carregando grupos...</div>
+            <div *ngIf="!isLoading && grupos.length === 0" class="text-center py-12 text-gray-500">Nenhum grupo encontrado.</div>
             
-            <div *ngSwitchCase="'grid'" class="p-6">
-                <div *ngIf="isLoading" class="text-center py-12 text-gray-500">Carregando grupos...</div>
-                <div *ngIf="!isLoading && grupos.length === 0" class="text-center py-12 text-gray-500">Nenhum grupo encontrado.</div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                    <div *ngFor="let grupo of grupos" class="bg-white rounded-lg border flex flex-col" [ngClass]="selectedGroups.has(grupo.id) ? 'border-indigo-400 ring-2 ring-indigo-200' : 'border-gray-200'">
-                        <div class="p-4 flex justify-between items-start">
-                            <div class="flex items-center space-x-3">
-                                <input type="checkbox" (change)="toggleSelect(grupo.id)" [checked]="selectedGroups.has(grupo.id)" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                <div>
-                                    <p class="text-sm font-semibold text-gray-900">{{ grupo.titulo }}</p>
-                                    <p class="text-xs text-gray-500">{{ grupo.disciplinaNome }}</p>
-                                </div>
-                            </div>
-                            <div class="relative">
-                                <button (click)="openActionMenuId = (openActionMenuId === grupo.id ? null : grupo.id)" class="p-1 rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-600">
-                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" /></svg>
-                                </button>
-                                <div *ngIf="openActionMenuId === grupo.id" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 origin-top-right z-10">
-                                </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div *ngFor="let grupo of grupos" class="bg-white rounded-lg border flex flex-col" [ngClass]="selectedGroups.has(grupo.id) ? 'border-indigo-400 ring-2 ring-indigo-200' : 'border-gray-200'">
+                    <div class="p-4 flex justify-between items-start">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" (change)="toggleSelect(grupo.id)" [checked]="selectedGroups.has(grupo.id)" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                            <div>
+                                <p class="text-sm font-semibold text-gray-900">{{ grupo.titulo }}</p>
+                                <p class="text-xs text-gray-500">{{ grupo.disciplinaNome }}</p>
                             </div>
                         </div>
-                        <div class="px-4 pb-4 flex-grow">
-                            <div class="flex items-center space-x-2">
-                                <span class="text-xs font-semibold px-2 py-0.5 rounded-full" [ngClass]="grupo.statusClass">{{ grupo.status }}</span>
-                                <span class="text-xs font-semibold px-2 py-0.5 rounded-full" [ngClass]="grupo.tipo === 'Turma' ? 'bg-blue-100 text-blue-800' : 'bg-teal-100 text-teal-800'">{{ grupo.tipo }}</span>
+                        <div class="relative">
+                            <button (click)="openActionMenuId = (openActionMenuId === grupo.id ? null : grupo.id)" class="p-1 rounded-full text-gray-400 hover:bg-gray-100 hover:text-gray-600">
+                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" /></svg>
+                            </button>
+                            <div *ngIf="openActionMenuId === grupo.id" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 origin-top-right z-10">
                             </div>
                         </div>
-                        <div class="border-t border-gray-200 bg-gray-50/50 p-4 flex justify-between items-center text-sm">
-                            <div class="flex items-center space-x-2">
-                                <img class="h-6 w-6 rounded-full" [src]="grupo.criadorAvatarUrl" alt="">
-                                <span class="text-gray-600">{{ grupo.criadorNome }}</span>
-                            </div>
-                            <span class="text-gray-500">{{ grupo.numMembros }} membros</span>
+                    </div>
+                    <div class="px-4 pb-4 flex-grow">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs font-semibold px-2 py-0.5 rounded-full" [ngClass]="grupo.statusClass">{{ grupo.status }}</span>
+                            <span class="text-xs font-semibold px-2 py-0.5 rounded-full" [ngClass]="grupo.tipo === 'Turma' ? 'bg-blue-100 text-blue-800' : 'bg-teal-100 text-teal-800'">{{ grupo.tipo }}</span>
                         </div>
+                    </div>
+                    <div class="border-t border-gray-200 bg-gray-50/50 p-4 flex justify-between items-center text-sm">
+                        <div class="flex items-center space-x-2">
+                            <img class="h-6 w-6 rounded-full" [src]="grupo.criadorAvatarUrl" alt="">
+                            <span class="text-gray-600">{{ grupo.criadorNome }}</span>
+                        </div>
+                        <span class="text-gray-500">{{ grupo.numMembros }} membros</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <footer *ngIf="!isLoading && totalPages > 1" class="flex items-center justify-between px-4 py-3 sm:px-6">
-        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-            <div>
-                <p class="text-sm text-gray-700">
-                    Exibindo de <span class="font-medium">{{ (currentPage * pageSize) + 1 }}</span> a <span class="font-medium">{{ (currentPage * pageSize) + grupos.length }}</span> de <span class="font-medium">{{ totalElements }}</span> resultados
-                </p>
-            </div>
-            <div>
-                <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm">
-                    <button (click)="paginaAnterior()" [disabled]="currentPage === 0" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:opacity-50">Anterior</button>
-                    <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300">Página {{ currentPage + 1 }} de {{ totalPages }}</span>
-                    <button (click)="proximaPagina()" [disabled]="currentPage + 1 >= totalPages" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:opacity-50">Próxima</button>
-                </nav>
-            </div>
+</div>
+
+<footer *ngIf="!isLoading && totalPages > 1" class="flex items-center justify-between px-4 py-3 sm:px-6">
+    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+        <div>
+            <p class="text-sm text-gray-700">
+                Exibindo de <span class="font-medium">{{ (currentPage * pageSize) + 1 }}</span> a <span class="font-medium">{{ (currentPage * pageSize) + grupos.length }}</span> de <span class="font-medium">{{ totalElements }}</span> resultados
+            </p>
         </div>
-    </footer>
+        <div>
+            <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm">
+                <button (click)="paginaAnterior()" [disabled]="currentPage === 0" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:opacity-50">Anterior</button>
+                <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300">Página {{ currentPage + 1 }} de {{ totalPages }}</span>
+                <button (click)="proximaPagina()" [disabled]="currentPage + 1 >= totalPages" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:opacity-50">Próxima</button>
+            </nav>
+        </div>
+    </div>
+</footer>
 </main>
 </div>
 

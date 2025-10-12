@@ -1,33 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-export interface UsuarioViewModel {
-    id: string;
-    nome: string;
-    email: string;
-    avatarUrl: string;
-    papel: string;
-    papelClass: string;
-    status: string;
-    statusClass: string;
-    dataCadastro: string;
-}
-
-const TODOS_OS_USUARIOS: UsuarioViewModel[] = [
-    { id: '1', nome: 'Ana Silva', email: 'ana.silva@email.com', avatarUrl: 'https://i.pravatar.cc/150?u=1', papel: 'Estudante', papelClass: 'text-gray-800 bg-gray-100', status: 'Ativo', statusClass: 'text-green-800 bg-green-100', dataCadastro: '2025-01-10' },
-    { id: '2', nome: 'Bruno Costa', email: 'bruno.costa@email.com', avatarUrl: 'https://i.pravatar.cc/150?u=2', papel: 'Professor', papelClass: 'text-blue-800 bg-blue-100', status: 'Ativo', statusClass: 'text-green-800 bg-green-100', dataCadastro: '2025-01-12' },
-    { id: '3', nome: 'Carla Dias', email: 'carla.dias@email.com', avatarUrl: 'https://i.pravatar.cc/150?u=3', papel: 'Admin', papelClass: 'text-red-800 bg-red-100', status: 'Ativo', statusClass: 'text-green-800 bg-green-100', dataCadastro: '2025-01-15' },
-    { id: '4', nome: 'Daniel Martins', email: 'daniel.martins@email.com', avatarUrl: 'https://i.pravatar.cc/150?u=4', papel: 'Estudante', papelClass: 'text-gray-800 bg-gray-100', status: 'Inativo', statusClass: 'text-yellow-800 bg-yellow-100', dataCadastro: '2025-02-01' },
-    { id: '5', nome: 'Eduarda Ferreira', email: 'eduarda.ferreira@email.com', avatarUrl: 'https://i.pravatar.cc/150?u=5', papel: 'Professor', papelClass: 'text-blue-800 bg-blue-100', status: 'Ativo', statusClass: 'text-green-800 bg-green-100', dataCadastro: '2025-02-05' },
-    { id: '6', nome: 'Fábio Gomes', email: 'fabio.gomes@email.com', avatarUrl: 'https://i.pravatar.cc/150?u=6', papel: 'Estudante', papelClass: 'text-gray-800 bg-gray-100', status: 'Ativo', statusClass: 'text-green-800 bg-green-100', dataCadastro: '2025-02-10' },
-    { id: '7', nome: 'Gabriela Lima', email: 'gabriela.lima@email.com', avatarUrl: 'https://i.pravatar.cc/150?u=7', papel: 'Estudante', papelClass: 'text-gray-800 bg-gray-100', status: 'Ativo', statusClass: 'text-green-800 bg-green-100', dataCadastro: '2025-03-11' },
-    { id: '8', nome: 'Heitor Souza', email: 'heitor.souza@email.com', avatarUrl: 'https://i.pravatar.cc/150?u=8', papel: 'Professor', papelClass: 'text-blue-800 bg-blue-100', status: 'Inativo', statusClass: 'text-yellow-800 bg-yellow-100', dataCadastro: '2025-03-14' },
-    { id: '9', nome: 'Isabela Rocha', email: 'isabela.rocha@email.com', avatarUrl: 'https://i.pravatar.cc/150?u=9', papel: 'Estudante', papelClass: 'text-gray-800 bg-gray-100', status: 'Ativo', statusClass: 'text-green-800 bg-green-100', dataCadastro: '2025-03-20' },
-    { id: '10', nome: 'Juliano Nogueira', email: 'juliano.nogueira@email.com', avatarUrl: 'https://i.pravatar.cc/150?u=10', papel: 'Estudante', papelClass: 'text-gray-800 bg-gray-100', status: 'Ativo', statusClass: 'text-green-800 bg-green-100', dataCadastro: '2025-04-01' },
-    { id: '11', nome: 'Larissa Mendes', email: 'larissa.mendes@email.com', avatarUrl: 'https://i.pravatar.cc/150?u=11', papel: 'Estudante', papelClass: 'text-gray-800 bg-gray-100', status: 'Ativo', statusClass: 'text-green-800 bg-green-100', dataCadastro: '2025-04-05' },
-    { id: '12', nome: 'Marcos Andrade', email: 'marcos.andrade@email.com', avatarUrl: 'https://i.pravatar.cc/150?u=12', papel: 'Professor', papelClass: 'text-blue-800 bg-blue-100', status: 'Ativo', statusClass: 'text-green-800 bg-green-100', dataCadastro: '2025-04-10' },
-];
+import { NovoUsuario, TODOS_OS_USUARIOS, UsuarioViewModel } from '../../../shared/interfaces/User.model';
 
 @Component({
     selector: 'app-user-management-page',
@@ -39,7 +13,22 @@ const TODOS_OS_USUARIOS: UsuarioViewModel[] = [
 export class UserManagementPageComponent implements OnInit {
     public isAddUserModalOpen = false;
     public gerarSenha = true;
-    public novoUsuario: any = { tipo: 'ESTUDANTE' };
+    public novoUsuario: NovoUsuario = {
+        tipo: 'ESTUDANTE',
+        id: 0,
+        nome: '',
+        email: '',
+        avatarUrl: '',
+        papel: 'Estudante',
+        status: 'Ativo',
+        dataCadastro: '',
+        papelClass: '',
+        statusClass: '',
+        semestreIngresso: '',
+        senha: '',
+        anoIngresso: '',
+        areaAtuacao: ''
+    };
     
     public usuarios: UsuarioViewModel[] = [];
     public openActionMenuId: string | null = null;
@@ -50,8 +39,6 @@ export class UserManagementPageComponent implements OnInit {
     public totalElements = 0;
     public pageSize = 5; // Diminuí para 5 para facilitar o teste da paginação
     
-    // Removida a injeção do AdminService
-    constructor() { }
     
     ngOnInit(): void {
         this.buscarUsuarios(this.currentPage);

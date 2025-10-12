@@ -53,8 +53,6 @@ export class PlanManagementPageComponent implements OnInit {
         { id: '4', nome: 'Plano Legado', descricao: 'Plano antigo, não mais disponível.', preco: 19.90, limiteDeGrupos: 2, limiteMembrosPorGrupo: 10, status: 'INATIVO', statusClass: 'text-yellow-800 bg-yellow-100' },
     ];
     
-    constructor() { }
-    
     ngOnInit(): void {
         this.buscarPlanos(0);
     }

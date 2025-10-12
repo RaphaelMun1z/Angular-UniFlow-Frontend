@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-checkout-payment-page',
@@ -8,18 +8,12 @@ import { Component, OnInit } from '@angular/core';
     styleUrl: './checkout-payment-page.component.scss'
 })
 
-export class CheckoutPaymentPageComponent implements OnInit {
+export class CheckoutPaymentPageComponent {
     
     public pixKey = '00020126...'; // Chave Pix viria da sua API
     public isKeyCopied = false;
     public metodoPagamento: 'pix' | 'cartao' = 'pix';
-    
-    constructor() { }
-    
-    ngOnInit(): void {
-        // ...
-    }
-    
+
     copyPixKey(): void {
         navigator.clipboard.writeText(this.pixKey).then(() => {
             this.isKeyCopied = true;

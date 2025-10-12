@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -28,7 +28,7 @@ export class UserProfileInfoComponent implements OnInit {
     public isEditing = false;
     public profileForm!: FormGroup;
     
-    constructor(private fb: FormBuilder) { }
+    fb = inject(FormBuilder);
     
     ngOnInit(): void {
         // Inicializa o formulário com a estrutura e validações

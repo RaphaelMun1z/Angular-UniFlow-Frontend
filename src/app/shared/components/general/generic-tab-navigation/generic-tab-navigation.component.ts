@@ -1,4 +1,4 @@
-import { Component, signal, ViewChildren, ElementRef, QueryList, AfterViewInit, HostListener, ViewChild, afterNextRender, input, EventEmitter, Output, runInInjectionContext, inject, Injector } from '@angular/core';
+import { Component, signal, ViewChildren, ElementRef, QueryList, AfterViewInit, ViewChild, afterNextRender, runInInjectionContext, inject, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router'; import { Tab } from '../../../interfaces/User.model';
 import { filter, startWith } from 'rxjs';

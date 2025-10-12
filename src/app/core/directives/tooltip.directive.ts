@@ -1,6 +1,6 @@
 // Arquivo: tooltip.directive.ts
 
-import { Directive, Input, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { Directive, Input, ElementRef, HostListener, Renderer2, inject } from '@angular/core';
 import {
     computePosition,
     flip,
@@ -12,18 +12,18 @@ import {
 
 @Directive({
     // 1. CORREÇÃO: O seletor agora é '[tooltip]' para corresponder ao seu HTML
-    selector: '[tooltip]', 
+    selector: '[appTooltip]', 
     standalone: true
 })
 export class TooltipDirective {
-    // 2. CORREÇÃO: Simplificamos o @Input. Agora a propriedade se chama 'tooltip'
-    @Input() tooltip = ''; 
+    @Input('appTooltip') tooltip = '';
     @Input() placement: Placement = 'top';
     
     private tooltipElement: HTMLElement | null = null;
     private arrowElement: HTMLElement | null = null;
     
-    constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+    elementRef = inject(ElementRef);
+    renderer = inject(Renderer2);
     
     @HostListener('mouseenter')
     onMouseEnter(): void {

@@ -1,13 +1,13 @@
-import { Component, computed, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { GenericViewPageComponent } from "../generic-view-page/generic-view-page.component";
 import { GenericPageHeaderComponent } from "../../../shared/components/general/generic-page-header/generic-page-header.component";
 import { GenericFloatingPlusButtonComponent } from "../../../shared/components/general/generic-floating-plus-button/generic-floating-plus-button.component";
 
-import { ADMIN_NAVIGATION_TABS, ADMIN_OPERATIONS } from '../../../shared/mocks/ADMIN_MANAGEMENT_TABS';
-import { PROFESSOR_NAVIGATION_TABS, PROFESSOR_OPERATIONS } from '../../../shared/mocks/PROFESSOR_MANAGEMENT_TABS';
-import { ESTUDANTE_NAVIGATION_TABS, ESTUDANTE_OPERATIONS } from '../../../shared/mocks/ESTUDANTE_MANAGEMENT_TABS';
+import { ADMIN_OPERATIONS } from '../../../shared/mocks/ADMIN_MANAGEMENT_TABS';
+import { PROFESSOR_OPERATIONS } from '../../../shared/mocks/PROFESSOR_MANAGEMENT_TABS';
+import { ESTUDANTE_OPERATIONS } from '../../../shared/mocks/ESTUDANTE_MANAGEMENT_TABS';
 import { CommonModule } from '@angular/common';
-import { Operation, Tab } from '../../../shared/interfaces/User.model';
+import { Operation } from '../../../shared/interfaces/User.model';
 import { RouterOutlet } from '@angular/router';
 import { GenericTabNavigationComponent } from "../../../shared/components/general/generic-tab-navigation/generic-tab-navigation.component";
 

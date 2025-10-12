@@ -13,18 +13,11 @@ export class NotificationButtonComponent {
     @Input() unreadNotificationsCount = 0;
     isNotificationsOpen = false;
     
-    private closeTimer: any;
-    
     openPopup(): void {
-        // Cancela qualquer timer de fechamento que esteja pendente
-        clearTimeout(this.closeTimer);
         this.isNotificationsOpen = true;
     }
     
     closePopup(): void {
-        // Inicia um timer para fechar o menu após um breve delay (200ms)
-        this.closeTimer = setTimeout(() => {
-            this.isNotificationsOpen = false;
-        }, 200);
+        this.isNotificationsOpen = false;
     }
 }
