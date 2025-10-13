@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { CheckoutPaymentPageComponent } from './pages/no-auth/payment-pages/checkout-payment-page/checkout-payment-page.component';
-import { ConfirmedPaymentPageComponent } from './pages/no-auth/payment-pages/confirmed-payment-page/confirmed-payment-page.component';
+import { CheckoutPaymentPageComponent } from './pages/public-pages/payment-pages/checkout-payment-page/checkout-payment-page.component';
+import { ConfirmedPaymentPageComponent } from './pages/public-pages/payment-pages/confirmed-payment-page/confirmed-payment-page.component';
 
 export const PAYMENT_ROUTES: Routes = [
     {
@@ -13,7 +13,7 @@ export const PAYMENT_ROUTES: Routes = [
             },
             { 
                 path: 'checkout', 
-                component: CheckoutPaymentPageComponent 
+                component: CheckoutPaymentPageComponent
             },
             { 
                 path: 'confirmacao', 

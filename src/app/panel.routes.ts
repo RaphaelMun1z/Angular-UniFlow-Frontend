@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { GenericManagementPageComponent } from './pages/general/generic-management-page/generic-management-page.component';
+import { GenericManagementPageTemplateComponent } from './pages/generic-pages/generic-management-page-template/generic-management-page-template.component';
 
 export const PANEL_ROUTES: Routes = [
     { 
         path: '', 
-        component: GenericManagementPageComponent,
+        component: GenericManagementPageTemplateComponent,
         children: [
             { 
                 path: '', 

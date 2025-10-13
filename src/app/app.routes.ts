@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
-
-import { NotFoundPageComponent } from './pages/no-auth/general-pages/not-found-page/not-found-page.component';
+import { NotFoundPageComponent } from './pages/public-pages/access-pages/not-found-page/not-found-page.component';
 
 export const routes: Routes = [
     {

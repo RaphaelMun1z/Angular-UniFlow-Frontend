@@ -1,7 +1,5 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { loadActivities } from '../../../../store/activities.actions';
-import { IActivityItem } from '../../../../store/activities.state';
 
 import { HeroSectionComponent } from './components/hero-section/hero-section.component';
 import { PartnersSectionComponent } from './components/partners-section/partners-section.component';
@@ -11,6 +9,8 @@ import { PlansSectionComponent } from './components/plans-section/plans-section.
 import { TestimonialsSectionComponent } from './components/testimonials-section/testimonials-section.component';
 import { FaqSectionComponent } from './components/faq-section/faq-section.component';
 import { FinalCTASectionComponent } from './components/final-ctasection/final-ctasection.component';
+import { IActivityItem } from '../../../store/activities.state';
+import { loadActivities } from '../../../store/activities.actions';
 
 @Component({
     selector: 'app-home-page',

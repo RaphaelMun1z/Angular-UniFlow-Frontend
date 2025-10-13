@@ -1,14 +1,14 @@
 import { Component, signal } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { GenericViewPageComponent } from "../generic-view-page/generic-view-page.component";
 import { PagerComponent } from "../../../shared/components/general/pager/pager.component";
 import { GenericFloatingPlusButtonComponent } from "../../../shared/components/general/generic-floating-plus-button/generic-floating-plus-button.component";
 import { GenericPageHeaderComponent } from "../../../shared/components/general/generic-page-header/generic-page-header.component";
 import { Tab } from "../../../shared/interfaces/User.model";
+import { GenericPageTemplateComponent } from "../generic-page-template/generic-page-template.component";
 
 @Component({
     selector: 'app-generic-groups-page',
-    imports: [CommonModule, GenericViewPageComponent, PagerComponent, GenericFloatingPlusButtonComponent, GenericPageHeaderComponent],
+    imports: [CommonModule, PagerComponent, GenericFloatingPlusButtonComponent, GenericPageHeaderComponent, GenericPageTemplateComponent],
     templateUrl: './generic-groups-page.component.html',
     styleUrl: './generic-groups-page.component.scss'
 })

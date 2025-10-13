@@ -1,5 +1,4 @@
 import { Component, computed, OnInit, signal } from '@angular/core';
-import { GenericViewPageComponent } from "../generic-view-page/generic-view-page.component";
 import { GenericPageHeaderComponent } from "../../../shared/components/general/generic-page-header/generic-page-header.component";
 import { GenericFloatingPlusButtonComponent } from "../../../shared/components/general/generic-floating-plus-button/generic-floating-plus-button.component";
 
@@ -10,15 +9,16 @@ import { CommonModule } from '@angular/common';
 import { Operation } from '../../../shared/interfaces/User.model';
 import { RouterOutlet } from '@angular/router';
 import { GenericTabNavigationComponent } from "../../../shared/components/general/generic-tab-navigation/generic-tab-navigation.component";
+import { GenericPageTemplateComponent } from "../generic-page-template/generic-page-template.component";
 
 @Component({
-    selector: 'app-generic-management-page',
-    imports: [CommonModule, GenericViewPageComponent, GenericPageHeaderComponent, GenericFloatingPlusButtonComponent, RouterOutlet, GenericTabNavigationComponent],
-    templateUrl: './generic-management-page.component.html',
-    styleUrl: './generic-management-page.component.scss'
+    selector: 'app-generic-management-page-template',
+    imports: [CommonModule, GenericPageHeaderComponent, GenericFloatingPlusButtonComponent, RouterOutlet, GenericTabNavigationComponent, GenericPageTemplateComponent],
+    templateUrl: './generic-management-page-template.component.html',
+    styleUrl: './generic-management-page-template.component.scss'
 })
 
-export class GenericManagementPageComponent implements OnInit {
+export class GenericManagementPageTemplateComponent implements OnInit {
     userLevel: 'admin' | 'professor' | 'estudante' = 'professor';
     
     // Signals para o estado da UI

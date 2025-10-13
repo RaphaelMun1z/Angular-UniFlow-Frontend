@@ -1,10 +1,9 @@
 import { Routes } from '@angular/router';
-import { AccessDeniedPageComponent } from './pages/no-auth/general-pages/access-denied-page/access-denied-page.component';
-import { AboutUsPageComponent } from './pages/no-auth/landing-pages/about-us-page/about-us-page.component';
-import { HomePageComponent } from './pages/no-auth/landing-pages/home-page/home-page.component';
-import { PlansPageComponent } from './pages/no-auth/landing-pages/plans-page/plans-page.component';
-import { TermsOfUsePageComponent } from './pages/no-auth/landing-pages/terms-of-use-page/terms-of-use-page.component';
-
+import { AboutUsPageComponent } from './pages/public-pages/about-us-page/about-us-page.component';
+import { AccessDeniedPageComponent } from './pages/public-pages/access-pages/access-denied-page/access-denied-page.component';
+import { HomePageComponent } from './pages/public-pages/home-page/home-page.component';
+import { PlansPageComponent } from './pages/public-pages/plans-page/plans-page.component';
+import { TermsOfUsePageComponent } from './pages/public-pages/terms-of-use-page/terms-of-use-page.component';
 export const PUBLIC_ROUTES: Routes = [
     {
         path: '',

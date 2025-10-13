@@ -6,7 +6,7 @@ import { StudentGroupClassPageComponent } from './pages/auth-subscriber/student-
 import { StudentGroupsAccessByInviteCodePageComponent } from './pages/auth-subscriber/student-groups-access-by-invite-code-page/student-groups-access-by-invite-code-page.component';
 import { StudentGroupsPendingInvitationsPageComponent } from './pages/auth-subscriber/student-groups-pending-invitations-page/student-groups-pending-invitations-page.component';
 import { NavigationPageComponent } from './shared/components/general/navigation-page/navigation-page.component';
-import { GroupsOperationsComponent } from './pages/general/generic-management-page/components/groups-operations/groups-operations.component';
+import { GroupsOperationsComponent } from './pages/generic-pages/generic-management-page-template/components/groups-operations/groups-operations.component';
 
 export const PANEL_GROUPS_ROUTES: Routes = [
     {

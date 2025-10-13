@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { DashboardPageComponent } from './pages/general/dashboard-page/dashboard-page.component';
 import { FinancePageComponent } from './pages/auth-admin/finance-page/finance-page.component';
 import { PlanManagementPageComponent } from './pages/auth-admin/plan-management-page/plan-management-page.component';
 import { UserManagementPageComponent } from './pages/auth-admin/user-management-page/user-management-page.component';
@@ -13,7 +12,8 @@ import { ListGroupsManagementComponent } from './pages/auth-admin/list-groups-ma
 import { MessageBroadcastPageComponent } from './pages/auth-admin/message-broadcast-page/message-broadcast-page.component';
 import { CreateClassPageComponent } from './pages/auth-subscriber/group-pages/create-class-page/create-class-page.component';
 import { CreateStudyGroupPageComponent } from './pages/auth-subscriber/group-pages/create-study-group-page/create-study-group-page.component';
-import { AccessDeniedPageComponent } from './pages/no-auth/general-pages/access-denied-page/access-denied-page.component';
+import { AccessDeniedPageComponent } from './pages/public-pages/access-pages/access-denied-page/access-denied-page.component';
+import { DashboardPageComponent } from './pages/generic-pages/dashboard-page/dashboard-page.component';
 
 export const ADMIN_ROUTES: Routes = [
     {

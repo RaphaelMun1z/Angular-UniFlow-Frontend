@@ -1,7 +1,6 @@
 import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { GenericViewPageComponent } from "../generic-view-page/generic-view-page.component";
 import { GenericPageHeaderComponent } from "../../../shared/components/general/generic-page-header/generic-page-header.component";
 import { PagerComponent } from "../../../shared/components/general/pager/pager.component";
 import { GenericFloatingPlusButtonComponent } from "../../../shared/components/general/generic-floating-plus-button/generic-floating-plus-button.component";
@@ -9,10 +8,11 @@ import { GenericFloatingPlusButtonComponent } from "../../../shared/components/g
 import { ActivityService, Activity } from '../../../core/services/activity.service'; 
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { map, distinctUntilChanged, switchMap } from 'rxjs';
+import { GenericPageTemplateComponent } from "../generic-page-template/generic-page-template.component";
 
 @Component({
     selector: 'app-generic-tasks-page',
-    imports: [CommonModule, RouterModule, GenericViewPageComponent, GenericPageHeaderComponent, PagerComponent, GenericFloatingPlusButtonComponent],
+    imports: [CommonModule, RouterModule, GenericPageHeaderComponent, PagerComponent, GenericFloatingPlusButtonComponent, GenericPageTemplateComponent],
     templateUrl: './generic-tasks-page.component.html',
     styleUrl: './generic-tasks-page.component.scss'
 })
