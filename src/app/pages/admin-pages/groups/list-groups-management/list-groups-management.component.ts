@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { of, delay } from 'rxjs';
-import { GrupoApiResponse, PagedResponse } from '../../../shared/interfaces/User.model';
+import { GrupoApiResponse, PagedResponse } from '../../../../shared/interfaces/User.model';
 
 export interface GrupoAdminViewModel {
     id: string;

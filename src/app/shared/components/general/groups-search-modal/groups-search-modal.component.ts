@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { Group2 } from '../../../shared/interfaces/User.model';
+import { Group2 } from '../../../interfaces/User.model';
 
 @Component({
-    selector: 'app-admin-groups-search-page',
+    selector: 'app-groups-search-modal',
     imports: [CommonModule],
-    templateUrl: './admin-groups-search-page.component.html',
-    styleUrl: './admin-groups-search-page.component.scss'
+    templateUrl: './groups-search-modal.component.html',
+    styleUrl: './groups-search-modal.component.scss'
 })
 
-export class AdminGroupsSearchPageComponent {
+export class GroupsSearchModalComponent {
     loading = signal(false);
     searched = signal(false);
     foundGroup = signal<Group2 | null>(null);
