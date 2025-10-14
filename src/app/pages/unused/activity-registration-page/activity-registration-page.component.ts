@@ -3,11 +3,12 @@ import { NavbarAltTreeComponent } from "../../../shared/components/navbar-versio
 import { FooterComponent } from "../../../shared/components/footer/footer.component";
 
 @Component({
-  selector: 'app-activity-registration-page',
-  imports: [NavbarAltTreeComponent, FooterComponent],
-  templateUrl: './activity-registration-page.component.html',
-  styleUrl: './activity-registration-page.component.scss'
+    selector: 'app-activity-registration-page',
+    imports: [NavbarAltTreeComponent, FooterComponent],
+    templateUrl: './activity-registration-page.component.html',
+    styleUrl: './activity-registration-page.component.scss'
 })
-export class ActivityRegistrationPageComponent {
 
+export class ActivityRegistrationPageComponent {
+    
 }
