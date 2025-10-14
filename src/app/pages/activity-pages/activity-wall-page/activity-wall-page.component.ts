@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SafeHtmlPipe } from '../../../../shared/components/general/safe-html.pipe';
+import { SafeHtmlPipe } from '../../../shared/components/general/safe-html.pipe';
 
 export interface AtividadeViewModel {
     id: string;

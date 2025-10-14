@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { of, delay } from 'rxjs';
 import { RouterLink } from '@angular/router';
-import { mockApiResponse, NotificacaoViewModel } from '../../../../../shared/interfaces/User.model';
+import { NotificacaoViewModel, mockApiResponse } from '../../../shared/interfaces/User.model';
 
 @Component({
     selector: 'app-user-notifications',
