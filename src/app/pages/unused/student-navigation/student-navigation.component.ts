@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UserRedirectionPanelPageComponent } from "../../../shared/components/general/user-redirection-panel-page/user-redirection-panel-page.component";
 
 interface ManagementCard {
     icon: string;
@@ -17,7 +16,7 @@ interface ManagementTab {
 
 @Component({
     selector: 'app-student-navigation',
-    imports: [UserRedirectionPanelPageComponent],
+    imports: [],
     templateUrl: './student-navigation.component.html',
     styleUrl: './student-navigation.component.scss'
 })
