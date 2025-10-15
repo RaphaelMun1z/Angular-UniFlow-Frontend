@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarAltTwoComponent } from "../../../shared/components/navbar-versions-components/navbar-alt-with-auth/navbar-alt-with-auth.component";
-import { FooterComponent } from "../../../shared/components/footer/footer.component";
 import { CommonModule } from '@angular/common';
 
 export interface AlunoEntrega {
@@ -13,7 +11,7 @@ export interface AlunoEntrega {
 
 @Component({
     selector: 'app-professor-activity-page',
-    imports: [CommonModule, NavbarAltTwoComponent, FooterComponent],
+    imports: [CommonModule],
     templateUrl: './professor-activity-page.component.html',
     styleUrl: './professor-activity-page.component.scss'
 })

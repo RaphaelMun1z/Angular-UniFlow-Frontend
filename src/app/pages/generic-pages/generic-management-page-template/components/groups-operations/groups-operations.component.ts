@@ -3,6 +3,7 @@ import { GenericNavigationCardComponent } from "../../../../../shared/components
 import { CommonModule } from '@angular/common';
 import { Operation } from '../../../../../shared/interfaces/User.model';
 import { AuthService } from '../../../../../core/services/auth.service';
+import { TeacherGroupNavigationPageComponent } from "../../../teacher-group-navigation-page/teacher-group-navigation-page.component";
 
 const PROFESSOR_OPERATIONS: Operation[] = [
     {
@@ -79,7 +80,7 @@ const ALUNO_OPERATIONS: Operation[] = [
 
 @Component({
     selector: 'app-groups-operations',
-    imports: [CommonModule, GenericNavigationCardComponent],
+    imports: [CommonModule, GenericNavigationCardComponent, TeacherGroupNavigationPageComponent],
     templateUrl: './groups-operations.component.html',
     styleUrl: './groups-operations.component.scss'
 })

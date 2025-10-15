@@ -14,6 +14,8 @@ import { CreateClassPageComponent } from './pages/generic-pages/create-class-pag
 import { CreateStudyGroupPageComponent } from './pages/generic-pages/create-study-group-page/create-study-group-page.component';
 import { AccessDeniedPageComponent } from './pages/public-pages/access-pages/access-denied-page/access-denied-page.component';
 import { DashboardPageComponent } from './pages/generic-pages/dashboard-page/dashboard-page.component';
+import { ContentModerationPageComponent } from './pages/admin-pages/content-moderation-page/content-moderation-page.component';
+import { SystemLogsPageComponent } from './pages/admin-pages/system-logs-page/system-logs-page.component';
 
 export const ADMIN_ROUTES: Routes = [
     {
@@ -27,6 +29,10 @@ export const ADMIN_ROUTES: Routes = [
             {
                 path: 'dashboard',
                 component: DashboardPageComponent
+            },
+            {
+                path: 'auditoria',
+                component: SystemLogsPageComponent
             },
             {
                 path: 'gerenciar',
@@ -51,6 +57,10 @@ export const ADMIN_ROUTES: Routes = [
                     {
                         path: 'notificacoes',
                         component: MessageBroadcastPageComponent
+                    },
+                    {
+                        path: 'conteudo',
+                        component: ContentModerationPageComponent
                     },
                     { 
                         path: 'grupos', 
