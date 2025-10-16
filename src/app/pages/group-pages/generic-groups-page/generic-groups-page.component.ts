@@ -4,7 +4,7 @@ import { PagerComponent } from "../../../shared/components/general/pager/pager.c
 import { GenericFloatingPlusButtonComponent } from "../../../shared/components/general/generic-floating-plus-button/generic-floating-plus-button.component";
 import { GenericPageHeaderComponent } from "../../../shared/components/general/generic-page-header/generic-page-header.component";
 import { Tab } from "../../../shared/interfaces/User.model";
-import { GenericPageTemplateComponent } from "../generic-page-template/generic-page-template.component";
+import { GenericPageTemplateComponent } from "../../generic-pages/generic-page-template/generic-page-template.component";
 
 @Component({
     selector: 'app-generic-groups-page',

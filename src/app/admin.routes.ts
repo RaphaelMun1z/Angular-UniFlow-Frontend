@@ -7,15 +7,15 @@ import { AdminGroupsGlobalSettingsPageComponent } from './pages/admin-pages/grou
 import { AdminGroupsReportsAndStatisticsPageComponent } from './pages/admin-pages/groups/admin-groups-reports-and-statistics-page/admin-groups-reports-and-statistics-page.component';
 import { GroupsSearchModalComponent } from './shared/components/general/groups-search-modal/groups-search-modal.component';
 import { GroupNavigationPageComponent } from './pages/admin-pages/groups/group-navigation-page/group-navigation-page.component';
-import { GroupTypeSelectionPageComponent } from './pages/generic-pages/group-type-selection-page/group-type-selection-page.component';
 import { ListGroupsManagementComponent } from './pages/admin-pages/groups/list-groups-management/list-groups-management.component';
 import { MessageBroadcastPageComponent } from './pages/admin-pages/message-broadcast-page/message-broadcast-page.component';
-import { CreateClassPageComponent } from './pages/generic-pages/create-class-page/create-class-page.component';
-import { CreateStudyGroupPageComponent } from './pages/generic-pages/create-study-group-page/create-study-group-page.component';
 import { AccessDeniedPageComponent } from './pages/public-pages/access-pages/access-denied-page/access-denied-page.component';
 import { DashboardPageComponent } from './pages/generic-pages/dashboard-page/dashboard-page.component';
 import { ContentModerationPageComponent } from './pages/admin-pages/content-moderation-page/content-moderation-page.component';
 import { SystemLogsPageComponent } from './pages/admin-pages/system-logs-page/system-logs-page.component';
+import { CreateClassPageComponent } from './pages/group-pages/create-class-page/create-class-page.component';
+import { CreateStudyGroupPageComponent } from './pages/group-pages/create-study-group-page/create-study-group-page.component';
+import { GroupTypeSelectionPageComponent } from './pages/group-pages/group-type-selection-page/group-type-selection-page.component';
 
 export const ADMIN_ROUTES: Routes = [
     {

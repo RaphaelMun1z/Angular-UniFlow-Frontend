@@ -32,6 +32,7 @@
     "echarts": "^6.0.0",
     "font-awesome": "^4.7.0",
     "jwt-decode": "^4.0.0",
+    "lucide-angular": "^0.545.0",
     "ngx-echarts": "^14.0.0",
     "postcss": "^8.5.6",
     "primeicons": "^7.0.0",
