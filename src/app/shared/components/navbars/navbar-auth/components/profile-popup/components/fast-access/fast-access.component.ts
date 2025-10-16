@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, HostListener, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LucideAngularModule, Plus, Users, Pin, BookMarked, LucideIconData, ChartLine, X } from 'lucide-angular';
+import { LucideAngularModule, Pin, BookMarked, LucideIconData, X, Bell, CreditCard, FileText, LayoutDashboard, Send, SquarePlus, UsersRound, Bolt } from 'lucide-angular';
 
 interface DynamicLink {
     path: string;
@@ -27,36 +27,76 @@ export class FastAccessComponent {
     
     teacherLinks: DynamicLink[] = [
         {
-            path: '/app/professor/grupos/cadastrar',
-            label: 'Criar Turma',
-            icon: Plus,
-            iconBgColor: 'bg-indigo-100',
-            iconTextColor: 'text-indigo-600',
+            path: '/app/me/pagamentos',
+            label: 'Pagamentos',
+            icon: CreditCard,
+            iconBgColor: 'bg-green-100',
+            iconTextColor: 'text-green-600',
             isPinned: true
         },
         {
-            path: '/app/professor/analytics',
-            label: 'Analytics',
-            icon: ChartLine,
+            path: '/app/me/notificacoes',
+            label: 'Notificações',
+            icon: Bell,
+            iconBgColor: 'bg-blue-100',
+            iconTextColor: 'text-blue-600',
+            isPinned: true
+        },
+        {
+            path: '/app/me/dashboard-professor',
+            label: 'Dashboard',
+            icon: LayoutDashboard,
+            iconBgColor: 'bg-purple-100',
+            iconTextColor: 'text-purple-600',
+            isPinned: true
+        },
+        {
+            path: '/app/painel/grupos',
+            label: 'Meus Grupos',
+            icon: UsersRound,
+            iconBgColor: 'bg-teal-100',
+            iconTextColor: 'text-teal-600',
+            isPinned: true
+        },
+        {
+            path: '/app/painel/grupos/administrar',
+            label: 'Administrar Grupos',
+            icon: Bolt,
+            iconBgColor: 'bg-teal-100',
+            iconTextColor: 'text-teal-600',
+            isPinned: true
+        },
+        {
+            path: '/app/painel/grupos/cadastrar',
+            label: 'Criar Grupo',
+            icon: SquarePlus,
+            iconBgColor: 'bg-teal-100',
+            iconTextColor: 'text-teal-600',
+            isPinned: false
+        },
+        {
+            path: '/app/me/atividades/entregas',
+            label: 'Atividades - Entregar',
+            icon: Send,
             iconBgColor: 'bg-sky-100',
             iconTextColor: 'text-sky-600',
             isPinned: false
         },
         {
-            path: '/app/professor/avaliacoes',
+            path: '/app/me/atividades/modelos',
+            label: 'Atividades - Modelos',
+            icon: FileText,
+            iconBgColor: 'bg-orange-100',
+            iconTextColor: 'text-orange-600',
+            isPinned: false
+        },
+        {
+            path: '/app/me/atividades',
             label: 'Gerenciar Avaliações',
             icon: BookMarked,
             iconBgColor: 'bg-rose-100',
             iconTextColor: 'text-rose-600',
             isPinned: true
-        },
-        {
-            path: '/app/professor/alunos',
-            label: 'Alunos',
-            icon: Users,
-            iconBgColor: 'bg-amber-100',
-            iconTextColor: 'text-amber-600',
-            isPinned: false
         }
     ];
     

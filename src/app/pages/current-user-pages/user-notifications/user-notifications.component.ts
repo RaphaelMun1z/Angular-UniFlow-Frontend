@@ -1,81 +1,99 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { of, delay } from 'rxjs';
-import { RouterLink } from '@angular/router';
-import { NotificacaoViewModel, mockApiResponse } from '../../../shared/interfaces/User.model';
+import { House, ChevronRight, CircleCheck, Trash2, LoaderCircle, Bell, CircleAlert, MessageSquare, BadgeCheck, LucideAngularModule } from 'lucide-angular';
+
+type NotificationType = 'security' | 'update' | 'comment' | 'default';
+
+interface Notification {
+    id: string;
+    type: NotificationType;
+    message: string;
+    timestamp: string;
+    isRead: boolean;
+    link: string;
+}
+
+// Interface para as abas de filtro, garantindo a tipagem correta
+interface FilterTab {
+    label: string;
+    filter: 'all' | 'unread';
+    count: number;
+}
 
 @Component({
     selector: 'app-user-notifications',
-    imports: [CommonModule, FormsModule, RouterLink],
+    imports: [CommonModule, FormsModule, LucideAngularModule],
     templateUrl: './user-notifications.component.html',
     styleUrl: './user-notifications.component.scss'
 })
 
-export class UserNotificationsComponent implements OnInit {
+export class UserNotificationsComponent {
+    // --- Estado do Componente ---
+    isLoading = signal(false);
+    activeFilter = signal<'all' | 'unread'>('all');
     
-    public notificacoes: NotificacaoViewModel[] = [];
-    public isLoading = true;
+    // --- Dados Fictícios (Mock) ---
+    notifications = signal<Notification[]>([
+        { id: '1', type: 'security', message: '<b>Novo login detectado</b> na sua conta de um dispositivo em São Paulo, SP.', timestamp: 'há 5 minutos', isRead: false, link: '#' },
+        { id: '2', type: 'comment', message: '<b>Ana Paula</b> comentou na sua atividade: "Ótimo trabalho!".', timestamp: 'há 2 horas', isRead: false, link: '#' },
+        { id: '3', type: 'update', message: 'Sua assinatura do <b>Plano Premium</b> foi renovada com sucesso.', timestamp: 'há 1 dia', isRead: true, link: '#' },
+        { id: '4', type: 'default', message: 'A atividade "Pesquisa de Campo" vence em <b>3 dias</b>.', timestamp: 'há 2 dias', isRead: true, link: '#' },
+    ]);
     
-    // Variáveis de Paginação
-    public currentPage = 0;
-    public totalPages = 0;
-    public totalElements = 0;
-    public pageSize = 10;
+    // --- Ícones para uso no Template ---
+    readonly Home = House;
+    readonly ChevronRight = ChevronRight;
+    readonly CheckCircle2 = CircleCheck;
+    readonly Trash2 = Trash2;
+    readonly LoaderCircle = LoaderCircle;
+    readonly Bell = Bell;
     
-    ngOnInit(): void {
-        this.buscarNotificacoes(0);
-    }
+    // --- Lógica Reativa com 'computed' ---
     
-    buscarNotificacoes(page: number): void {
-        console.log(page)
-        this.isLoading = true;
-        
-        of(mockApiResponse).pipe(delay(500)).subscribe({
-            next: (response) => {
-                this.notificacoes = response.content;
-                this.currentPage = response.currentPage;
-                this.totalPages = response.totalPages;
-                this.totalElements = response.totalElements;
-                this.isLoading = false;
-            },
-            error: (err) => {
-                console.error("Erro ao buscar notificações:", err);
-                this.isLoading = false;
-            }
-        });
-    }
+    // Contagem de notificações não lidas
+    unreadCount = computed(() => this.notifications().filter(n => !n.isRead).length);
     
-    proximaPagina(): void {
-        if ((this.currentPage + 1) < this.totalPages) {
-            this.buscarNotificacoes(this.currentPage + 1);
+    // Filtra as notificações com base na aba ativa
+    filteredNotifications = computed(() => {
+        if (this.activeFilter() === 'unread') {
+            return this.notifications().filter(n => !n.isRead);
+        }
+        return this.notifications();
+    });
+    
+    filterTabs = computed<FilterTab[]>(() => [
+        { label: 'Todas', filter: 'all', count: this.notifications().length },
+        { label: 'Não Lidas', filter: 'unread', count: this.unreadCount() }
+    ]);
+    
+    // --- Métodos de Ação ---
+    
+    // Mapeia o tipo de notificação para um ícone e cores específicas
+    getNotificationIcon(type: NotificationType) {
+        switch (type) {
+            case 'security': return { icon: CircleAlert, bgColor: 'bg-red-100', iconColor: 'text-red-600' };
+            case 'comment': return { icon: MessageSquare, bgColor: 'bg-blue-100', iconColor: 'text-blue-600' };
+            case 'update': return { icon: BadgeCheck, bgColor: 'bg-green-100', iconColor: 'text-green-600' };
+            default: return { icon: Bell, bgColor: 'bg-gray-100', iconColor: 'text-gray-600' };
         }
     }
     
-    paginaAnterior(): void {
-        if (this.currentPage > 0) {
-            this.buscarNotificacoes(this.currentPage - 1);
-        }
+    markAsRead(id: string) {
+        this.notifications.update(notifications => 
+            notifications.map(n => n.id === id ? { ...n, isRead: true } : n)
+        );
     }
     
-    marcarComoLida(notificationId: string): void {
-        const notificacao = this.notificacoes.find(n => n.id === notificationId);
-        if (notificacao && !notificacao.lida) {
-            console.log(`Marcando notificação ${notificationId} como lida...`);
-            // Lógica para chamar o service
-            notificacao.lida = true;
-        }
+    markAllAsRead() {
+        this.notifications.update(notifications => 
+            notifications.map(n => ({ ...n, isRead: true }))
+        );
     }
     
-    marcarTodasComoLidas(): void {
-        console.log('Marcando todas as notificações como lidas...');
-        // Lógica para chamar o service
-        this.notificacoes.forEach(n => n.lida = true);
-    }
-    
-    deletarNotificacao(notificationId: string): void {
-        console.log(`Deletando notificação ${notificationId}...`);
-        // Lógica para chamar o service
-        this.notificacoes = this.notificacoes.filter(n => n.id !== notificationId);
+    deleteNotification(id: string) {
+        this.notifications.update(notifications => 
+            notifications.filter(n => n.id !== id)
+        );
     }
 }
