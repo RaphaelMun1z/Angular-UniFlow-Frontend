@@ -10,7 +10,7 @@ import { GroupNavigationPageComponent } from './pages/admin-pages/groups/group-n
 import { ListGroupsManagementComponent } from './pages/admin-pages/groups/list-groups-management/list-groups-management.component';
 import { MessageBroadcastPageComponent } from './pages/admin-pages/message-broadcast-page/message-broadcast-page.component';
 import { AccessDeniedPageComponent } from './pages/public-pages/access-pages/access-denied-page/access-denied-page.component';
-import { DashboardPageComponent } from './pages/generic-pages/dashboard-page/dashboard-page.component';
+import { DashboardPageComponent } from './pages/current-user-pages/dashboard-page/dashboard-page.component';
 import { ContentModerationPageComponent } from './pages/admin-pages/content-moderation-page/content-moderation-page.component';
 import { SystemLogsPageComponent } from './pages/admin-pages/system-logs-page/system-logs-page.component';
 import { CreateClassPageComponent } from './pages/group-pages/create-class-page/create-class-page.component';

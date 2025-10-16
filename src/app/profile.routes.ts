@@ -13,6 +13,7 @@ import { TeacherGroupsManageJoinRequestsPageComponent } from './pages/generic-pa
 import { GroupsListComponent } from './pages/group-pages/generic-groups-page/components/groups-list/groups-list.component';
 import { GroupManagementPageComponent } from './pages/group-pages/group-management-page/group-management-page.component';
 import { GroupPageComponent } from './pages/group-pages/group-page/group-page.component';
+import { DashboardPageComponent } from './pages/current-user-pages/dashboard-page/dashboard-page.component';
 
 export const PROFILE_ROUTES: Routes = [
     {
@@ -40,6 +41,18 @@ export const PROFILE_ROUTES: Routes = [
                 component: UserNotificationsComponent
             },
             { 
+                path: 'dashboard', 
+                component: DashboardPageComponent,
+            },
+            { 
+                path: 'dashboard-estudante', 
+                component: EstudanteDashboardPageComponent,
+            },
+            { 
+                path: 'dashboard-professor', 
+                component: ProfessorDashboardPageComponent,
+            },
+            { 
                 path: 'grupos', 
                 children: [
                     { 
@@ -52,26 +65,28 @@ export const PROFILE_ROUTES: Routes = [
                         component: GroupsListComponent,
                     },
                     { 
-                        path: ':id/gerenciar',
-                        component: GroupManagementPageComponent,
-                    },
-                    { 
-                        path: ':id/solicitacoes',
-                        component: TeacherGroupsManageJoinRequestsPageComponent,
-                    },
-                    { 
                         path: ':id',
-                        component: GroupPageComponent,
+                        children: [
+                            { 
+                                path: '', 
+                                redirectTo: '', 
+                                pathMatch: 'full' 
+                            },
+                            { 
+                                path: '',
+                                component: GroupPageComponent,
+                            },
+                            { 
+                                path: 'gerenciar',
+                                component: GroupManagementPageComponent,
+                            },
+                            { 
+                                path: 'solicitacoes',
+                                component: TeacherGroupsManageJoinRequestsPageComponent,
+                            },
+                        ]
                     },
                 ]
-            },
-            { 
-                path: 'dashboard-estudante', 
-                component: EstudanteDashboardPageComponent,
-            },
-            { 
-                path: 'dashboard-professor', 
-                component: ProfessorDashboardPageComponent,
             },
             { 
                 path: 'atividades', 
@@ -86,16 +101,26 @@ export const PROFILE_ROUTES: Routes = [
                         component: TasksListComponent,
                     },
                     { 
-                        path: 'entregas',
-                        component: ProfessorActivityPageComponent,
-                    },
-                    { 
                         path: 'modelos',
                         component: RegisteredActivitiesPageComponent,
                     },
                     { 
                         path: ':id',
-                        component: EstudanteActivityPageComponent,
+                        children: [
+                            { 
+                                path: '', 
+                                redirectTo: '', 
+                                pathMatch: 'full' 
+                            },
+                            { 
+                                path: '',
+                                component: EstudanteActivityPageComponent,
+                            },
+                            { 
+                                path: 'entregas',
+                                component: ProfessorActivityPageComponent,
+                            },
+                        ]
                     },
                 ]
             },

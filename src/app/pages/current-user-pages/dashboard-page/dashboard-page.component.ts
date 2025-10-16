@@ -12,7 +12,7 @@ import { CourseProgress, MediaContent, SubscriptionPlan, NavLink, UserRole, User
 
 export class DashboardPageComponent implements OnInit {
     // --- SIGNALS ---
-    currentUser = signal<User>({ id: '0', name: '', avatar: '', role: 'estudante' });
+    currentUser = signal<User>({ id: '0', name: '', avatar: '', role: 'professor' });
     
     // Dados Estudante
     courseProgress = signal<CourseProgress[]>([]);

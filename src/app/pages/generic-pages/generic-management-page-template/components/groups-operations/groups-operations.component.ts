@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Operation } from '../../../../../shared/interfaces/User.model';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { TeacherGroupNavigationPageComponent } from "../../../teacher-group-navigation-page/teacher-group-navigation-page.component";
+import { NavigationPageComponent } from "../../../../../shared/components/general/navigation-page/navigation-page.component";
 
 const PROFESSOR_OPERATIONS: Operation[] = [
     {
@@ -80,7 +81,7 @@ const ALUNO_OPERATIONS: Operation[] = [
 
 @Component({
     selector: 'app-groups-operations',
-    imports: [CommonModule, GenericNavigationCardComponent, TeacherGroupNavigationPageComponent],
+    imports: [CommonModule, GenericNavigationCardComponent, TeacherGroupNavigationPageComponent, NavigationPageComponent],
     templateUrl: './groups-operations.component.html',
     styleUrl: './groups-operations.component.scss'
 })

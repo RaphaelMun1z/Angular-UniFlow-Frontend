@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, HostListener, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LucideAngularModule, Pin, BookMarked, LucideIconData, X, Bell, CreditCard, FileText, LayoutDashboard, Send, SquarePlus, UsersRound, Bolt } from 'lucide-angular';
+import { LucideAngularModule, Pin, LucideIconData, X, Bell, CreditCard, LayoutDashboard, UsersRound, User, Award, LayoutList, Layers2, LayoutTemplate, SquareArrowUp, GraduationCap, LibraryBig } from 'lucide-angular';
 
 interface DynamicLink {
     path: string;
@@ -25,14 +25,30 @@ export class FastAccessComponent {
     
     isPopupVisible = signal(false); // Controla a visibilidade do popup
     
-    teacherLinks: DynamicLink[] = [
+    allLinks: DynamicLink[] = [
+        {
+            path: '/app/me',
+            label: 'Perfil',
+            icon: User,
+            iconBgColor: 'bg-green-100',
+            iconTextColor: 'text-green-600',
+            isPinned: true
+        },
+        {
+            path: '/app/me/assinaturas',
+            label: 'Assinatura',
+            icon: Award,
+            iconBgColor: 'bg-green-100',
+            iconTextColor: 'text-green-600',
+            isPinned: false
+        },
         {
             path: '/app/me/pagamentos',
             label: 'Pagamentos',
             icon: CreditCard,
             iconBgColor: 'bg-green-100',
             iconTextColor: 'text-green-600',
-            isPinned: true
+            isPinned: false
         },
         {
             path: '/app/me/notificacoes',
@@ -40,10 +56,10 @@ export class FastAccessComponent {
             icon: Bell,
             iconBgColor: 'bg-blue-100',
             iconTextColor: 'text-blue-600',
-            isPinned: true
+            isPinned: false
         },
         {
-            path: '/app/me/dashboard-professor',
+            path: '/app/me/dashboard',
             label: 'Dashboard',
             icon: LayoutDashboard,
             iconBgColor: 'bg-purple-100',
@@ -51,56 +67,64 @@ export class FastAccessComponent {
             isPinned: true
         },
         {
-            path: '/app/painel/grupos',
+            path: '/app/me/grupos',
             label: 'Meus Grupos',
             icon: UsersRound,
-            iconBgColor: 'bg-teal-100',
-            iconTextColor: 'text-teal-600',
-            isPinned: true
-        },
-        {
-            path: '/app/painel/grupos/administrar',
-            label: 'Administrar Grupos',
-            icon: Bolt,
-            iconBgColor: 'bg-teal-100',
-            iconTextColor: 'text-teal-600',
-            isPinned: true
-        },
-        {
-            path: '/app/painel/grupos/cadastrar',
-            label: 'Criar Grupo',
-            icon: SquarePlus,
             iconBgColor: 'bg-teal-100',
             iconTextColor: 'text-teal-600',
             isPinned: false
         },
         {
-            path: '/app/me/atividades/entregas',
-            label: 'Atividades - Entregar',
-            icon: Send,
+            path: '/app/painel/grupos',
+            label: 'Administrar Grupos',
+            icon: LayoutTemplate,
+            iconBgColor: 'bg-teal-100',
+            iconTextColor: 'text-teal-600',
+            isPinned: true
+        },
+        {
+            path: '/app/painel/grupos/ingressar',
+            label: 'Ingressar em um Grupo',
+            icon: SquareArrowUp,
+            iconBgColor: 'bg-teal-100',
+            iconTextColor: 'text-teal-600',
+            isPinned: true
+        },
+        {
+            path: '/app/painel/grupos/cadastrar/turma',
+            label: 'Criar Turma',
+            icon: GraduationCap,
+            iconBgColor: 'bg-teal-100',
+            iconTextColor: 'text-teal-600',
+            isPinned: true
+        },
+        {
+            path: '/app/painel/grupos/cadastrar/grupo-de-estudo',
+            label: 'Criar Grupo de Estudo',
+            icon: LibraryBig,
+            iconBgColor: 'bg-teal-100',
+            iconTextColor: 'text-teal-600',
+            isPinned: true
+        },
+        {
+            path: '/app/me/atividades',
+            label: 'Minhas Atividades',
+            icon: LayoutList,
             iconBgColor: 'bg-sky-100',
             iconTextColor: 'text-sky-600',
             isPinned: false
         },
         {
             path: '/app/me/atividades/modelos',
-            label: 'Atividades - Modelos',
-            icon: FileText,
-            iconBgColor: 'bg-orange-100',
-            iconTextColor: 'text-orange-600',
+            label: 'Atividades Modelo',
+            icon: Layers2,
+            iconBgColor: 'bg-sky-100',
+            iconTextColor: 'text-sky-600',
             isPinned: false
         },
-        {
-            path: '/app/me/atividades',
-            label: 'Gerenciar Avaliações',
-            icon: BookMarked,
-            iconBgColor: 'bg-rose-100',
-            iconTextColor: 'text-rose-600',
-            isPinned: true
-        }
     ];
     
-    links = signal<DynamicLink[]>(this.teacherLinks);
+    links = signal<DynamicLink[]>(this.allLinks);
     
     pinnedLinks = computed(() => this.links().filter(link => link.isPinned));
     unpinnedLinks = computed(() => this.links().filter(link => !link.isPinned));
