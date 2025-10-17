@@ -1,33 +1,44 @@
 import { Component, OnInit, signal, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SafeHtmlPipe } from '../safe-html.pipe';
 import { LogoLinkComponent } from "../logo-link/logo-link.component";
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
+import { Bell, ChevronLeft, ChevronRight, CircleCheck, ClipboardList, House, LayoutDashboard, LoaderCircle, LucideAngularModule, LucideIconData, Trash2, Users } from "lucide-angular";
 
-// --- INTERFACES E TIPOS ---
 interface SidebarLink {
     id: string;
     label: string;
     link: string;
-    icon: string; // SVG path data
+    icon: LucideIconData;
 }
 
 @Component({
     selector: 'app-generic-aside',
-    imports: [CommonModule, SafeHtmlPipe, LogoLinkComponent, RouterLink],
+    imports: [CommonModule, RouterModule, LogoLinkComponent, RouterLink, LucideAngularModule],
     templateUrl: './generic-aside.component.html',
     styleUrl: './generic-aside.component.scss'
 })
 
 export class GenericAsideComponent implements OnInit, OnDestroy {
+    readonly Users = Users;
+    readonly ClipboardList = ClipboardList;
+    readonly LayoutDashboard = LayoutDashboard;
+    readonly ChevronLeft = ChevronLeft;
+    readonly ChevronRight = ChevronRight;
+    readonly House = House;
+    readonly CircleCheck = CircleCheck;
+    readonly Trash2 = Trash2;
+    readonly LoaderCircle = LoaderCircle;
+    readonly Bell = Bell;
+    
     isMinimized = signal(false);
     activeSidebarLink = signal('lessons');
     isMobileView = signal(false);
     
     sidebarLinks = signal<SidebarLink[]>([
-        { id: 'grupos', label: 'Meus Grupos', link: '/app/me/grupos', icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />' },
-        { id: 'tasks', label: 'Minhas Atividades', link: '/app/me/atividades', icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v11.494m-9-8.994v11.494m18-11.494v11.494M5.25 8.25h13.5M5.25 11.25h13.5m-13.5 3h13.5M21 21H3a2 2 0 01-2-2V5a2 2 0 012-2h18a2 2 0 012 2v14a2 2 0 01-2 2z" />' },
-        { id: 'panel', label: 'Meu Painel', link: '/app/painel', icon: '<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v11.494m-9-8.994v11.494m18-11.494v11.494M5.25 8.25h13.5M5.25 11.25h13.5m-13.5 3h13.5M21 21H3a2 2 0 01-2-2V5a2 2 0 012-2h18a2 2 0 012 2v14a2 2 0 01-2 2z" />' },
+        { id: 'home', label: 'Início', link: '/app/home', icon: this.House },
+        { id: 'grupos', label: 'Meus Grupos', link: '/app/me/grupos', icon: this.Users },
+        { id: 'tasks', label: 'Minhas Atividades', link: '/app/me/atividades', icon: this.ClipboardList },
+        { id: 'panel', label: 'Meu Painel', link: '/app/painel', icon: this.LayoutDashboard },
     ]);
     
     private userExpandedBeforeDesktop = false;
